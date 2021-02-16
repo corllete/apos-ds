@@ -37,9 +37,10 @@ Execute `docker volume rm apos-ds_mongodb-data` to remove it.
 The app to be run is slightly modified [Apostrophe 3 boilerplate](https://github.com/apostrophecms/a3-boilerplate).
 In order to be able to add page and attach the design system to it, you have to create user:
 ```sh
-node app @apostrophecms/user:add admin admin
+cd packages/app && node app @apostrophecms/user:add admin admin
 ```
 
+From the project root or inside `packages/app` run:
 ```sh
 npm run dev
 ```
