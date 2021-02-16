@@ -57,5 +57,3 @@ See above!
 ## A quick look
 
 ![Story view](./story-view.png)
-
-![Story list](./story-list.png)
