@@ -1,0 +1,6 @@
+{% extends "layout/preview.html" %}
+{% import "components/categoryList.html" as list %}
+
+{% block content %}
+  {{ list.render(data.rootCategories, data.categories, data.config) }}
+{% endblock %}

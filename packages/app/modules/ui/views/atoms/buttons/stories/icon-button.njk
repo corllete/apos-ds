@@ -1,0 +1,11 @@
+{% extends dsPreview %}
+{% import "atoms/buttons/macro.html" as buttons %}
+
+{% block tagline %}
+  Icon and toggle icon buttons.
+{% endblock %}
+
+{% block previewSimple %}
+  {{ buttons.icon('favorite')  }}
+  {{ buttons.iconToggle('favorite_border', 'favorite', { pressed: false, attrs: { id: 'toggle-btn' } })  }}
+{% endblock %}

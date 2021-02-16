@@ -1,0 +1,154 @@
+{% extends dsPreview %}
+{% import "ui:atoms/form/macro.html" as form %}
+
+{% block previewSimple %}
+  <div class="ds-story__preview-even">
+    {{ form.text('filled', 'Filled')  }}
+    {{ form.textOutlined('outlined', 'Outlined')  }}
+  </div>
+{% endblock %}
+
+
+{% block tagline %}
+  Text field variants.
+{% endblock %}
+
+{% block description %}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Quae cum essent dicta, discessimus. Disserendi artem nullam habuit. 
+    Quae contraria sunt his, malane? Dici enim nihil potest verius.
+  </p>
+{% endblock %}
+
+{# Optional component variants - sub-stories #}
+{% block variants %}
+  {# open new grid container with section tag and heading #}
+  {% dssection 'Variants' %}
+
+    {# Various options #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.textOutlined('textSmart', "Click me", { 
+          leadingIcon: 'question_answer', 
+          trailingIcon: 'room',
+          required: true,
+          count: 50,
+          help: 'A help'
+        })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A text field with various options: material icons, counter, help, required.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.textOutlined('textSmart', "Click me", { 
+                leadingIcon: 'question_answer', 
+                trailingIcon: 'room',
+                required: true,
+                count: 50,
+                help: 'A help'
+              })
+            }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Prefix and Suffix #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div style="width: 140px">{{ form.textOutlined('prefsuf', 'Prefix/suffix', { 
+          prefix: '€', 
+          suffix: '.00', 
+          value: 10,
+          inputCls: 'ds-right'
+        })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A text field with prefix and suffix.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div style="width: 100px">
+            {{ form.textOutlined('prefsuf', 'Prefix/suffix', { 
+                prefix: '€', 
+                suffix: '.00', 
+                value: 10,
+                inputCls: 'ds-right'
+              })    
+            }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Counter #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.textOutlined('textCounter', 'Counted', { value: 'Prefilled value', count: 50 })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A text field with counter.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.textOutlined('textCounter', 'Counted', { value: 'Prefilled value', count: 50 })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Help text #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.textOutlined('textHelp', 'With help text', { help: 'A help text' })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Text field with a help text.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.textOutlined('textHelp', 'With help text', { help: 'A help text' })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Error #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.textOutlined('textError', 'With error', { error: 'Error message', required: true })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A requried text field with forced error.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.textOutlined('textError', 'With error', { error: 'Error message', required: true })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Disabled #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        {{ form.textOutlined('textDisabled', 'Disabled', { disabled: true })  }}
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A disabled text field.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          {{ form.textOutlined('textDisabled', 'Disabled', { disabled: true })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+  {% enddssection %}
+{% endblock %}
+

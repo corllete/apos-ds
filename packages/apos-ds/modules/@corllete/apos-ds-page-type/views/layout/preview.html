@@ -1,0 +1,20 @@
+{% extends "layout/previewBase.html" %}
+{# extend point for applications #}
+
+{# Before any css - safe to completely overwrite it #}
+{% block previewFonts %}
+  {# Required for the preview actions and other #}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {# Uncomment for playing around with  Roboto #}
+  {# <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet"> #}
+{% endblock %}
+
+{# Add any head (css) after the preview styles were included #}
+{% block previewCss %}{% endblock %}
+
+{# Add any custom js after the preview js source #}
+{% block previewJs %}{% endblock %}
+
+{# Add any head (css) after the preview styles were included #}
+{% block bodyClass %}mdc-typography{% endblock %}

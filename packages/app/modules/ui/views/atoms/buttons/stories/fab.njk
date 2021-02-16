@@ -1,0 +1,13 @@
+{% extends dsPreview %}
+{% import "atoms/buttons/macro.html" as buttons %}
+
+{% block tagline %}
+  The floating action button variants - default, mini and extended.
+{% endblock %}
+
+{% block previewSimple %}
+  {{ buttons.fab('favorite')  }}
+  {{ buttons.fabMini('favorite')  }}
+  {{ buttons.fabExtended('favorite', 'Extended Fab')  }}
+  {{ buttons.fabExtended('favorite', 'Extended Trailing Fab', { trailing: true })  }}
+{% endblock %}

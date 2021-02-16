@@ -1,0 +1,33 @@
+@import "reset";
+
+// Import global Material Theming variables
+@import "theme";
+
+
+// Import styles for each MDC Web component
+@import "@material/button/mdc-button";
+@import "@material/drawer/mdc-drawer";
+@import "@material/elevation/mdc-elevation";
+@import "@material/fab/mdc-fab";
+@import "@material/form-field/mdc-form-field";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/icon-button/mixins";
+@import "@material/list/mdc-list";
+@import "@material/ripple/mixins";
+@import "@material/rtl/mixins";
+// @import "@material/shape/mixins";
+// @import "@material/shape/functions";
+@import "@material/switch/mdc-switch";
+@import "@material/tab-bar/mdc-tab-bar";
+@import "@material/tab-scroller/mdc-tab-scroller";
+@import "@material/tab-indicator/mdc-tab-indicator";
+@import "@material/tab/mdc-tab";
+@import "@material/theme/color-palette";
+@import "@material/theme/functions";
+@import "@material/theme/mixins";
+@import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/typography/mdc-typography";
+
+// Import site-specific CSS files
+@import "layout";
+@import "components";

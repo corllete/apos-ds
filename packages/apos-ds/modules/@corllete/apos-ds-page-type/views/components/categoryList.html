@@ -1,0 +1,126 @@
+{##
+ # Render category list with their stories
+ #
+ # @param {CategoryCollection} list categories to be rendered
+ # @param {CategoryCollection} all categories
+ # @param {ConfigCollection} all configuration, containing stories
+ #
+ # @def {EntityCollection} CategoryCollection
+ # @id {String} id category id
+ # @entity {Category}
+ # @enddef
+ #
+ # @def {EntityCollection} ConfigCollection
+ # @id {String} id config id
+ # @entity {Config}
+ # @enddef
+ #
+ # @def {Entity} Config
+ # @key {String} _id config id
+ # @key {String} label config label
+ # @key {String} category category path in format `category.name SEPARATOR[...] category.name`
+ #  where SEPARATOR is apos-ds module option `categorySeparator`
+ # @key {String:Story[]} stories list of stories
+ # @enddef
+ #
+ # @def {Entity} Category
+ # @key {String} _id category id
+ # @key {String} label category label
+ # @key {String:Boolean} list if it should render its stories in list
+ # @enddef
+ #
+ # @todo parse-doc for Nunjucks
+ #}
+{% macro render(list, categories, configs, options) %}
+  {% call container() -%}
+    {{ categoryList(list, categories, configs, options) }}
+  {%- endcall %}
+{% endmacro %}
+
+{% macro container() %}
+  <div class="ds-category-list">
+    {{ caller() }}
+  </div>
+{% endmacro %}
+
+{% macro categoryList(list, categories, configs, options) %}
+  {% for id, cat in list %}
+    {% if cat.list and cat.all.length > 0 %}
+      {# Meta #}
+      {{ meta(id, cat, options.parentLink) }}
+      {# Stories #}
+      {{ stories(cat, categories, configs) }}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro meta(id, category, parentLink) %}
+  <h2 class="ds-category-list__heading" id="{{ id }}">
+    {% if parentLink %}
+      <a
+        class="ds-category-list__heading-link"
+        href="{{ category._url }}"
+        target="_parent">{{ category.label }}<span class="material-icons ds-category-list__heading-icon">link</span></a>
+    {% else %}
+      {{ category.label }}
+    {% endif %}
+  </h2>
+  {% if cat.desc %}
+    <p  class="ds-category-list__desc">{{ cat.desc }}</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro stories(category, categories, configs) %}
+  {% if category.list and category.all.length > 0 %}
+    {% for configName in category.all %}
+
+      {% set config = configs[configName] %}
+      {% set scat = categories[config.categoryId] %}
+      {% if not scat.list %}
+        {% set categoryId = category.children | first %}
+        {% set scat = categories[categoryId] %}
+      {% endif %}
+      {% if not scat or not scat.list %}
+        {% set scat = category %}
+      {% endif %}
+
+      {% for story in config.stories %}
+        {{ item(story, scat) }}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+{##
+ # Render list story item
+ # @param {Story} story to be rendered
+ # @param {Category} category the appropriate story category
+ #
+ # @def {Entity} Story
+ # @key {String} _id story id
+ # @key {String} name unique story name, used for building the story id
+ # @key {String} template fully quallified template path in format `module:path/template.html
+ # @key {String} label story label
+ # @key {Enum<String>:inprogress|inreview|complete} state story state
+ # @key {StorySource[]} sources sources array used to build dependency graph and docs
+ # @enddef
+ #}
+{% macro item(story, category) %}
+  <div class="ds-category-list__story">
+    <h4 class="ds-category-list__story-heading" id="{{ story._id }}">
+      <a
+        class="ds-category-list__subheading-link"
+        href="{{ scat._url }}"
+        target="_parent">{{ scat.label }}</a>
+      <span class="material-icons ds-category-list__story-category-icon--arrow">double_arrow</span>
+      <a
+        class="ds-category-list__story-heading-link"
+        href="{{ story._url }}"
+        target="_parent">{{ story.label }}  {{ apos.dsp.storyState(story.state) }}</a>
+    </h4>
+    {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutList.html' %}
+    {% set tmpl = story.module + ":" + story.template %}
+    {% include tmpl ignore missing %}
+  </div>
+{% endmacro %}
+

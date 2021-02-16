@@ -1,0 +1,31 @@
+{% extends "preview/layoutShowBase.html" %}
+
+{% block css %}{# Put any extra style here (without style tag) #}{% endblock %}
+{% block tagline %}{% endblock %}
+{% block actionbar %}{% endblock %}
+
+{# Insert just befor the preview content #}
+{% block beforePreview %}
+  {# <div class="ds-story__divider"></div> #}
+{% endblock %}
+
+{# MAIN PREVIEW - use one of the options below #}
+{# The story preview - no layout #}
+{% block preview %}{% endblock %}
+{# The story preview - with simple (centered) flex layout #}
+{% block previewSimple %}{% endblock %}
+
+{# Insert just after the preview content #}
+{% block afterPreview %}
+  {# <div class="ds-story__divider"></div> #}
+{% endblock %}
+
+{# Story variants (if any). Example card main story with card-expanded, card-animated variants #}
+{% block beforeVariants %}{% endblock %}
+{% block variants %}{% endblock %}
+{% block afterVariants %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+
+{% block js %}{# Put any extra JS here, without script tag #}{% endblock %}

@@ -1,0 +1,28 @@
+// Buttons
+// Documentation implementation instruction won't work:
+// https://material.io/components/buttons/web#using-buttons
+// The only way this works now:
+// https://github.com/material-components/material-components-web/issues/6598#issuecomment-725534057
+@use "@material/button/styles" as button-styles;
+
+// Floating action buttons
+@use "@material/fab";
+
+// Icon buttons
+@use "@material/icon-button" as ib;
+
+// Text fields
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield" as tf;
+@use "@material/textfield/character-counter" as cc;
+@use "@material/textfield/icon";
+
+
+
+@include fab.core-styles;
+@include ib.core-styles;
+@include tf.core-styles;
+@include cc.character-counter-core-styles;
+@include icon.icon-core-styles;

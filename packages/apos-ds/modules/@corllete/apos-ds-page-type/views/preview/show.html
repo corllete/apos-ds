@@ -1,0 +1,21 @@
+{% extends "layout/preview.html" %}
+
+{% set story = data.story %}
+{% block title %}{% if story %}{{ story.label }} - {% endif %}{{ super() }}{% endblock %}
+
+{% block content %}
+  {% if story %}
+    <div class="ds-story">
+      <h2 class="ds-story__heading" id="{{ story._id }}">
+        {{ story.label }} {{ apos.dsp.storyState(story.state) }}
+      </h2>
+      {% set tmpl = story.module + ":" + story.template %}
+      {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutShow.html' %}
+      {% include tmpl ignore missing %}
+    </div>
+  {% else %}
+    <h2 class="ds-story__heading">
+      Story not found
+    </h2>
+  {% endif %}
+{% endblock %}

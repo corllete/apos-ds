@@ -1,0 +1,189 @@
+{% macro text(name, hint, options) %}
+  <label class="mdc-text-field mdc-text-field--filled{{ ' mdc-text-field--label-floating' if options.value }}{{ ' mdc-text-field--no-label' if not hint }}{{ ' mdc-text-field--disabled' if options.disabled }}{{ ' mdc-text-field--invalid' if options.error }}{{ ' mdc-text-field--with-leading-icon' if options.leadingIcon }}">
+    <span class="mdc-text-field__ripple"></span>
+    {% if hint %}
+      <span class="mdc-floating-label{{ ' mdc-floating-label--float-above' if options.value }}" id="{{ options.id if options.id else name }}">{{ hint }}</span>
+    {% endif %}
+    {% if options.prefix %}
+      <span class="mdc-text-field__affix mdc-text-field__affix--prefix">{{ options.prefix }}</span>
+    {% endif %}
+    {% if options.leadingIcon %}
+      <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" tabindex="0" role="button" aria-hidden="true">{{ options.leadingIcon }}</i>
+    {% endif %}
+    <input 
+      class="mdc-text-field__input{{ ' ' + options.inputCls if options.inputCls }}" 
+      type="text" 
+      name="{{ name }}" 
+      {% if options.type %} type="{{ options.type }}"{% endif %} 
+      {% if options.count %} maxlength="{{ options.count }}"{% endif %} 
+      {% if options.value %} value="{{ options.value }}"{% endif %} 
+      {% if options.ariaLabel %} aria-label="{{ options.ariaLabel }}"{% elif hint %} aria-labelledby="{{ options.id if options.id else name }}"{% endif %} 
+      {{ ' disabled' if options.disabled}} 
+      {% if options.pattern %} pattern="{{ options.pattern }}"{% endif %} 
+      {{ ' required' if options.required}}>
+    {% if options.suffix %}
+      <span class="mdc-text-field__affix mdc-text-field__affix--suffix">{{ options.suffix }}</span>
+    {% endif %}
+    {% if options.trailingIcon %}
+      <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button" aria-hidden="true">{{ options.trailingIcon }}</i>
+    {% endif %}
+    <span class="mdc-line-ripple"></span>
+  </label>
+{% if options.help or options.count or options.error %}
+  <div class="mdc-text-field-helper-line">
+    {% if options.help %}
+      <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+        {{ options.help }}
+      </div>
+    {% endif %}
+    {% if options.error %}
+      <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+        {{ options.error }}
+      </div>
+    {% endif %}
+    {% if options.count %}
+      <div class="mdc-text-field-character-counter">0 / {{ options.count }}</div>
+    {% endif %}
+  </div>
+{% endif %}
+{% endmacro %}
+
+{% macro textOutlined(name, hint, options) %}
+<label class="mdc-text-field mdc-text-field--outlined{{ ' mdc-text-field--label-floating' if options.value }}{{ ' mdc-text-field--no-label' if not hint }}{{ ' mdc-text-field--disabled' if options.disabled }}{{ ' mdc-text-field--invalid' if options.error }}{{ ' mdc-text-field--with-leading-icon' if options.leadingIcon }}">
+  <span class="mdc-notched-outline">
+    <span class="mdc-notched-outline__leading"></span>
+    <span class="mdc-notched-outline__notch">
+      {% if hint %}
+        <span class="mdc-floating-label{{ ' mdc-floating-label--float-above' if options.value }}" id="{{ options.id if options.id else name }}">{{ hint }}</span>
+      {% endif %}
+    </span>
+    <span class="mdc-notched-outline__trailing"></span>
+  </span>
+  
+  {% if options.prefix %}
+    <span class="mdc-text-field__affix mdc-text-field__affix--prefix">{{ options.prefix }}</span>
+  {% endif %}
+
+  {% if options.leadingIcon %}
+    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" tabindex="0" role="button" aria-hidden="true">{{ options.leadingIcon }}</i>
+  {% endif %}
+  
+  <input 
+    class="mdc-text-field__input{{ ' ' + options.inputCls if options.inputCls }}" 
+    type="text" name="{{ name }}" 
+    {% if options.type %} type="{{ options.type }}"{% endif %} 
+    {% if options.count %} maxlength="{{ options.count }}"{% endif %} 
+    {% if options.value %} value="{{ options.value }}"{% endif %} 
+    {% if options.ariaLabel %} aria-label="{{ options.ariaLabel }}"{% elif hint %} aria-labelledby="{{ options.id if options.id else name }}"{% endif %} 
+    {{ ' disabled' if options.disabled}}
+    {% if options.pattern %} pattern="{{ options.pattern }}"{% endif %} 
+    {{ ' required' if options.required}}>
+
+  {% if options.suffix %}
+    <span class="mdc-text-field__affix mdc-text-field__affix--suffix">{{ options.suffix }}</span>
+  {% endif %}
+
+  {% if options.trailingIcon %}
+    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button" aria-hidden="true">{{ options.trailingIcon }}</i>
+  {% endif %}
+</label>
+{% if options.help or options.count or options.error %}
+  <div class="mdc-text-field-helper-line">
+    {% if options.help %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+      {{ options.help }}
+    </div>
+  {% endif %}
+  {% if options.error %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+      {{ options.error }}
+    </div>
+  {% endif %}
+  {% if options.count %}
+    <div class="mdc-text-field-character-counter">0 / {{ options.count }}</div>
+  {% endif %}
+  </div>
+{% endif %}
+{% endmacro %}
+
+{% macro area(name, hint, options) %}
+<label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea{{ ' mdc-text-field--label-floating' if options.value }}{{ ' mdc-text-field--no-label' if not hint }}{{ ' dc-text-field--disabled' if options.disabled }}{{ ' mdc-text-field--invalid' if options.error }}">
+  <span class="mdc-text-field__ripple"></span>
+  {% if hint %}
+    <span class="mdc-floating-label{{ ' mdc-floating-label--float-above' if options.value }}" id="{{ name }}">{{ hint }}</span>
+  {% endif %}
+  <span class="mdc-text-field__resizer">
+    <textarea 
+      class="mdc-text-field__input" 
+      name="{{ name }}" 
+      rows="8" 
+      cols="40" 
+      {% if options.count%}maxlength="{{ options.count }}"{% endif %} 
+      aria-labelledby="{{ name }}" 
+      {{ ' disabled' if options.disabled}} 
+      {% if options.pattern %} pattern="{{ options.pattern }}"{% endif %} 
+      {{ ' required' if options.required}}>{{ options.value }}</textarea>
+  </span>
+  <span class="mdc-line-ripple"></span>
+</label>
+{% if options.help or options.count or options.error %}
+<div class="mdc-text-field-helper-line">
+  {% if options.help %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+      {{ options.help }}
+    </div>
+  {% endif %}
+  {% if options.error %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+      {{ options.error }}
+    </div>
+  {% endif %}
+  {% if options.count %}
+    <div class="mdc-text-field-character-counter">0 / {{ options.count }}</div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro areaOutlined(name, hint, options) %}
+<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea{{ ' mdc-text-field--label-floating' if options.value }}{{ ' mdc-text-field--no-label' if not hint }}{{ ' mdc-text-field--disabled' if options.disabled }}{{ ' mdc-text-field--invalid' if options.error }}">
+  <span class="mdc-notched-outline">
+    <span class="mdc-notched-outline__leading"></span>
+    <span class="mdc-notched-outline__notch">
+      {% if hint %}
+        <span class="mdc-floating-label{{ ' mdc-floating-label--float-above' if options.value }}" id="{{ name }}">{{ hint }}</span>
+      {% endif %}
+    </span>
+    <span class="mdc-notched-outline__trailing"></span>
+  </span>
+  <span class="mdc-text-field__resizer">
+    <textarea 
+      class="mdc-text-field__input" 
+      name="{{ name }}" 
+      rows="8" 
+      cols="40" 
+      {% if options.count%} maxlength="{{ options.count }}"{% endif %} 
+      aria-labelledby="{{ name }}" 
+      {{ ' disabled' if options.disabled}} 
+      {% if options.pattern %} pattern="{{ options.pattern }}"{% endif %} 
+      {{ ' required' if options.required}}>{{ options.value }}</textarea>
+  </span>
+</label>
+{% if options.help or options.count or options.error %}
+<div class="mdc-text-field-helper-line">
+  {% if options.help %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+      {{ options.help }}
+    </div>
+  {% endif %}
+  {% if options.error %}
+    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+      {{ options.error }}
+    </div>
+  {% endif %}
+  {% if options.count %}
+    <div class="mdc-text-field-character-counter">0 / {{ options.count }}</div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %} 

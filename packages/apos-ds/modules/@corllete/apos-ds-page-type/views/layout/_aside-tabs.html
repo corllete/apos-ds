@@ -1,0 +1,21 @@
+{% extends "components/tab/container.html" %}
+{% import "components/tab/macro.html" as tab %}
+
+{% set navContent %}
+  {% include "layout/_aside-tabs-nav.html" %}
+{% endset %}
+{% set tabNav = { name: 'first', label: 'Navigation', content: navContent, active: true } %}
+{% set configContent %}
+  {% include "layout/_aside-tabs-config.html" %}
+{% endset %}
+{% set tabConfig = { name: 'second', icon: 'settings_applications', content: configContent } %}
+
+{% set tabs = [tabNav, tabConfig] %}
+
+{% block buttons %}
+  {{ tab.buttons(tabs) }}
+{% endblock %}
+
+{% block tabs %}
+  {{ tab.content(tabs) }}
+{% endblock %}

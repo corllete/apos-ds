@@ -1,0 +1,15 @@
+version: "2"
+services:
+  mongo:
+    image: mongo
+    # restart: always
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+
+volumes:
+  mongodb-data:

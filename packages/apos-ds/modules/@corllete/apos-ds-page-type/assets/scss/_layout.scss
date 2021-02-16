@@ -1,0 +1,613 @@
+// The design system layout
+
+html, body, .apos-refreshable {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  background-color: white;
+}
+
+.apos-ui, .apos-admin-bar-wrapper {
+  display: none;
+}
+
+.apos-refreshable {
+  display: flex;
+  margin: 0;
+  width: 100%;
+}
+
+// The left navigation drawer content
+
+.ds-drawer {
+  @include mdc-drawer-surface-fill-color(white);
+  @include mdc-drawer-shape-radius(0);
+  width: 350px;
+  height: 100%;
+  z-index: 440;
+
+  &.mdc-drawer--modal {
+    height: 100%;
+  }
+
+  .mdc-drawer__header {
+    padding: 24px;
+  }
+
+  .ds-drawer-divider {
+    margin: -1px;
+  }
+
+  .mdc-drawer__content,
+  .ds-tab-content,
+  .ds-nav-caption {
+    color: rgba(0, 0, 0, .87);
+  }
+
+  .ds-tab-content {
+    padding: 1.25em;
+  }
+
+  .ds-nav-caption {
+    padding: 1.25em 1em 0.25em 1em;
+    font-weight: 500;
+  }
+
+  /**
+    * Side Navigation - purce CSS
+    * TODO - refactor, convert to flex and JS, add icon link to category list
+    * https://www.cssscript.com/multilevel-accordion-menu-with-plain-html-css/
+    */
+  .nav .nav__item-link, .nav .nav__category-link {
+    display: block;
+  }
+
+  .nav label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
+  .nav .nav__item-link {
+    padding: 1rem;
+    transition: all .15s ease-in;
+  }
+
+  .nav__category-link {
+    padding: 1rem;
+  }
+
+  .nav ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .nav a {
+    color: rgba(0, 0, 0, .87);
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: none;
+      outline: none;
+    }
+  }
+
+  .nav__category-link:active,
+  .nav__category-link:focus,
+  .nav__category-link:hover {
+    color: $mdc-theme-primary;
+    background: #ffffff;
+  }
+
+  .nav .nav__item-link:focus, 
+  .nav .nav__item-link:hover, 
+  .nav label:focus, 
+  .nav label:hover {
+    background: #f5f5f5;
+  }
+
+  .nav label { cursor: pointer; }
+
+  // Styling first level lists items
+  .group-list .nav__item-link, .group-list label {
+    padding-left: 2rem;
+  }
+
+  .group-list .nav__item-link:focus,
+  .group-list .nav__item-link:hover,
+  .group-list label:focus,
+  .group-list label:hover {
+    background: #f5f5f5;
+  }
+
+  // Styling second level list items
+  .sub-group-list .nav__item-link, .sub-group-list label {
+    padding-left: 4rem;
+  }
+
+  .sub-group-list .nav__item-link:focus,
+  .sub-group-list .nav__item-link:hover,
+  .sub-group-list label:focus,
+  .sub-group-list label:hover {
+    background: #f5f5f5;
+  }
+
+  // Styling third level list items
+  .sub-sub-group-list .nav__item-link, .sub-sub-group-list label {
+    padding-left: 6rem;
+  }
+
+  .sub-sub-group-list .nav__item-link:focus,
+  .sub-sub-group-list .nav__item-link:hover,
+  .sub-sub-group-list label:focus,
+  .sub-sub-group-list label:hover {
+    background: #f5f5f5;
+  }
+
+  // Hide nested lists
+  .group-list, .sub-group-list, .sub-sub-group-list {
+    height: 100%;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height .15s ease-in-out;
+    transition: max-height .15s ease-in-out;
+  }
+
+  .nav li label {
+    text-transform: uppercase;
+  }
+
+  .nav__list input[type=checkbox]:checked + label + ul { /* reset the height when checkbox is checked */
+    max-height: 1000px;
+  }
+
+  // Rotating chevron icon on toggle.
+  .nav label > .nav__toggle-icon {
+    margin-left: auto;
+    padding: 1rem;
+    transition: transform .15s ease;
+  }
+
+  .nav__list input[type=checkbox]:checked + label > .nav__toggle-icon {
+    transform: rotate(90deg);
+  }
+
+  // Active row
+  .nav__list--active {
+    font-weight: 600;
+  }
+  // End Side Navigation
+
+  h6 {
+    color: rgba(0, 0, 0, .6);
+    margin: 0;
+  }
+  p {
+    margin-block-start: 0.5em;
+    margin-block-end: 1.25em;
+  }
+
+  .mdc-tab {
+    font-family: Roboto, sans-serif;
+    @include mdc-tab-active-text-label-color(#6200ee);
+    @include mdc-tab-states-color(#6200ee);
+    @include mdc-tab-text-label-color(black);
+
+    .mdc-tab-indicator--active {
+      @include mdc-tab-ink-color(#6200ee);
+    }
+
+    .mdc-tab-indicator {
+      @include mdc-tab-indicator-underline-color(#6200ee);
+    }
+  }
+
+  a {
+    color: #6200ee;
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  code {
+    font-family: 'Roboto mono';
+    background: $material-color-grey-200;
+  }
+
+  .mdc-form-field {
+    margin: 12px 0;
+
+    .rtl-switch {
+      @include mdc-switch-toggled-off-color(white);
+      @include mdc-switch-toggled-off-track-color(black);
+      margin-right: 16px;
+    }
+  }
+
+  .section-header a {
+    color: rgba(0, 0, 0, 0.54);
+
+    &:hover, &:focus {
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+
+  .ds-state {
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+
+  .ds-state--inprogress {
+    // border-left: 3px solid red;
+    background-color: red;
+  }
+
+  .ds-state--inreview {
+    // border-left: 3px solid yellow;
+    background-color: yellow;
+  }
+
+  .ds-state--complete {
+    // border-left: 3px solid green;
+    background-color: green;
+  }
+}
+
+.ds-title {
+  a {
+    color: $material-color-grey-800;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: $material-color-grey-600;
+  }
+
+  svg, img {
+    vertical-align: -3px;
+    margin-right: 4px;
+  }
+}
+
+.drawer-content--second {
+  display: none;
+}
+
+.ds-primary-url {
+  color: #6200ee;
+  font-size: 0.65rem;
+  font-family: Roboto, sans-serif;
+}
+
+// Theme Summary content
+
+.mdc-list-divider.ds-summary-divider {
+  border-bottom-width: 2px;
+  margin: 20px 0;
+}
+
+.ds-summary-line {
+  @include mdc-typography(caption);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+
+  figure {
+    margin: 0;
+  }
+
+  .ds-summary-code {
+    background: none;
+  }
+
+  .ds-summary-color {
+    width: 20px;
+    height: 20px;
+    border: 1px solid $material-color-grey-400;
+    border-radius: 50%;
+  }
+
+  &.ds-summary-line--typography {
+    margin: 0;
+  }
+
+  .ds-summary-typography {
+    width: 120px;
+
+    // Draw typography baselines
+    &.mdc-typography--headline1 {
+      $line-height: 6rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+    &.mdc-typography--headline2 {
+      $line-height: 3.75rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+    &.mdc-typography--headline3 {
+      $line-height: 3.125rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+    &.mdc-typography--headline4 {
+      $line-height: 2.5rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+    &.mdc-typography--headline5 {
+      $line-height: 2rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+    &.mdc-typography--headline6,
+    &.mdc-typography--subtitle1,
+    &.mdc-typography--subtitle2,
+    &.mdc-typography--body1,
+    &.mdc-typography--body2,
+    &.mdc-typography--caption,
+    &.mdc-typography--button,
+    &.mdc-typography--overline {
+      $line-height: 2rem;
+      @include mdc-typography-baseline-top($line-height);
+      @include mdc-typography-baseline-bottom($line-height);
+    }
+  }
+
+  // Application of color
+  .ds-summary-color--primary {
+    background: $mdc-theme-primary;
+  }
+  .ds-summary-color--on-primary {
+    background: $mdc-theme-on-primary;
+  }
+  .ds-summary-color--secondary {
+    background: $mdc-theme-secondary;
+  }
+  .ds-summary-color--on-secondary {
+    background: $mdc-theme-on-secondary;
+  }
+  .ds-summary-color--error {
+    background: $mdc-theme-error;
+  }
+  .ds-summary-color--on-error {
+    background: $mdc-theme-on-error;
+  }
+  .ds-summary-color--surface {
+    background: $mdc-theme-surface;
+  }
+  .ds-summary-color--on-surface {
+    background: $mdc-theme-on-surface;
+  }
+  .ds-summary-color--background {
+    background: $mdc-theme-background;
+  }
+}
+
+.mdc-list-divider.typography-baseline-divider {
+  margin-top: 0;
+  margin-bottom: 12px;
+  border-bottom-color: $material-color-grey-200;
+}
+
+// The app bar
+
+.ds-app-bar {
+  display: none; // hide on >1310px screens
+  position: fixed;
+
+  @include mdc-top-app-bar-fill-color(white);
+  @include mdc-top-app-bar-icon-ink-color($material-color-grey-800);
+  @include mdc-elevation(1);
+
+  .mdc-top-app-bar__title {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+  .mdc-top-app-bar__navigation-icon {
+    cursor: pointer;
+  }
+}
+
+.mdc-drawer-app-content {
+  width: 100%;
+  height: 100vh;
+}
+
+.ds-config-bar, .ds-config-bar--large {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background: $material-color-grey-100;
+  padding: 5px;
+}
+
+.ds-config-bar {
+  display: none; // hide on >1310px screens
+  & .ds-action--toggle-side {
+    display: none;
+  }
+}
+
+// Breakpoint <1310px
+@media (max-width: 1310px) {
+  .ds-app-bar {
+    display: block;
+  }
+
+  .ds-config-bar {
+    display: flex;
+  }
+
+  .ds-config-bar--large {
+    display: none;
+  }
+
+  .ds-drawer {
+    //  No display by default until JS loads in to prevent jank
+    display: none;
+  }
+}
+
+// Main content layout
+
+.ds-main-content {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background: mdc-theme-prop-value(background);
+  background-color: #ffffff;
+
+  &:not(.mdc-top-app-bar--fixed-adjust) {
+    // padding: 2vh 0;
+    padding: 0;
+  }
+
+  .column {
+    width: 420px;
+  }
+
+  .full {
+    width: 100%;
+  }
+
+  // Content iframe
+  .ds-content-preview,
+  .ds-content-preview__body {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .ds-content-preview {
+    overflow: hidden;
+    background: mdc-theme-prop-value(background);
+  }
+  .ds-content-preview__body {
+    overflow: auto;
+  }
+}
+
+.ds-component-section-row {
+  display: flex;
+
+  .cds-omponent-section:first-child {
+    width: 200px;
+  }
+}
+
+.ds-component-section {
+  margin: 16px 20px 40px 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .ds-component-section {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mdc-image-list {
+    width: auto;
+  }
+
+  .mdc-drawer {
+    width: 60%;
+    min-width: calc(100% - 56px);
+  }
+
+  .column, .full {
+    width: auto;
+    max-width: 420px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  .column, .full {
+    overflow: hidden;
+  }
+}
+
+.section-header {
+  display: flex;
+  height: 36px;
+  font-family: Roboto, sans-serif;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: if(mdc-theme-contrast-tone($mdc-theme-background) == "dark",
+      rgba(0, 0, 0, 0.54),
+      rgba(255, 255, 255, 0.54));
+
+    &:hover, &:focus {
+    color: if(mdc-theme-contrast-tone($mdc-theme-background) == "dark",
+      rgba(0, 0, 0, 0.87),
+      rgba(255, 255, 255, 0.87));
+      text-decoration: none;
+    }
+  }
+
+  .material-icons {
+    font-size: 1rem;
+    padding: 8px;
+
+    &.leading-icon {
+      padding-left: 0;
+    }
+  }
+}
+
+.component-wrapper {
+  margin: 16px 0;
+}
+
+// Summary Typography
+.typography-callout {
+  font-size: 12px;
+  padding: 16px;
+  border: 1px solid $material-color-grey-300;
+  background-color: $material-color-grey-200;
+}
+
+.font-link {
+  font-size: 12px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: -16px;
+}
+
+.font-link i {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.varValue {
+  font-weight: 600;
+}
+
+.material-icons {
+  text-transform: none !important;
+}

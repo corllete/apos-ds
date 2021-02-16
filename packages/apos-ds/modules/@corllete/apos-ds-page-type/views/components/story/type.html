@@ -1,0 +1,221 @@
+{% set pangram =        'Pack my box with five dozen liquor jugs' %}
+{% set pangramAlt =     'The five boxing wizards jump quickly' %}
+{% set pangramSingle =  'Cwmfjordbankglyphsvextquiz' %}
+{% set content1 -%}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Quam si explicavisset, non tam haesitaret. Si id dicis, vicimus. 
+Non est ista, inquam, Piso, magna dissensio. Nemo igitur esse beatus potest. 
+Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo enim genera quae erant, 
+fecit tria. Quid adiuvas? Isto modo ne improbos quidem, si essent boni viri. 
+An est aliquid, quod te sua sponte delectet? 
+{%- endset %}
+{% set content2 -%}
+Videamus igitur sententias eorum, tum ad verba redeamus. 
+Sit hoc ultimum bonorum, quod nunc a me defenditur; 
+Ex rebus enim timiditas, non ex vocabulis nascitur. Quae ista amicitia est? 
+Tamen a proposito, inquam, aberramus. Paulum, cum regem Persem captum adduceret, 
+eodem flumine invectio?
+{%- endset %}
+{% set content3 -%}
+Nihilo magis. Quid ad utilitatem tantae pecuniae? Haeret in salebra. 
+Ratio enim nostra consentit, pugnat oratio. Illi enim inter se dissentiunt. 
+Verba tu fingas et ea dicas, quae non sentias?
+{%- endset %}
+
+{% macro cell(obj, options) %}
+  {% dscell options.span %}
+    {% if obj.headings %}
+      {{ headings(obj.headings, options) }}
+    {% endif %}
+    {% if obj.paragraphs %}
+      {{ paragraphs(obj.paragraphs, options) }}
+    {% endif %}
+  {% enddscell %}
+{% endmacro %}
+
+{% macro types(obj, options) %}
+  {% if obj.headings %}
+    {{ headings(obj.headings, options) }}
+  {% endif %}
+  {% if obj.paragraphs %}
+    {{ paragraphs(obj.paragraphs, options) }}
+  {% endif %}
+{% endmacro %}
+
+{% macro heading(arr, options) %}
+  {% dscell options.span %}
+    {{ headings(arr, options) }}
+  {% enddscell %}
+{% endmacro %}
+
+{% macro headings(arr, opts) %}
+  {% set rootId = apos.util.generateId() %}
+  {% set options = apos.dsp.normalizeHeadingOptions(opts) %}
+  {% set collection = apos.dsp.normalizeHeadings(arr, options) %}
+  {% set cls = ' ' + options.cls if options.cls %}
+  {% if options.detect %}
+    {% set cls = cls + ' ds-type--detect-global' %}
+  {% endif %}
+  {% if options.rating %}
+    {% set cls = cls + ' ds-type-fix-top-border' %}
+  {% endif %}
+  {% if options.rating %}
+  <div 
+    class="ds-type--detect-crating"
+    data-root-target="self"
+    data-preview-target=".ds-heading__crating"
+    data-background-target=".ds-heading"
+    data-foreground-target=".ds-heading__preview">
+    <div class="ds-heading__crating ds-toggle">
+      <a class="ds-toggle__trigger" href="#" title="Toggle code">
+        <span class="ds-heading__crating--label ds-type--set-crating" data-type="crating-label">Not detected</span>
+        <span class="ds-heading__crating--ratio ds-type--set-crating" data-type="crating-ratio"></span>
+        <span class="ds-heading__toggle-icon ds-toggle__icon material-icons"></span>
+      </a>
+      {# Avoid padding in the content, move details as child #}
+      <div class="ds-toggle__content" style="display: none">
+        <div class="ds-heading__crating--details ds-type--set-crating" data-type="crating-details"></div>
+      </div>
+    </div>
+  {% endif %}
+  <div 
+    id="{{ rootId }}"
+    class="ds-heading{{ cls }}"
+    data-target="self" 
+    style="{{ options.mainStyle }}">
+    {% if options.header %}
+      <div class="ds-heading__header{% if options.detect %} ds-type--detect{% endif %}" data-target="#{{ rootId }} .ds-heading__preview">
+        <span class="ds-type--set" data-type="font">{{ options.font }}</span>
+      </div>
+    {% endif %} 
+    {% for item in collection %}
+      {% set label = item.label if item.label else 'h' + item.level %}
+      <div class="ds-heading__item{% if options.detect %} ds-type--detect{% endif %}" data-target=".ds-heading__preview">
+        <div class="ds-heading__meta">
+          {{ label }} (<span class="ds-type--set" data-type="size">{{ item.size }}</span>)
+          {% if item.varName %}
+            <div>{{ item.varName }}</div>
+          {% endif %}
+          {% if item.cls %}
+            <div>{{ item.cls }}</div>
+          {% endif %}
+        </div>
+        {{ headingPreview(item, options) }}
+        {% if options.details %}
+          {{ details(item, {} | merge(options, { line: true })) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if options.rating %}
+  </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro paragraph(arr, options) %}
+  {% dscell options.span %}
+    {{ paragraphs(arr, options) }}
+  {% enddscell %}
+{% endmacro %}
+
+{% macro paragraphs(items, opts) %}
+  {% set rootId = apos.util.generateId() %}
+  {% set options = apos.dsp.normalizeParagraphOptions(opts) %}
+  {% set collection = apos.dsp.normalizeParagraphs(items, options) %}
+  {% set cls = ' ' + options.cls if options.cls %}
+  {% if options.detect %}
+    {% set cls = cls + ' ds-type--detect-global' %}
+  {% endif %}
+  {% if options.rating %}
+    {% set cls = cls + ' ds-type-fix-top-border' %}
+  {% endif %}
+  {% if options.rating %}
+  <div 
+    class="ds-type--detect-crating"
+    data-root-target="self"
+    data-preview-target=".ds-paragraph__crating"
+    data-background-target=".ds-paragraph"
+    data-foreground-target=".ds-paragraph__preview">
+    <div class="ds-paragraph__crating ds-toggle"{#  data-toggle-state="false" #}>
+      <a class="ds-toggle__trigger" href="#" title="Toggle code">
+        <span class="ds-paragraph__crating--label ds-type--set-crating" data-type="crating-label">Not detected</span>
+        <span class="ds-paragraph__crating--ratio ds-type--set-crating" data-type="crating-ratio"></span>
+        <span class="ds-paragraph__toggle-icon ds-toggle__icon material-icons"></span>
+      </a>
+      {# Avoid padding in the content, move details as child #}
+      <div class="ds-toggle__content" style="display: none">
+        <div class="ds-paragraph__crating--details ds-type--set-crating" data-type="crating-details"></div>
+      </div>
+    </div>
+  {% endif %}
+  <div 
+    id="{{ rootId }}"
+    class="ds-paragraph{{ cls }}" 
+    data-target="self" 
+    style="{{ options.mainStyle }}">
+    {% if options.header %}
+      <div class="ds-paragraph__header{% if options.detect %} ds-type--detect{% endif %}" data-target="#{{ rootId }} .ds-paragraph__preview">
+        <span class="ds-type--set" data-type="font">{{ options.font }}</span>
+      </div>
+    {% endif %} 
+    {% for item in collection %}
+      {% set label = item.label if item.label else 'Paragraph' %}
+      <div class="ds-paragraph__item{% if options.detect %} ds-type--detect{% endif %}" data-target=".ds-paragraph__preview">
+        <div class="ds-paragraph__meta">
+          {{ label }} (<span class="ds-type--set" data-type="size">{{ item.size }}</span>/<span class="ds-type--set" data-type="line">{{ item.line }}</span>)
+          {% if item.varName %}
+            <div>{{ item.varName }}</div>
+          {% endif %}
+        </div>
+        {{ paragraphPreview(item, options) }}
+        {% if options.details %}
+          {{ details(item, options) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if options.rating %}
+  </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro headingPreview(item, options) %}
+  {% set cls = ' ' + item.cls if item.cls %}
+  {% set label = pangramSingle if options.single else pangram %}
+  {% if options.alt %}
+    {% set label = pangramSingle %}
+  {% endif %}
+  <h{{ item.level }}{%if options.id%} id="{{ options.id }}"{%endif%} class="ds-heading__preview{{ cls }}" style="{{ item.previewStyle }}">{{ label }}</h{{ item.level }}>
+{% endmacro %}
+
+{% macro paragraphPreview(item, options) %}
+  {% set cls = ' ' + item.cls if item.cls %}
+  {# large is default #}
+  {% set content = content1 + ' ' + content2 if options.small else content1 + ' ' + content2 + ' ' + content3 + ' ' + content1 %}
+  {% if options.medium %}
+    {% set content = content1 + ' ' + content2 + ' ' + content3 %}
+  {% endif %}
+  {% if options.xsmall %}
+    {% set content = content3 %}
+  {% endif %}
+  <p{%if options.id%} id="{{ options.id }}"{%endif%} class="ds-paragraph__preview{{ cls }}" style="{{ item.previewStyle }}">
+    {{ content }}
+  </p>
+{% endmacro %}
+
+{% macro details(item, options) %}
+  <ul class="ds-heading__details">
+    <li>color: <span class="ds-type--set" data-type="color">{{ item.color }}</span></li>
+    {% if options.image %}
+      <li>background-image: <span class="ds-type--set-global" data-type="image">{{ options.image }}</span></li>
+    {% endif %}
+    {% if options.background %}
+      <li>background-color: <span class="ds-type--set-global" data-type="background">{{ options.background }}</span></li>
+    {% endif %}
+    <li>font-weight: <span class="ds-type--set" data-type="weight">{{ item.weight }}</span></li>
+    <li>letter-spacing: <span class="ds-type--set" data-type="letter">{{ item.tracking }}</span></li>
+    {% if options.line %}
+      <li>line-height: <span class="ds-type--set" data-type="line">{{ item.line }}</span></li>
+    {% endif %}
+  </ul>
+{% endmacro %}

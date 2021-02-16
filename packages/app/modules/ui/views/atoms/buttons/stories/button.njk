@@ -1,0 +1,23 @@
+{% extends dsPreview %}
+{% import "atoms/buttons/macro.html" as buttons %}
+
+{% block previewSimple %}
+  <div class="ds-story__preview-even">
+    {{ buttons.button('Default')  }}
+    {{ buttons.btnOutlined('Outlined')  }}
+    {{ buttons.btnRaised('Rasied')  }}
+    {{ buttons.btnUnelevated('Unelevated')  }}
+  </div>
+{% endblock %}
+
+{% block tagline %}
+  The generic button variants - outlined, raised and with no elevation.
+{% endblock %}
+
+{% block description %}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Quae cum essent dicta, discessimus. Disserendi artem nullam habuit. 
+    Quae contraria sunt his, malane? Dici enim nihil potest verius.
+  </p>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% macro render(categories, configs) %}
+<nav class="nav" role="navigation">
+  <ul class="nav__list">
+  {% for id, category in categories %}
+    {{ parent(category, categories, configs) }}
+  {% endfor %}
+  </ul>
+</nav>
+{% endmacro %}
+
+{% macro parent(category, categories, configs) %}
+  {# {% if category.parents.length == 0 and (category.children.length > 0 or (not category.list and category.all.length > 0)) %} #}
+  {% if category.parents.length == 0 and category.children.length > 0 %}
+    {{ row('group-list', category, categories, configs) }}
+  {% endif %}
+{% endmacro %}
+
+{% macro row(type, category, categories, configs) %}
+  {%- set next = apos.dsp.nextNavType(type) %}
+  <li>
+    <input id="{{ category._id }}" type="checkbox"{% if category.active %} checked="checked"{% endif %} hidden />
+    <label for="{{ category._id }}"{% if category.active %} class="nav__list--active"{% endif %}>
+      {{ category.label }}
+      <span class="material-icons nav__toggle-icon">chevron_right</span>
+      {# button for view all link #}
+      {% if category.list %}
+        {% set label = __ns('ds', 'go to') %}
+        <a href="{{ category._url }}" title="{{ label }} {{ category.label }}" class="nav__category-link"><span class="material-icons">link</span></a>
+      {% else %}
+        <span class="material-icons nav__category-link">link_off</span>
+      {% endif %}
+    </label>
+    
+    <ul class="{{ type }}">
+      {# not category.list or  #}
+      {% if not category.children.length %}
+        {# render items #}
+        {{ items(category, configs) }}
+      {% else %}
+        {# render sub categories #}
+        {% for id in category.children %}
+          {{ row(next, categories[id], categories, configs) }}
+        {% endfor %}
+      {% endif %}
+
+      {# {% if category.list %}
+        {% set label = __ns('ds', 'View all') %}
+        {{ item(category._url, label, false) }}
+      {% endif %} #}
+    </ul>
+  </li>
+{% endmacro %}
+
+{% macro items(category, configs) %}
+  {% for configId in category.all %}
+    {% set config = configs[configId] %}
+    {% for story in config.stories %}
+      {{ item(story._url, story.label, story.active, story.state) }}
+    {% endfor %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro item(url, label, active, state) %}
+  {% set clsState = 'ds-state ds-state--' + state if state %}
+  {% set clsActive = 'nav__item-link' %}
+  {% if active %}
+    {% set clsActive = clsActive + ' nav__list--active' %}
+  {% endif %}
+  <li class="nav__story">
+    <a class="{{ clsActive }}" href="{{ url }}"><span class="{{ clsState }}"></span>{{ label }}</a>
+  </li>
+{% endmacro %}

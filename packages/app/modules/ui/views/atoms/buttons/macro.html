@@ -1,0 +1,218 @@
+{#
+  A regular button - https://material.io/develop/web/components/buttons
+
+  `options`:
+  - type: (string) outlined | raised | unelevated
+  - unbounded: (boolean) set ripple unbounded (such as checkboxes and radiobuttons)
+  - icon: (string) name of material icon (e.g. bookmark)
+  - trailing: (boolean) shows trailing icon if true (and if icon is available)
+  - classNames: (string) additional classNames
+  - aria: (Object) Object where keys will be used and prefixed with `aria-`.
+    Empty value will render data attribute without value.
+  - data: (Object) Object where keys will be used and prefixed with `data-`.
+    Empty value will render data attribute without value.
+#}
+{% macro button(label, options) %}
+  <div class="mdc-touch-target-wrapper">
+    <button class="{{ btnClass(options) }}"
+      {{ printAriaAttrs(options.aria) }}
+      {{ printDataAttrs(options.data, options.unbounded) }}
+      {{ printCommonAttrs(options) }}>
+      <div class="mdc-button__ripple"></div>
+      {% if options.icon and not options.trailing %}
+        <i class="material-icons mdc-button__icon" aria-hidden="true">{{ options.icon }}</i>
+      {% endif %}
+      <span class="mdc-button__label">{{ __ns('crlt', label) }}</span>
+      {% if options.icon and options.trailing %}
+        <i class="material-icons mdc-button__icon" aria-hidden="true">{{ options.icon }}</i>
+      {% endif %}
+      <div class="mdc-button__touch"></div>
+    </button>
+  </div>
+{% endmacro %}
+
+{# Quick render for button types #}
+{% macro btnOutlined(label, options) -%}
+  {{ button(label, {} | merge (options, { type: 'outlined' })) }}
+{%- endmacro %}
+
+{% macro btnRaised(label, options) -%}
+  {{ button(label, {} | merge (options, { type: 'raised' })) }}
+{%- endmacro %}
+
+{% macro btnUnelevated(label, options) -%}
+  {{ button(label, {} | merge (options, { type: 'unelevated' })) }}
+{%- endmacro %}
+
+
+{#
+  A floating button  https://material.io/develop/web/components/buttons/floating-action-buttons
+
+  `icon`: (string) name of material icon (e.g. bookmark)
+
+  `options`:
+  - type: (string) mini | extended
+  - exited: (boolean) if present will animate button out of the view
+  - unbounded: (boolean) set ripple unbounded (such as checkboxes and radiobuttons)
+  - label: (string) used for extended type only
+  - trailing: (boolean) shows trailing icon if true (and if icon is available)
+  - classNames: (string) additional classNames
+  - aria: (Object) Object where keys will be used and prefixed with `aria-`.
+    Empty value will render data attribute without value.
+  - data: (Object) Object where keys will be used and prefixed with `data-`.
+    Empty value will render data attribute without value.
+#}
+{% macro fab(icon, options) %}
+  <div class="mdc-touch-target-wrapper">
+    <button class="{{ fabClass(options) }}"
+      {{ printAriaAttrs(options.aria) }}
+      {{ printDataAttrs(options.data, options.unbounded) }}
+      {{ printCommonAttrs({ label: label } | merge(options)) }}>
+      <div class="mdc-fab__ripple"></div>
+      {% if not options.trailing %}
+        <i class="material-icons mdc-fab__icon">{{ icon }}</i>
+      {% endif %}
+      {% if options.type == 'extended' %}
+        <span class="mdc-fab__label">{{ __ns('crlt', options.label) }}</span>
+      {% endif %}
+      {% if options.trailing %}
+        <i class="material-icons mdc-fab__icon">{{ icon }}</i>
+      {% endif %}
+      <div class="mdc-button__touch"></div>
+    </button>
+  </div>
+{% endmacro %}
+
+{# Quick render for floating action button types #}
+{% macro fabMini(icon, options) -%}
+  {{ fab(icon, {} | merge (options, { type: 'mini' })) }}
+{%- endmacro %}
+
+{% macro fabExtended(icon, label, options) -%}
+  {{ fab(icon, {} | merge (options, { type: 'extended', label: label })) }}
+{%- endmacro %}
+
+{#
+  An icon button  https://material.io/develop/web/components/buttons/icon-buttons
+
+  `options`:
+  - label: (string) if present, will be used for `aria-label` button attribute
+  - url: (string) if present `a` tag will be rendered and url will be used as `href` attribute
+  - classNames: (string) additional classNames
+  - attrs: (Object) element attributes, if value is empty only key is printed
+  - aria: (Object) Object where keys will be used and prefixed with `aria-`.
+    Empty value will render data attribute without value.
+  - data: (Object) Object where keys will be used and prefixed with `data-`.
+    Empty value will render data attribute without value.
+#}
+{% macro icon(icon, options) %}
+  {% set tag = 'a' if options.url else 'button' %}
+  {% set aria = options.aria %}
+  {% if options.label %}
+    {% set aria = { label: options.label } | merge(aria) %}
+  {% endif %}
+  <{{ tag }} class="mdc-icon-button material-icons {{ options.classNames }}"
+    {% if options.url %}href="{{ options.url }}"{% endif %}
+    {{ printAriaAttrs(aria) }}
+    {{ printAttrs(options.attrs) }}
+    {{ printDataAttrs(options.data) }}>{{ icon }}</{{ tag }}>
+{% endmacro %}
+
+{#
+  An icon button toggle  https://material.io/develop/web/components/buttons/icon-buttons
+
+  `iconOff`: (string) material icon for default (off) state
+  `iconOn`: (string) material icon for `on` state
+
+  `options`:
+  - pressed: (mixed) "true" or "false", empty means "false". Used as value for `aria-pressed` and
+    showing the proper state if button is pressed
+  - labels: (Object) Controls different labels for on/off state. If present should have the following signature:
+      - labels.on: (string, required) On label
+      - labels.off: (string, required) Off label
+  - label: (string) if present, will be used for `aria-label` button attribute
+  - url: (string) if present `a` tag will be rendered and url will be used as `href` attribute
+  - classNames: (string) additional classNames
+  - attrs: (Object) element attributes, if value is empty only key is printed
+  - aria: (Object) Object where keys will be used and prefixed with `aria-`.
+    Empty value will render data attribute without value.
+  - data: (Object) Object where keys will be used and prefixed with `data-`.
+    Empty value will render data attribute without value.
+#}
+{% macro iconToggle(iconOff, iconOn, options) %}
+  {% set tag = 'a' if options.url else 'button' %}
+  {% set aria = options.aria %}
+  {% set pressed = true if (options.pressed and options.pressed != "false") else false %}
+  {% set data = options.data %}
+
+  {% if options.label %}
+    {% set aria = { label: options.label } | merge(aria) %}
+  {% endif %}
+  {% if options.labels %}
+    {% set data = { "aria-label-on": options.label.on, 'aria-label-off': options.label.off } | merge(data) %}
+  {% else %}
+    {% set aria = { pressed: pressed } | merge(aria) %}
+  {% endif %}
+  <{{ tag }} class="mdc-icon-button{% if pressed %} mdc-icon-button--on{% endif %} {{ options.classNames }}"
+    {% if options.url %}href="{{ options.url }}"{% endif %}
+    {{ printAriaAttrs(aria) }}
+    {{ printAttrs(options.attrs) }}
+    {{ printDataAttrs(data) }}>
+      <i class="material-icons mdc-icon-button__icon">{{ iconOff }}</i>
+      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">{{ iconOn }}</i>
+  </{{ tag }}>
+{% endmacro %}
+
+{# Internal: print class string based on options #}
+{%- macro btnClass(options) -%}
+  {%- set cls = 'mdc-button mdc-button--touch' -%}
+  {%- if options.type -%}{%- set cls = cls + ' mdc-button--' + options.type -%}{%- endif -%}
+  {%- if options.classNames -%}{%- set cls = cls + ' ' + options.classNames -%}{%- endif -%}
+  {{ cls }}
+{%- endmacro -%}
+
+{# Internal: print floating action button class string based on options #}
+{%- macro fabClass(options) -%}
+  {%- set cls = 'mdc-fab mdc-fab--touch' -%}
+  {%- if options.type -%}{%- set cls = cls + ' mdc-fab--' + options.type -%}{%- endif -%}
+  {%- if options.exited -%}{%- set cls = cls + ' mdc-fab--exited' -%}{%- endif -%}
+  {%- if options.classNames -%}{%- set cls = cls + ' ' + options.classNames -%}{%- endif -%}
+  {{ cls }}
+{%- endmacro -%}
+
+{# Internal: print data attributes string based on options #}
+{%- macro printDataAttrs(data, unbounded) -%}
+  {{ printAttrs(data, 'data-') }}
+  {%- if unbounded -%}
+    {{ ' data-mdc-ripple-is-unbounded' }}
+  {%- endif -%}
+{%- endmacro -%}
+
+{# Internal: print aria attributes string based on options #}
+{%- macro printAriaAttrs(data) -%}
+  {{ printAttrs(data, 'aria-') }}
+{%- endmacro -%}
+
+{# Internal: print attributes string based on options #}
+{%- macro printAttrs(attrs, prefix) -%}
+  {%- for key, value in attrs -%}
+    {%- if value -%}
+      {{ " " }}{{ prefix }}{{ key }}="{{ value }}"
+      {%- else -%}
+      {{ " " }}{{ prefix }}{{ key }}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
+
+{# Internal: print common attributes string based on options #}
+{%- macro printCommonAttrs(options) -%}
+  {%- set attrs = '' -%}
+  {%- if options.label and options.type != 'extended' -%}
+    {%- set attrs = attrs + ' aria-label="' + options.label + '"' -%}
+  {%- endif -%}
+  {%- if options.disabled -%}
+    {%- set attrs = attrs + ' disabled' -%}
+  {%- endif -%}
+  {{ attrs }}
+{%- endmacro -%}
+

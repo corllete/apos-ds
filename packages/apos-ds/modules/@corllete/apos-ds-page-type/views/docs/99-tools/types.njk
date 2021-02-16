@@ -1,0 +1,688 @@
+{% extends dsPreview %}
+{% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+{% import "preview/_toolbar.html" as toolbar %}
+
+{% block css %}
+<style>
+  .ds-demo-type-color {
+    color: white;
+  }
+  .ds-demo-type-color-bg {
+    background-color: #ff5555;
+  }
+  .box {
+    border: 2px solid #f0f0f0;
+    {# width: 45%; #}
+  }
+</style>
+{% endblock %}
+
+{% block tagline %}
+  Typography tools to build better design systems.
+{% endblock %}
+
+{% block actionbar %}
+  {{ toolbar.actionToggleCode(true) }}
+{% endblock %}
+
+{% block preview %}
+  {% dssection 'Heading usage' %}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+        {# Usage #}
+        {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+        {# Render in grid cell #}
+        {{ types.heading(headings, options) }}
+        {# No grid #}
+        {{ types.headings(headings, options) }}
+      {% endraw %}
+    {% enddscodecell %}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        General use of the heading macro. When rendered with grid, 
+        <code>options.span</code> controls the cell span. 
+      </div>
+    {% enddscell %}
+  {% enddssection %}
+
+  {% dssection 'Heading basic example' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        Basic headings render based on provided font sizes, span 12 (max). 
+        It renders <code>h*</code> tags with margin reset.
+        The rest is up to your global application styles. 
+      </div>
+    {% enddsrow %}
+    {{ types.heading([98,28,21,16,14,12], { span: 12 }) }}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+        {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+        {{ types.heading([98,28,21,16,14,12], { span: 12 }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Number of headings' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        Passing a number instead of array will render the number of headings. 
+        It renders <code>h{number}</code> tags with margin reset.
+        The rest is up to your global application styles.
+        The size will be auto-detected and replaced with Javascript via the 
+        <code>detect: true</code> option. Detection must be set explicit due to 
+        performance reasons.
+      </div>
+    {% enddsrow %}
+    {{ types.heading(3, { span: 12, detect: true }) }}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(3, { span: 12, detect: true }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Heading - base options' %}
+    {{ types.heading(1, { 
+        span: 3,
+        label: 'Caption {level}',
+        background: '#ff5555', 
+        details: true, 
+        single: true, 
+        detect: true 
+    }) }}
+    {% dscell 4 %}
+      <div>
+        Pass number of options to render mixed predefined and auto-detected values.
+        Detection must be set explicit due to performance reasons.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(1, { 
+        span: 3,
+        label: 'Caption {level}',
+        background: '#ff5555', 
+        details: true, 
+        single: true, 
+        detect: true 
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Heading - show font header' %}
+    {{ types.heading(1, { 
+        span: 3,
+        header: true,
+        background: '#ff5555', 
+        single: true, 
+        details: true, 
+        detect: true 
+    }) }}
+    {% dscell 4 %}
+      <div>
+        This option requires forced auto-detect.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(1, { 
+          span: 3,
+          header: true,
+          background: '#ff5555', 
+          single: true, 
+          details: true, 
+          detect: true 
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+
+  {% dssection 'Heading contrast rating' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        Detect automatically the contrast rating according to WCAG 2.0 standards via option <code>rating: true</code>.
+        <code>detect: true</code> is not required in order this to work properly.
+      </div>
+    {% enddsrow %}
+    {{ types.heading([38], { 
+      span: 3, 
+      color: '#c0c0c0',
+      background: '#ffffff', 
+      metaColor: '#000',
+      rating: true,
+      single: true
+    }) }}
+    {{ types.heading([38], { 
+      span: 3, 
+      color: '#ffffff',
+      background: '#ff5555', 
+      metaColor: '#ffffff',
+      rating: true,
+      single: true
+    }) }}
+    {{ types.heading([38], { 
+      span: 3, 
+      background: '#ffffff', 
+      rating: true,
+      single: true
+    }) }}
+    {{ types.heading([38], { 
+      span: 3, 
+      background: 'rgba(255, 255, 255, 0.1)', 
+      rating: true,
+      single: true
+    }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading([38], { 
+        span: 4, 
+        color: '#ffffff',
+        background: '#ff5555', 
+        metaColor: '#ffffff',
+        rating: true,
+        single: true
+      }) }}
+      {{ types.heading([38], { 
+        span: 4, 
+        rating: true,
+        background: '#ffffff', 
+        single: true
+      }) }}
+      {{ types.heading([38], { 
+        span: 4, 
+        rating: true,
+        background: 'rgba(255, 255, 255, 0.1)', 
+        single: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Heading - auto detect by class' %}
+    {{ types.heading(['ds-demo-type-color'], { 
+      span: 6,
+      cls: 'ds-demo-type-color-bg',
+      metaColor: 'white',
+      single: true,
+      details: true,
+      detect: true
+    }) }}
+    {% dscell 4 %}
+      {% dshint '', { cls: 'ds-content-block' } %}
+        When providing classes it is good to set the <code>options.metaColor</code> to match exactly
+        the heading color. The meta details will use that color with appropriate opacity.
+      {% enddshint %}
+      <div class="ds-typography--code ds-justify">
+        Pass classes as heading items and auto-detected the values. 
+        The background color of the preview can be controlled by <code>options.cls</code>
+        CSS classes used here are provided via {%raw%}<code>{% block css %}</code>{%endraw%} in the current story. 
+        Detection must be set explicit due to performance reasons.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(['ds-demo-type-color'], { 
+        span: 6,
+        cls: 'ds-demo-type-color-bg',
+        metaColor: 'white',
+        single: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Heading - array of objects' %}
+    {{ types.heading(
+      [
+        {
+          level: 2,
+          cls: 'ds-demo-type-color ds-demo-type-color-bg',
+          varName: '$ds-caption-text-color'
+        }
+      ], 
+      { 
+        span: 4,
+        label: 'Caption {level}',
+        metaColor: 'white',
+        cls: 'ds-demo-type-color-bg',
+        single: true,
+        details: true,
+        background: true,
+        detect: true
+      }
+    ) }}
+    {% dscell 4 %}
+      <div>
+        Provide array of objects argument for every heading instead size numbers or string classes.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(
+        [
+          {
+            level: 2,
+            cls: 'ds-demo-type-color ds-demo-type-color-bg',
+            varName: '$ds-caption-text-color'
+          }
+        ], 
+        { 
+          span: 4,
+          label: 'Caption {level}',
+          metaColor: 'white',
+          cls: 'ds-demo-type-color-bg',
+          single: true,
+          details: true,
+          background: true,
+          detect: true
+        }
+      ) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Heading - properties and options' %}
+    {{ types.heading(
+      [
+        {
+          level: 2,
+          label: 'Heading 2',
+          size: '28px',
+          weight: '400',
+          tracking: '-2',
+          line: 'normal',
+          padding: '5px',
+          margin: '0',
+          cls: 'ds-demo-type-color',
+          varName: '$ds-heading-text-color'
+        }
+      ], 
+      { 
+        span: 4,
+        font: 'Roboto',
+        color: '#ffffff',
+        label: 'Caption {level}',
+        metaColor: 'white',
+        background: '#ff5555',
+        single: true,
+        details: true
+      }
+    ) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code ds-justify">
+        All possible heading object and options properties. 
+        <code>font, color, background, image</code> can be only set in options.
+        <code>weight, tracking, padding, label</code> can be set as defaults in options
+        and overridden by the heading items.<br />
+        <code>margin</code> doesn't make sense in typography context, but you still have 
+        the chance to force it. Class options will be overriden by the manual values (style tag property) for both
+        options and heading objects. <code>background</code> and <code>image</code> options can be
+        boolean <code>true</code> or color/image url. In the former case they would be only shown in details 
+        and their values will be auto detected from the css computed data (requires force detect option).
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.heading(
+        [
+          {
+            level: 2,
+            label: 'Heading 2',
+            size: '28px',
+            weight: '400',
+            tracking: '-2',
+            line: 'normal',
+            padding: '5px',
+            margin: '0',
+            cls: 'ds-demo-type-color',
+            varName: '$ds-heading-text-color'
+          }
+        ], 
+        { 
+          span: 4,
+          font: 'Roboto',
+          color: '#ffffff',
+          label: 'Caption {level}',
+          metaColor: 'white',
+          background: '#ff5555',
+          single: true,
+          details: true
+        }
+      ) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph usage' %}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+      {# Usage #}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {# Render in grid cell #}
+      {{ types.paragraph(items, options) }}
+      {# No grid #}
+      {{ types.paragraphs(items, options) }}
+      {% endraw %}
+    {% enddscodecell %}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        General use of the paragraph macro. When rendered with grid, 
+        <code>options.span</code> controls the cell span. 
+      </div>
+    {% enddscell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph basic example' %}
+    {{ types.paragraph(['20/30', '15/22.5'], { span: 6, background: '#f8f8f8' }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        Basic paragraphs render based on provided font sizes/line height and background color and span options. 
+        It renders <code>p</code> applying only the provided options with no additional styling coming from the design system.
+        The rest is up to your global application styles. 
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph(['20/30', '15/22.5'], { span: 6, background: '#f8f8f8' }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph options' %}
+    {{ types.paragraph(['20/30', '15/22.5'], { 
+      span: 4, 
+      color: '#ffffff',
+      metaColor: '#ffffff',
+      background: '#ff5555', 
+      label: 'Custom label',
+      weight: 400,
+      tracking: 'normal',
+      small: true,
+      details: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        The paragraph rendering is controlled by number of options. 
+        Some of them serve as defaults for the paragraph item which is being rendered, others
+        control the global rendering. Inspect the code of this example for more details. 
+        The length of the text is controlled by boolean options: <code>xsmall | small | medium | large (default)</code>
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph(['20/30', '15/22.5'], { 
+        span: 4, 
+        color: '#ffffff',
+        metaColor: '#ffffff',
+        background: '#ff5555', 
+        label: 'Custom label',
+        weight: 400,
+        tracking: 'normal',
+        small: true,
+        details: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph contrast rating' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        Detect automatically the contrast rating according to WCAG 2.0 standards via option <code>rating: true</code>.
+        <code>detect: true</code> is not required in order this to work properly.
+      </div>
+    {% enddsrow %}
+    {{ types.paragraph(['20/30'], { 
+      span: 3, 
+      color: '#c0c0c0',
+      background: '#ffffff', 
+      metaColor: '#000',
+      rating: true,
+      small: true
+    }) }}
+    {{ types.paragraph(['20/30'], { 
+      span: 3, 
+      color: '#ffffff',
+      background: '#ff5555', 
+      metaColor: '#ffffff',
+      rating: true,
+      small: true
+    }) }}
+    {{ types.paragraph(['20/30'], { 
+      span: 3, 
+      background: '#ffffff', 
+      rating: true,
+      small: true
+    }) }}
+    {{ types.paragraph(['20/30'], { 
+      span: 3, 
+      background: 'rgba(255, 255, 255, 0.1)', 
+      rating: true,
+      small: true
+    }) }}
+    
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph(['20/30'], { 
+        span: 4, 
+        color: '#ffffff',
+        background: '#ff5555', 
+        metaColor: '#ffffff',
+        rating: true,
+        small: true
+      }) }}
+      {{ types.paragraph(['20/30'], { 
+        span: 4, 
+        rating: true,
+        background: '#ffffff', 
+        small: true
+      }) }}
+      {{ types.paragraph(['20/30'], { 
+        span: 4, 
+        rating: true,
+        background: 'rgba(255, 255, 255, 0.1)', 
+        small: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph autodetect details' %}
+    {{ types.paragraph(['20/30', '15/22.5'], { 
+      span: 4, 
+      color: '#ffffff',
+      metaColor: '#ffffff',
+      background: '#ff5555', 
+      label: 'Custom label',
+      xsmall: true,
+      header: true,
+      details: true,
+      detect: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        The <code>detect: true</code> options is auto-detecting all meta data from the computed dom style.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph(['20/30', '15/22.5'], { 
+        span: 4, 
+        color: '#ffffff',
+        metaColor: '#ffffff',
+        background: '#ff5555', 
+        label: 'Custom label',
+        xsmall: true,
+        header: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph with css class' %}
+    {{ types.paragraph(['ds-demo-type-color'], { 
+      span: 4, 
+      cls: 'ds-demo-type-color-bg', 
+      metaColor: '#ffffff',
+      header: true,
+      details: true,
+      detect: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        Provide css class name as paragraph item and set <code>detect: true</code> to 
+        auto detect details from existing css rules.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph(['ds-demo-type-color'], { 
+        span: 4, 
+        label: 'Section A',
+        cls: 'ds-demo-type-color-bg', 
+        metaColor: '#ffffff',
+        header: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Paragraph - items as objects' %}
+    {{ types.paragraph([{
+      cls: 'ds-demo-type-color',
+      size: '1.2rem',
+      line: '1.7rem',
+      label: 'Secion',
+      label: 'Promo Box',
+      weight: 'normal',
+      tracking: 1
+    }], { 
+      span: 4, 
+      cls: 'ds-demo-type-color-bg', 
+      color: '#ffffff',
+      background: '#ff5555', 
+      metaColor: '#ffffff',
+      header: true,
+      details: true,
+      detect: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        Example of all available paragraph properties and options. 
+        <code>font, color, background, image</code> can be only set in options.
+        <code>weight, tracking, padding, label</code> can be set as defaults in options
+        and overridden by the heading items.<br />
+        Keep in mind that the <code>cls</code> rule here has no meaning as it's overridden by the 
+        custom style properties.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.paragraph([{
+        cls: 'ds-demo-type-color',
+        size: '1.2rem',
+        line: '1.7rem',
+        label: 'Secion',
+        label: 'Promo Box',
+        weight: 'normal',
+        tracking: 1
+      }], { 
+        span: 4, 
+        cls: 'ds-demo-type-color-bg', 
+        color: '#ffffff',
+        background: '#ff5555', 
+        metaColor: '#ffffff',
+        header: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Types usage' %}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+      {# Usage #}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {# Render in grid cell #}
+      {{ types.cell(items, options) }}
+      {# No grid #}
+      {{ types.types(items, options) }}
+      {% endraw %}
+    {% enddscodecell %}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        Combine <code>headings</code> and <code>paragraphs</code> in a single view.
+      </div>
+    {% enddscell %}
+  {% enddssection %}
+
+  {% dssection 'Types example' %}
+    {{ types.cell({ 
+      headings: [38, 28, 21], 
+      paragraphs: ['20/30', '15/22.5'] 
+    }, { span: 6, background: '#f8f8f8' }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        General use of the <strong>type macro</strong>. <code>items</code> is an object 
+        which may contain <code>headings: [items]</code> and.or <code>paragraphs: [items]</code>
+        in the format for each described above. <code>options.span</code> controls the grid's cell span. 
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.cell({ 
+        headings: [38, 28, 21], 
+        paragraphs: ['20/30', '15/22.5'] 
+      }, { span: 6, background: '#f8f8f8' }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+{% endblock %}
+

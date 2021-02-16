@@ -1,0 +1,407 @@
+{% extends dsPreview %}
+{% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+{% import "preview/_toolbar.html" as toolbar %}
+
+{% block css %}
+<style>
+  .trs-demo-color-primary {
+    background-color: #3ea39e;
+  }
+  .trs-demo-color-secondary {
+    background-color: #ffe605;
+  }
+  .trs-demo-color-bg-dark {
+    background-color: #535962;
+  }
+  .trs-demo-color-bg {
+    background-color: #f0f0f0;
+  }
+
+  .trs-demo-color-palette1 {
+    background-color: #e3f1fc;
+  }
+  .trs-demo-color-palette2 {
+    background-color: #c2d8ea;
+  }
+  .trs-demo-color-palette3 {
+    background-color: #a1c0d8;
+  }
+  .trs-demo-color-palette4 {
+    background-color: #80a8c6;
+  }
+</style>
+{% endblock %}
+
+{% block tagline %}
+  The color and color palette tools to build better design systems.
+{% endblock %}
+
+{% block actionbar %}
+  {{ toolbar.actionToggleCode(true) }}
+{% endblock %}
+
+{% block preview %}
+  {% dssection 'Colors with variables' %}
+    {{ colors.color('Primary', '#3ea39e', "$trs-primary-color") }}
+    {{ colors.color('Secondary', '#ffe605', "$trs-secondary-color") }}
+    {{ colors.color('Background Dark', '#535962', "$trs-dark-background-color", { span: 2 }) }}
+    {{ colors.color('Background Light', '#f0f0f0', "$trs-background-color", { span: 2 }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.color('Primary', '#3ea39e', "$trs-primary-color") }}
+      {{ colors.color('Secondary', '#ffe605', "$trs-secondary-color") }}
+      {{ colors.color('Background Dark', '#535962', "$trs-dark-background-color", { span: 2 }) }}
+      {{ colors.color('Background Light', '#f0f0f0', "$trs-background-color", { span: 2 }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Colors with additional details' %}
+    {% call colors.color('Primary', '#3ea39e', "$trs-primary-color") %}
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+        Quod iam a me expectare noli. Duo Reges: constructio interrete.
+        Quorum sine causa fieri nihil putandum est. 
+        Huius ego nunc auctoritatem sequens idem faciam. 
+        Cur post Tarentum ad Archytam? Praeteritis, inquit, gaudeo.
+      </p>
+    {% endcall %}
+    {% call colors.color('Secondary', '#ffe605', "$trs-secondary-color") %}
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+        Quod iam a me expectare noli. Duo Reges: constructio interrete.
+        Quorum sine causa fieri nihil putandum est. 
+        Huius ego nunc auctoritatem sequens idem faciam. 
+        Cur post Tarentum ad Archytam? Praeteritis, inquit, gaudeo.
+      </p>
+    {% endcall %}
+    {% call colors.color('Background Dark', '#535962', "$trs-dark-background-color", { span: 2 }) %}
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+        Quod iam a me expectare noli.
+      </p>
+    {% endcall %}
+    {% call colors.color('Background Light', '#f0f0f0', "$trs-background-color", { span: 2 }) %}
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+        Quod iam a me expectare noli.
+      </p>
+    {% endcall %}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {% call colors.color('Primary', '#3ea39e', "$trs-primary-color") %}
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+          Quod iam a me expectare noli. Duo Reges: constructio interrete.
+          Quorum sine causa fieri nihil putandum est. 
+          Huius ego nunc auctoritatem sequens idem faciam. 
+          Cur post Tarentum ad Archytam? Praeteritis, inquit, gaudeo.
+        </p>
+      {% endcall %}
+      {% call colors.color('Secondary', '#ffe605', "$trs-secondary-color") %}
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+          Quod iam a me expectare noli. Duo Reges: constructio interrete.
+          Quorum sine causa fieri nihil putandum est. 
+          Huius ego nunc auctoritatem sequens idem faciam. 
+          Cur post Tarentum ad Archytam? Praeteritis, inquit, gaudeo.
+        </p>
+      {% endcall %}
+      {% call colors.color('Background Dark', '#535962', "$trs-dark-background-color", { span: 2 }) %}
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+          Quod iam a me expectare noli.
+        </p>
+      {% endcall %}
+      {% call colors.color('Background Light', '#f0f0f0', "$trs-background-color", { span: 2 }) %}
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Ita prorsus, inquam; Sed ad bona praeterita redeamus. 
+          Quod iam a me expectare noli.
+        </p>
+      {% endcall %}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Colors with auto detect' %}
+    {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true }) }}
+    {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true }) }}
+    {{ colors.color('Background Dark', 'trs-demo-color-bg-dark', '', { span: 2, detect: true }) }}
+    {{ colors.color('Background Light', 'trs-demo-color-bg', '', { span: 2, detect: true }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true }) }}
+      {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true }) }}
+      {{ colors.color('Background Dark', 'trs-demo-color-bg-dark', '', { span: 2, detect: true }) }}
+      {{ colors.color('Background Light', 'trs-demo-color-bg', '', { span: 2, detect: true }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - default, with var' %}
+    {{ colors.palette([
+      [
+        {name: "100", varName: "$some-var", value: "#e3f1fc"},
+        {name: "200", value: "#c2d8ea"},
+        {name: "300", value: "#a1c0d8"},
+        {name: "400", value: "#80a8c6"}
+      ]
+    ]) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "100", varName: "$some-var", value: "#e3f1fc"},
+          {name: "200", value: "#c2d8ea"},
+          {name: "300", value: "#a1c0d8"},
+          {name: "400", value: "#80a8c6"}
+        ]
+      ]) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - horizontal, with span' %}
+    {{ colors.palette([
+      [
+        {name: "Color 1", value: "#3ea39e"},
+        {name: "Color 2", value: "#ffe605"},
+        {name: "Color 3", value: "#535962", color: "#f0f0f0"},
+        {name: "Color 4", value: "#f0f0f0"}
+      ]
+    ], { span: 8, horizontal: true }) }}
+    
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "Color 1", value: "#3ea39e"},
+          {name: "Color 2", value: "#ffe605"},
+          {name: "Color 3", value: "#535962", color: "#f0f0f0"},
+          {name: "Color 4", value: "#f0f0f0"}
+        ]
+      ], { span: 8, horizontal: true }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - horizontal multi, with span' %}
+    {{ colors.palette([
+      [
+        {name: "Color 1-1", value: "#3ea39e"},
+        {name: "Color 1-2", value: "#ffe605"},
+        {name: "Color 1-3", value: "#535962", color: "#f0f0f0"},
+        {name: "Color 1-4", value: "#f0f0f0"}
+      ],
+      [
+        {name: "Color 2-1", value: "#f0f0f0"},
+        {name: "Color 2-2", value: "#535962", color: "#f0f0f0"},
+        {name: "Color 2-3", value: "#ffe605"},
+        {name: "Color 2-4", value: "#3ea39e"}
+      ]
+    ], { span: 8, horizontal: true }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "Color 1-1", value: "#3ea39e"},
+          {name: "Color 1-2", value: "#ffe605"},
+          {name: "Color 1-3", value: "#535962", color: "#f0f0f0"},
+          {name: "Color 1-4", value: "#f0f0f0"}
+        ],
+        [
+          {name: "Color 2-1", value: "#f0f0f0"},
+          {name: "Color 2-2", value: "#535962", color: "#f0f0f0"},
+          {name: "Color 2-3", value: "#ffe605"},
+          {name: "Color 2-4", value: "#3ea39e"}
+        ]
+      ], { span: 8, horizontal: true }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - span' %}
+    {{ colors.palette([
+      [
+        {name: "100", value: "#e3f1fc"},
+        {name: "200", value: "#c2d8ea"},
+        {name: "300", value: "#a1c0d8"},
+        {name: "400", value: "#80a8c6"}
+      ]
+    ], { span: 6 }) }}
+    
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "100", value: "#e3f1fc"},
+          {name: "200", value: "#c2d8ea"},
+          {name: "300", value: "#a1c0d8"},
+          {name: "400", value: "#80a8c6"}
+        ]
+      ], { span: 6 }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - text color control' %}
+    {{ colors.palette([
+      [
+        {name: "100", value: "#e3f1fc"},
+        {name: "200", value: "#c2d8ea"},
+        {name: "300", value: "#a1c0d8"},
+        {name: "400", value: "#80a8c6", color: "white"}
+      ]
+    ]) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "100", value: "#e3f1fc"},
+          {name: "200", value: "#c2d8ea"},
+          {name: "300", value: "#a1c0d8"},
+          {name: "400", value: "#80a8c6", color: "white"}
+        ]
+      ]) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - auto-detect color value from class name' %}
+    {{ colors.palette([
+      [
+        {name: "100", value: "trs-demo-color-palette1"},
+        {name: "200", value: "trs-demo-color-palette2"},
+        {name: "300", value: "trs-demo-color-palette3"},
+        {name: "400", value: "trs-demo-color-palette4"}
+      ]
+    ], { detect: true }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {name: "100", value: "trs-demo-color-palette1"},
+          {name: "200", value: "trs-demo-color-palette2"},
+          {name: "300", value: "trs-demo-color-palette3"},
+          {name: "400", value: "trs-demo-color-palette4"}
+        ]
+      ], { detect: true }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Color palette - multi' %}
+    {{ colors.palette([
+      [
+        {value: "#ffff00"},
+        {value: "#ffff22"},
+        {value: "#ffff44"},
+        {value: "#ffff66"},
+        {value: "#ffff88"},
+        {value: "#ffffaa"},
+        {value: "#ffffcc"},
+        {value: "#ffffee"}
+      ],
+      [
+        {value: "#ff00ff"},
+        {value: "#ff22ff"},
+        {value: "#ff44ff"},
+        {value: "#ff66ff"},
+        {value: "#ff88ff"},
+        {value: "#ffaaff"},
+        {value: "#ffccff"},
+        {value: "#ffeeff"}
+      ],
+      [
+        {value: "#00ffff"},
+        {value: "#22ffff"},
+        {value: "#44ffff"},
+        {value: "#66ffff"},
+        {value: "#88ffff"},
+        {value: "#aaffff"},
+        {value: "#ccffff"},
+        {value: "#eeffff"}
+      ]
+    ], { span: 6 }) }}
+
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
+
+      {{ colors.palette([
+        [
+          {value: "#ffff00"},
+          {value: "#ffff22"},
+          {value: "#ffff44"},
+          {value: "#ffff66"},
+          {value: "#ffff88"},
+          {value: "#ffffaa"},
+          {value: "#ffffcc"},
+          {value: "#ffffee"}
+        ],
+        [
+          {value: "#ff00ff"},
+          {value: "#ff22ff"},
+          {value: "#ff44ff"},
+          {value: "#ff66ff"},
+          {value: "#ff88ff"},
+          {value: "#ffaaff"},
+          {value: "#ffccff"},
+          {value: "#ffeeff"}
+        ],
+        [
+          {value: "#00ffff"},
+          {value: "#22ffff"},
+          {value: "#44ffff"},
+          {value: "#66ffff"},
+          {value: "#88ffff"},
+          {value: "#aaffff"},
+          {value: "#ccffff"},
+          {value: "#eeffff"}
+        ]
+      ], { span: 6 }) }}
+      
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+{% endblock %}

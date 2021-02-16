@@ -1,0 +1,41 @@
+{% macro resize() %}
+  {# <span class="mdc-typography--overline">Resize</span> #}
+  <button title="Smart phone" class="mdc-icon-button material-icons ds-action ds-action--resize" data-size="small">phone_android</button>
+  <button title="Tablet" class="mdc-icon-button material-icons ds-action ds-action--resize" data-size="medium">tablet_android</button>
+  <button title="Laptop" class="mdc-icon-button material-icons ds-action ds-action--resize" data-size="large">laptop</button>
+  <button title="Current" class="mdc-icon-button material-icons ds-action ds-action--resize" data-size="full">desktop_windows</button>
+{% endmacro %}
+
+{% macro actionToggleSide() %}
+  <button
+    title="Toggle sidebar visibilitiy"
+    class="mdc-icon-button material-icons ds-action ds-action--toggle-side">chevron_left</button>
+{% endmacro %}
+
+{% macro actionCatInfo(cat) %}
+  {# <button title="Category info" class="mdc-icon-button material-icons ds-action ds-action--cat-info" data-id="{{ cat._id }}">preview</button> #}
+{% endmacro %}
+
+{% macro actionStoryInfo(story) %}
+  {% if story.details %}
+    <button title="Story info" class="mdc-icon-button material-icons ds-action ds-action--story-info" data-id="{{ story._id }}">preview</button>
+  {% endif %}
+{% endmacro %}
+
+{% macro actionStoryPreviewUrl(previewUrl) %}
+  <a title="Open story preview" class="mdc-icon-button material-icons ds-action" href="{{ previewUrl }}">link</a>
+{% endmacro %}
+
+{% macro actionStoryRel(story) %}
+  <button title="Story relationships" class="mdc-icon-button material-icons ds-action ds-action--story-rel" data-id="{{ story._id }}">grain</button>
+{% endmacro %}
+
+{# Functional in preview (inside the iframe) context only #}
+{% macro actionToggleCode(single) %}
+  {% if single %}
+    <a href="#" title="Toggle all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="toggle">code</a>
+  {% else %}
+    <a href="#" title="Show all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="show">unfold_more</a>
+    <a href="#" title="Hide all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="hide">unfold_less</a>
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,66 @@
+{# {% extends data.outerLayout %} #}
+{# Use a complete override to avoid conflicts #}
+{% extends "layout/pageLayoutOverride.html" %}
+
+{% block extraHead %}
+  {# import Material Icons and Typography fonts from Google Fonts #}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  {{ apos.dsp.stylesheet('bundle') }}
+{% endblock %}
+
+{% block title %}{{ data.projectName }}{% endblock %}
+
+{% block bodyClass %}mdc-typography{% endblock %}
+
+{% block beforeMain %}
+  {% include "layout/_aside.html" %}
+  <div class="mdc-drawer-scrim"></div>
+{% endblock %}
+
+
+{% block main %}
+  {% set toolbar %}
+    {% block toolbar %}{% endblock %}
+  {% endset %}
+  <div class="mdc-drawer-app-content">
+    {# Header shown below 1310px width #}
+    <header class="ds-app-bar mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="material-icons mdc-top-app-bar__navigation-icon">menu</span>
+          <span class="mdc-top-app-bar__title">
+            <h1 class="ds-title mdc-typography--headline5">
+              <a href="{{ data.page._url }}">{{ data.projectName }}</a>
+            </h1>
+          </span>
+        </section>
+      </div>
+    </header>
+
+    {# Config bar shown > 1310px width #}
+    <div class="ds-config-bar--large">
+      {{ toolbar | safe }}
+    </div>
+
+    <main class="ds-main-content mdc-top-app-bar--fixed-adjust">
+      {# Config bar shown < 1310px width #}
+      <div class="ds-config-bar">
+        {{ toolbar | safe }}
+      </div>
+
+      {% block content %}{% endblock %}
+
+    </main> {# /.ds-main-content #}
+  </div> {# /.mdc-drawer-app-content #}
+{% endblock %}
+
+
+{% block afterMain %}
+
+{% endblock %}
+
+{% block extraBody %}
+  {{ apos.dsp.script('bundle') }}
+{% endblock %}

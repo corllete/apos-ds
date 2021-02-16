@@ -1,0 +1,93 @@
+{% extends dsPreview %}
+{% import "preview/_toolbar.html" as toolbar %}
+
+{% block tagline %}
+  Story hints for highlighting important aspects of your documentation.
+{% endblock %}
+
+{% block actionbar %}
+  {{ toolbar.actionToggleCode(true) }}
+{% endblock %}
+
+{% block preview %}
+  {% dssection 'Demo hints' %}
+    {% dsrow %}
+      <p>An example usage of hints with grid, available in story mode only.</p>
+    {% enddsrow %}
+
+    {# Default #}
+    {% dshintcell 6 %}
+      Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+      <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+    {% enddshintcell %}
+
+    {# Default code #}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+
+      {% dshintcell 6 %}
+        Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+        <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+      {% enddshintcell %}
+
+      {% endraw %}
+    {% enddscodecell %}
+
+    {# Type ok #}
+    {% dshintcell 6, 'ok' %}
+      Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+      <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+    {% enddshintcell %} 
+
+    {# Type ok code #}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+
+      {% dshintcell 6, 'ok' %}
+        Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+        <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+      {% enddshintcell %}
+
+      {% endraw %}
+    {% enddscodecell %}
+
+
+    {# Type warning #}
+    {% dshintcell 6, 'warning' %}
+      Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+      <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+    {% enddshintcell %} 
+
+    {# Type warning code #}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+
+      {% dshintcell 6, 'warning' %}
+        Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+        <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+      {% enddshintcell %}
+
+      {% endraw %}
+    {% enddscodecell %}
+
+    {# Type neutral #}
+    {% dshintcell 6, 'neutral' %}
+      Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+      <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+    {% enddshintcell %} 
+
+    {# Type neutral code #}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+
+      {% dshintcell 6, 'neutral' %}
+        Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+        <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+      {% enddshintcell %}
+
+      {% endraw %}
+    {% enddscodecell %}
+
+  {% enddssection %}
+{% endblock %}
+

@@ -1,0 +1,51 @@
+// Material Theming
+// After importing all MDC Web components, apply mixins to theme individual components
+
+// .mdc-button {
+//   @include mdc-button-shape-radius(50%);
+// }
+
+// Icon button actions
+.mdc-icon-button.ds-action {
+  @include mdc-icon-button-icon-size(1.25rem);
+}
+
+.mdc-icon-button.ds-action:active,
+.mdc-icon-button.ds-action:focus,
+.mdc-icon-button.ds-action:hover {
+  color: $mdc-theme-primary;
+}
+
+// Switch
+.mdc-switch {
+  @include mdc-rtl-reflexive-box(margin, right, 20px);
+}
+
+// Tabs
+.component-wrapper .mdc-tab-bar {
+  background: $mdc-theme-primary;
+
+  .mdc-tab {
+    @include mdc-tab-text-label-color($mdc-theme-on-primary);
+
+    .mdc-tab__ripple {
+      @include mdc-states($mdc-theme-on-primary);
+    }
+  }
+
+  .mdc-tab-indicator {
+    @include mdc-tab-indicator-underline-color($mdc-theme-on-primary);
+  }
+}
+
+.component-wrapper {
+  &.button-component-wrapper, &.fab-component-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.icon-button-component-wrapper {
+    @include mdc-rtl-reflexive-box(margin, left, -12px);
+  }
+}

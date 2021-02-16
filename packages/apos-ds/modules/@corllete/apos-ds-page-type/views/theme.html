@@ -1,0 +1,357 @@
+  <head>
+
+    <title>Build a Material Theme</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import Material Icons from Google Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    {{ apos.dsp.stylesheet('bundle') }}
+  </head>
+  <body class="mdc-typography">
+    <aside class="ds-drawer mdc-drawer">
+      <div class="mdc-drawer__header">
+        <h1 class="ds-title project-name mdc-typography--headline5">
+          Project Title
+        </h1>
+      </div>
+      <hr class="mdc-list-divider ds-drawer-divider">
+
+      <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-scroller">
+          <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content">
+              <button class="mdc-tab mdc-tab--active drawer-tab--first" role="tab" aria-selected="true" tabindex="0">
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__text-label">About</span>
+                </span>
+                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>
+              <button class="mdc-tab drawer-tab--second" role="tab" aria-selected="true" tabindex="0">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__text-label">Summary</span>
+                  </span>
+                  <span class="mdc-tab-indicator">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple"></span>
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="mdc-list-divider ds-drawer-divider">
+
+      <div class="mdc-drawer__content drawer-content--first">
+        <h6 class="mdc-typography--overline">How to build a theme</h6>
+        <p class="mdc-typography--body2">
+        </p>
+        <p class="mdc-typography--body2">
+          Built on top of <a href="https://glitch.com/~material-theme-builder">Material theme builder</a>, using
+          <a href="https://github.com/material-components/material-components-web">Material Components for the web</a>.
+        </p>
+
+        <div class="drawer-content--options">
+          <h6 class="mdc-typography--overline">Options</h6>
+          <div class="mdc-form-field rtl-form-field">
+            <div class="mdc-switch rtl-switch">
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__thumb-underlay">
+                <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="rtl-input" class="mdc-switch__native-control" role="switch">
+                </div>
+              </div>
+            </div>
+            <label for="rtl-input">Enable Right-to-Left</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdc-drawer__content drawer-content--second">
+        <div class="section-header">
+          <a href="https://material.io/design/color/the-color-system.html#tools-for-picking-colors" class="mdc-typography--overline" target="_blank">
+            <i class="material-icons leading-icon">colorize</i>
+            Color Scheme
+            <i class="material-icons">open_in_new</i>
+          </a>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--primary">$mdc-theme-primary</code>
+          <figure class="ds-summary-color ds-summary-color--primary"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--on-primary">$mdc-theme-on-primary</code>
+          <figure class="ds-summary-color ds-summary-color--on-primary"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--secondary">$mdc-theme-secondary</code>
+          <figure class="ds-summary-color ds-summary-color--secondary"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--on-secondary">$mdc-theme-on-secondary</code>
+          <figure class="ds-summary-color ds-summary-color--on-secondary"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--error">$mdc-theme-error</code>
+          <figure class="ds-summary-color ds-summary-color--error"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--on-error">$mdc-theme-on-error</code>
+          <figure class="ds-summary-color ds-summary-color--on-error"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--surface">$mdc-theme-surface</code>
+          <figure class="ds-summary-color ds-summary-color--surface"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--on-surface">$mdc-theme-on-surface</code>
+          <figure class="ds-summary-color ds-summary-color--on-surface"></figure>
+        </div>
+        <div class="ds-summary-line">
+          <code class="ds-summary-code ds-summary-code--background">$mdc-theme-background</code>
+          <figure class="ds-summary-color ds-summary-color--background"></figure>
+        </div>
+        <hr class="mdc-list-divider ds-summary-divider">
+
+        <div class="section-header">
+          <a href="https://material.io/design/typography/the-type-system.html" class="mdc-typography--overline" target="_blank">
+            <i class="material-icons leading-icon">text_fields</i>
+            Typography Scale
+            <i class="material-icons">open_in_new</i>
+          </a>
+        </div>
+        <div class="typography-callout">
+          <code class="ds-summary-code">$mdc-typography--font-family:
+          <span class="font-name varValue"></span>;</code>
+          <a class="font-link mdc-typography--button" target="_blank">See on Google Fonts <i class="material-icons">open_in_new</i></a>
+        </div>
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline1</code>
+          <figure class="ds-summary-typography mdc-typography--headline1">H1</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline2</code>
+          <figure class="ds-summary-typography mdc-typography--headline2">H2</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline3</code>
+          <figure class="ds-summary-typography mdc-typography--headline3">H3</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline4</code>
+          <figure class="ds-summary-typography mdc-typography--headline4">H4</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline5</code>
+          <figure class="ds-summary-typography mdc-typography--headline5">H5</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--headline6</code>
+          <figure class="ds-summary-typography mdc-typography--headline6">H6</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--subtitle1</code>
+          <figure class="ds-summary-typography mdc-typography--subtitle1">Subtitle 1</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--subtitle2</code>
+          <figure class="ds-summary-typography mdc-typography--subtitle2">Subtitle 2</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--body1</code>
+          <figure class="ds-summary-typography mdc-typography--body1">Body 1</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--body2</code>
+          <figure class="ds-summary-typography mdc-typography--body2">Body 2</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--button</code>
+          <figure class="ds-summary-typography mdc-typography--button">Button</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--caption</code>
+          <figure class="ds-summary-typography mdc-typography--caption">Caption</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+        <div class="ds-summary-line ds-summary-line--typography">
+          <code class="ds-summary-code">$mdc-typography--overline</code>
+          <figure class="ds-summary-typography mdc-typography--overline">Overline</figure>
+        </div>
+        <hr class="mdc-list-divider typography-baseline-divider">
+      </div>
+    </aside>
+
+    <div class="mdc-drawer-scrim"></div>
+    <div class="mdc-drawer-app-content">
+      <header class="ds-app-bar mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <span class="material-icons mdc-top-app-bar__navigation-icon" role="navigation">menu</span>
+            <span class="mdc-top-app-bar__title">
+              <h1 class="ds-title mdc-typography--headline5">
+                Build a Material Theme
+              </h1>
+            </span>
+          </section>
+        </div>
+      </header>
+
+      <div class="ds-config-bar--large mdc-typography--caption">
+        {% include "layout/_config-bar.html" %}
+      </div>
+
+      <main class="ds-main-content mdc-top-app-bar--fixed-adjust">
+        <div class="ds-config-bar mdc-typography--caption">
+          {% include "layout/_config-bar.html" %}
+        </div>
+
+        <div class="column">
+          <!-- Button -->
+          <section class="ds-component-section">
+            <div class="section-header">
+              <a
+                href="https://material.io/design/components/buttons.html"
+                class="mdc-typography--button" target="_blank" rel="noopener noreferrer">
+                Button
+                <i class="material-icons">open_in_new</i>
+              </a>
+            </div>
+            <div class="component-wrapper button-component-wrapper">
+              <button class="mdc-button mdc-button--raised">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Raised</span>
+              </button>
+              <button class="mdc-button">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Text</span>
+              </button>
+              <button class="mdc-button mdc-button--outlined">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Outlined</span>
+              </button>
+            </div>
+            <div class="component-wrapper button-component-wrapper">
+              <button class="mdc-button mdc-button--raised">
+                <div class="mdc-button__ripple"></div>
+                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                  >bookmark</i
+                >
+                <span class="mdc-button__label">Raised</span>
+              </button>
+              <button class="mdc-button">
+                <div class="mdc-button__ripple"></div>
+                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                  >bookmark</i
+                >
+                <span class="mdc-button__label">Text</span>
+              </button>
+              <button class="mdc-button mdc-button--outlined">
+                <div class="mdc-button__ripple"></div>
+                <i class="material-icons mdc-button__icon" aria-hidden="true"
+                  >bookmark</i
+                >
+                <span class="mdc-button__label">Outlined</span>
+              </button>
+            </div>
+          </section>
+
+        </div> {# /.column #}
+
+        <div class="column column-2">
+
+          <!-- FAB -->
+          <section class="ds-component-section">
+            <div class="section-header">
+              <a href="https://material.io/design/components/buttons-floating-action-button.html" class="mdc-typography--button" target="_blank">
+                FAB
+                <i class="material-icons">open_in_new</i>
+              </a>
+            </div>
+            <div class="component-wrapper fab-component-wrapper">
+              <button class="mdc-fab mdc-fab--extended">
+                <span class="material-icons mdc-fab__icon">edit</span>
+                <span class="mdc-fab__label">Button</span>
+              </button>
+              <button class="mdc-fab" aria-label="Favorite">
+                <span class="mdc-fab__icon material-icons">favorite</span>
+              </button>
+              <button class="mdc-fab mdc-fab--mini" aria-label="Add">
+                <span class="mdc-fab__icon material-icons">add</span>
+              </button>
+            </div>
+          </section>
+        </div> {# /.column column-2 #}
+
+        <div class="full">
+
+          <!-- Tabs -->
+          <section class="ds-component-section tabs-section">
+            <div class="section-header">
+              <a href="https://material.io/design/components/tabs.html" class="mdc-typography--button" target="_blank">
+                Tabs
+                <i class="material-icons">open_in_new</i>
+              </a>
+            </div>
+            <div class="component-wrapper">
+              <div class="mdc-tab-bar" role="tablist">
+                <div class="mdc-tab-scroller">
+                  <div class="mdc-tab-scroller__scroll-area">
+                    <div class="mdc-tab-scroller__scroll-content">
+                      <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                        <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">Button</span>
+                        </span>
+                        <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                          <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                      </button>
+                      <button class="mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                        <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">Button</span>
+                        </span>
+                        <span class="mdc-tab-indicator">
+                          <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                      </button>
+                      <button class="mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                          <span class="mdc-tab__content">
+                            <span class="mdc-tab__text-label">Button</span>
+                          </span>
+                          <span class="mdc-tab-indicator">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                          </span>
+                          <span class="mdc-tab__ripple"></span>
+                        </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div> {# /.full #}
+
+      </main> {# /.ds-main-content #}
+    </div> {# /.mdc-drawer-app-content #}
+
+    <!-- import the module bundle javascript file -->
+    {{ apos.dsp.script('bundle') }}
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "layout/preview.html" %}
+{% import "components/categoryList.html" as list %}
+{% set cat = data.category %}
+{% set catCollection = apos.dsp.toCollection([cat]) %}
+
+{% block title %}{% if cat %}{{ cat.label }} - {% endif %}{{ super() }}{% endblock %}
+
+{% block content %}
+
+  {% if cat and cat.list %}
+    {{ list.render(catCollection, data.categories, data.config, { parentLink: false }) }}
+  {% else %}
+    {% call list.container() -%}
+      <h2 class="ds-category-list__heading">
+        {% if not cat.list %}
+          List preview disabled for this category
+        {% else %}
+          Category not found
+        {% endif %}
+      </h2>
+    {%- endcall %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "layout/page.html" %}
+{% import "components/preview.html" as preview %}
+{% import "preview/_toolbar.html" as toolbar %}
+
+{% set cat = data.category %}
+{% block title %}{% if cat %}{{ cat.label }} - {% endif %}{{ super() }}{% endblock %}
+
+{% block toolbar %}
+  <div>{{ toolbar.actionToggleSide() }}{{ toolbar.actionCatInfo(data.category) }}</div>
+  <div>{{ toolbar.resize() }}</div>
+{% endblock %}
+
+{% block content %}
+  {{ preview.render(data.previewUrl) }}
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends dsPreview %}
+{% import "ui:atoms/form/macro.html" as form %}
+
+{% block previewSimple %}
+  <div class="ds-story__preview-even">
+    {{ form.area('filled', 'Filled area')  }}
+    {{ form.areaOutlined('outlined', 'Outlined area')  }}
+    {# 
+    {# 
+    {{ buttons.multi('Rasied')  }} #}
+  </div>
+{% endblock %}
+
+{% block tagline %}
+  Text area variants.
+{% endblock %}
+
+{% block description %}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Quae cum essent dicta, discessimus. Disserendi artem nullam habuit. 
+    Quae contraria sunt his, malane? Dici enim nihil potest verius.
+  </p>
+{% endblock %}
+
+{# Optional component variants - sub-stories #}
+{% block variants %}
+  {# open new grid container with section tag and heading #}
+  {% dssection 'Variants' %}
+
+    {# Counter #}
+    {# 2 cells with span 6, some helper classes available (should be documented somewhere). Try ds-debug! #}
+    {# You could also use your own project level css to present your stories or you could #}
+    {# add per story css (not recommended) via the `css` block. Keep in mind the latter #}
+    {# will interfere with the other stories in the story list view, so keep it well scoped. #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.areaOutlined('counted', 'Count text', { value: 'Some value already exists', count: 140 })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A multi-line area with counter.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.areaOutlined('counted', 'Count text', { value: 'Some value already exists', count: 140 })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Help text #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.areaOutlined('help', 'With help text', { help: 'A help text' })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Textarea with a help text.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.areaOutlined('help', 'With help text', { help: 'A help text' })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Error #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>{{ form.areaOutlined('error', 'With error', { error: 'Error message' })  }}</div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Textarea with forced error.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          <div>
+            {{ form.areaOutlined('error', 'With error', { error: 'Error message' })  }}
+          </div>
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {# Disabled #}
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        {{ form.areaOutlined('disabled', 'Disabled', { disabled: true })  }}
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">A disabled multi-line area.</p>
+        {% dscode 'njk', { toggle: false } %}
+        {% raw %}
+          {% import "ui:atoms/form/macro.html" as form %}
+
+          {{ form.areaOutlined('disabled', 'Disabled', { disabled: true })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+  {% enddssection %}
+{% endblock %}

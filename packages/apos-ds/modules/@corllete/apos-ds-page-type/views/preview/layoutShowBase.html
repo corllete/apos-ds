@@ -1,0 +1,130 @@
+{# Extra page style #}
+{% set css %}
+  {%- block css -%}{%- endblock -%}
+{% endset %}
+
+{% if css %}
+  {# <style> #}
+{{ css | safe }}
+  {# </style> #}
+{% endif %}
+
+{# Top bar #}
+<div class="ds-story__top-bar ds-layout-sides">
+  <div class="ds-story__meta">
+    
+    <div class="ds-story__tmpl-location ds-typography--outline">
+      {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
+    </div>
+    {# Tagline #}
+    {% set tagline %}
+      {%- block tagline -%}{%- endblock -%}
+    {% endset %}
+    {% if tagline %}
+      <div class="ds-story__tagline ds-typography--outline">
+        {{ tagline | safe }}
+      </div>
+    {% endif %}
+  </div>
+
+  {# Action bar #}
+  {% set actionbar %}
+    {%- block actionbar -%}{%- endblock -%}
+  {% endset %}
+  {% if actionbar %}
+    <div class="ds-story__top-actions">
+      {{ actionbar | safe }}
+    </div>
+  {% endif %}
+</div>
+
+{# Preview #}
+{% set preview %}{% block preview %}{% endblock %}{% endset %}
+
+{% set previewSimple %}{% block previewSimple %}{% endblock %}{% endset %}
+
+<div class="ds-story__content">
+  {# Before Preview #}
+  {% block beforePreview %}{% endblock %}
+
+  {# Default and simple (flex centered) preview #}
+  {% if preview %}
+    <div class="ds-story__preview">
+      {{ preview | safe }}
+    </div>
+  {% else %}
+    <div class="ds-story__preview-simple">
+      {{ previewSimple | safe }}
+    </div>
+  {% endif %}
+
+  {# After Preview #}
+  {% block afterPreview %}{% endblock %}
+
+  {% block beforeVariants %}{% endblock %}
+  <div class="ds-story__preview-variants">{% block variants %}{% endblock %}</div>
+  {% block afterVariants %}{% endblock %}
+</div>
+
+<div id="ds-story__details" class="ds-modal">
+  <div class="ds-modal__header">
+    <h3 class="ds-modal__heading">{{ __ns('ds', 'Details') }}</h3>
+    <button class="ds-action-button ds-modal__close-button" title="{{ __ns('ds', 'Close details') }} "> 
+      <span class="material-icons ds-modal__close-icon">close</span>
+    </button>
+  </div>
+  <div class="ds-modal__content">
+    {# Story details container #}
+    <div class="ds-story__details">
+      {# Meta #}
+      {% set story = data.story %}
+
+      {# TODO code preview tabs? #}
+      <div class="ds-story__meta ds-typography--outline">
+        {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
+      </div>
+
+      {# Description #}
+      {% set desc %}
+        {%- block description -%}{%- endblock -%}
+      {% endset %}
+      {% if desc %}
+        <div class="ds-typography--desc">{{ desc | safe }}</div>
+      {% endif %}
+
+      {# Sources #}
+      {% if story.sources.length %}
+        {% dsgrid { cls: 'ds-story__sources' } %}
+          {% for source in story.sources %}
+            {% dscell 6, { tablet: 8 } %}
+            <div class="ds-story-source">
+            {% if source.type == 'macro' or source.type == 'fragment' %}
+              <h4 class="ds-story-source__title">{{ source.type }}.{{ source.name }}(params)</h4>
+            {% else %}
+              <h4 class="ds-story-source__title">data.{{ source.name }}(params)</h4>
+            {% endif %}
+              <div class="ds-typography--outline">{{ source.path }}</div>
+              <div class="ds-story__docs">parameters schema (todo)</div>
+            </div>
+            <div class="ds-story__divider"></div>
+            {% enddscell %}
+          {% endfor %}
+        {% enddsgrid %}
+      {% endif %}
+    </div> {# /.ds-story__details #}
+    <div class="ds-modal__content--end"></div>
+  </div> {# /.ds-modal__content #}
+</div> {# /.ds-modal #}
+
+
+
+{# Extra page JS #}
+{% set js %}
+  {%- block js -%}{%- endblock -%}
+{% endset %}
+
+{% if js %}
+  {# <script type="text/javascript"> #}
+{{ js | safe }}
+  {# </script> #}
+{% endif %}

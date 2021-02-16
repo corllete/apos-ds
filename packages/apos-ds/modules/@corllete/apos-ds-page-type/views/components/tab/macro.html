@@ -1,0 +1,26 @@
+{% macro buttons(tabs) %}
+  {% for item in tabs %}
+    <button class="mdc-tab{% if item.active %} mdc-tab--active{% endif %} drawer-tab--{{ item.name }}" role="tab" aria-selected="true" tabindex="0">
+      <span class="mdc-tab__content">
+        {% if item.icon %}
+          <span class="mdc-tab__icon material-icons" aria-hidden="true">{{ item.icon }}</span>
+        {% endif %}
+        {% if item.label %}
+          <span class="mdc-tab__text-label">{{ item.label }}</span>
+        {% endif %}
+      </span>
+      <span class="mdc-tab-indicator{% if item.active %} mdc-tab-indicator--active{% endif %}">
+        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+      </span>
+      <span class="mdc-tab__ripple"></span>
+    </button>
+  {% endfor %}
+{% endmacro %}
+
+{% macro content(tabs) %}
+  {% for item in tabs %}
+    <div class="mdc-drawer__content drawer-content--{{ item.name }}">
+      {{ item.content | safe }}
+    </div>
+  {% endfor %}
+{% endmacro %}

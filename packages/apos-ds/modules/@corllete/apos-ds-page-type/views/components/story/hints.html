@@ -1,0 +1,14 @@
+{% macro cell(type, span = 4) -%}
+  {% set content = caller() %}
+  {% dscell span %}
+    {{ hint(content, type) }}
+  {% enddscell %}
+{%- endmacro %}
+
+{# type - neutral | warning | ok, empty for default #}
+{% macro hint(content, type) %}
+  {% set t = type if type else 'default' %}
+  <section class="ds-hint ds-hint--{{ t }}">
+    <p class="ds-hint__content ds-typography--code">{{ content }}</p>
+  </section>
+{% endmacro %}

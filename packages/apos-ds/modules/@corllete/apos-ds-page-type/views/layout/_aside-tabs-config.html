@@ -1,0 +1,21 @@
+<div class="ds-tab-content">
+  <div class="drawer-content--options">
+    <h6 class="mdc-typography--overline">Options</h6>
+    <div class="mdc-form-field apos-admin-form-field">
+      <div class="mdc-switch apos-admin-switch{% if not data.user %} mdc-switch--disabled{% endif %}">
+        <div class="mdc-switch__track"></div>
+        <div class="mdc-switch__thumb-underlay">
+          <div class="mdc-switch__thumb">
+              <input
+              type="checkbox"
+              id="apos-admin-input"
+              class="mdc-switch__native-control"
+              role="switch"
+              {% if not data.user %}disabled{% endif %}>
+          </div>
+        </div>
+      </div>
+      <label for="apos-admin-input">Toggle Apostrophe admin</label>
+    </div>
+  </div>
+</div>

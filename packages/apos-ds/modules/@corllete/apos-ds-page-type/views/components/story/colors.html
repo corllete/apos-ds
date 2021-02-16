@@ -1,0 +1,68 @@
+{% macro colorItem(name, value, varName, options) %}
+  {% set cls = 'ds-color ds-color--detect' if options.detect else 'ds-color' %}
+  {% set details = options.details %}
+  <div class="{{ cls }}" data-target=".ds-color__preview">
+  {% if options.detect %}
+    <div class="ds-color__preview {{ value }}"></div>
+    <div class="ds-color__info">
+      {{ name }}
+      <code class="ds-summary-line">{% if varName %}{{ varName }}:&nbsp;{%endif%}<span class="ds-color--set" data-type="background"></span></code>
+      <code class="ds-summary-line">.{{ value }}</code>
+      {% if details %}
+        <section class="ds-color__details">
+          {{ details }}
+        </section>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="ds-color__preview" style="background: {{value}} none repeat scroll 0% 0%"></div>
+    <div class="ds-color__info">
+      {% if name %}
+        <h4 class="ds-color__name">{{ name }}</h4>
+      {% endif %}
+      <code class="ds-summary-line">{% if varName %}{{ varName }}:&nbsp;{%endif%}<span class="ds-color--set">{{ value }}</span></code>
+      {% if details %}
+        <section class="ds-color__details">
+          {{ details }}
+        </section>
+      {% endif %}
+    </div>
+  {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro color(name, value, varName, options) %}
+  {% if caller %}
+    {% set details = caller() %}
+  {% endif %}
+  {% dscell options.span %}
+    {% call colorItem(name, value, varName, options | merge({ details: details })) %}
+      {{ datails }}
+    {% endcall %}
+  {% enddscell %}
+{% endmacro %}
+
+{% macro palette(colors, options = {}) %}
+  {% dscell options.span %}
+    <div class="ds-color-palette{%if options.horizontal%} ds-color-palette--horizontal{%endif%}">
+    {% for cols in colors %}
+      <div class="ds-color-palette__col">
+        {% for item in cols %}
+          {% if options.detect %}
+            <div class="ds-color-palette__cell {{ item.value }} ds-color--detect ds-color__preview" style="{% if item.color %}color:{{ item.color }};{% endif %}">
+              {{ item.name }}
+              <code class="ds-summary-line">{% if item.varName %}{{ item.varName }}: {%endif%}<span class="ds-color__value--detect"></span></code>
+              <code class="ds-summary-line">.{{ item.value }}</code>
+            </div>
+          {% else %}
+            <div class="ds-color-palette__cell" style="background: {{item.value}} none repeat scroll 0% 0%;{% if item.color %}color:{{ item.color }};{% endif %}">
+              {{ item.name }}
+              <code class="ds-summary-line">{% if item.varName %}{{ item.varName }}: {%endif%}<span class="ds-color__value--detect">{{ item.value }}</span></code>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+    </div>
+  {% enddscell %}
+{% endmacro %}

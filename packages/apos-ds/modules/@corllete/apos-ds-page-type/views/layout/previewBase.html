@@ -1,0 +1,25 @@
+{% extends data.outerLayout %}
+
+{% block startHead %}
+  {# import Material Icons and Typography fonts from Google Fonts #}
+  {% block previewFonts %}{% endblock %}
+{% endblock %}
+
+{% block extraHead %}
+  {{ apos.dsp.stylesheet('preview') }}
+  {% block previewCss %}{% endblock %}
+{% endblock %}
+
+{% block title %}{{ data.projectName }}{% endblock %}
+
+{% block main %}
+  <main class="ds-main-content">
+    {% block content %}{% endblock %}
+  </main> {# /.ds-main-content #}
+{% endblock %}
+
+{% block extraBody %}
+  {{ apos.dsp.script('highlight.common.min') }}
+  {{ apos.dsp.script('preview') }}
+  {% block previewJs %}{% endblock %}
+{% endblock %}
