@@ -2,10 +2,9 @@
 
 It's yet another design system but experimental and built for Nunjucks components, working on top of the awesome [Apostrophe](https://apostrophecms.com/) (version 3 alpha).
 
-## Development install
+## Development / Demo install
 
-Clone this. Yup, still the only way.
-
+Clone this.
 
 Be sure you have mongodb running. If you don't but you have `docker-compose` installed - we got your back! Just do:
 ```sh
@@ -17,7 +16,7 @@ When your mongodb is up and running:
 ```sh
 npm i
 ```
-It make take a while...
+It may take a while...
 
 When you are ready playing stop your mongo:
 ```sh
@@ -32,9 +31,9 @@ docker volume ls
 You should see `apos-ds_mongodb-data` (or similar if you cloned in different than the default folder).
 Execute `docker volume rm apos-ds_mongodb-data` to remove it.
 
-## Run in development
+## Run it
 
-The app to be run is slightly modified [Apostrophe 3 boilerplate](https://github.com/apostrophecms/a3-boilerplate).
+The demo app `packages/app` is slightly modified [Apostrophe 3 boilerplate](https://github.com/apostrophecms/a3-boilerplate).
 In order to be able to add page and attach the design system to it, you have to create user:
 ```sh
 cd packages/app && node app @apostrophecms/user:add admin admin
@@ -53,7 +52,9 @@ On the way!
 
 ## Where is the npm package?
 
-See above!
+`npm i @corllete/apos-ds`
+
+[The full story](packages/apos-ds)
 
 ## A quick look
 

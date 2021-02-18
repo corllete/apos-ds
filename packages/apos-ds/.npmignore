@@ -1,4 +1,6 @@
 node_modules
 modules/@corllete/apos-ds-page-type/ui/css
 modules/@corllete/apos-ds-page-type/ui/js
+modules/@corllete/apos-ds-page-type/assets/css/highlight
+publish
 *.tgz

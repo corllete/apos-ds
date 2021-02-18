@@ -78,15 +78,19 @@ module.exports = function (self, env) {
 
       const hasToggle = typeof toggle === 'boolean';
       const icon = toggle ? 'expand_less' : 'expand_more';
-      const toggleStart = hasToggle ? `
+      const toggleStart = hasToggle
+        ? `
         <div class="ds-toggle">
           <a class="ds-toggle__trigger" href="#" title="Toggle code">Toggle code <span class="ds-toggle__icon material-icons">${icon}</span></a>
           <div class="ds-toggle__content" style="display: ${toggle ? 'block' : 'none'};">
-      ` : '';
-      const toggleEnd = hasToggle ? `
+      `
+        : '';
+      const toggleEnd = hasToggle
+        ? `
           </div>
         </div>
-      ` : '';
+      `
+        : '';
 
       return `
       ${toggleStart}

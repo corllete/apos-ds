@@ -1,6 +1,6 @@
 {
 	"name": "@corllete/apos-ds",
-	"version": "1.0.0-alpha.1",
+	"version": "1.0.0-alpha.0",
 	"description": "Nunjucks Design System for Apostrophe CMS.",
 	"keywords": [
 		"apostrophecms",
@@ -11,13 +11,14 @@
 	"author": "Corllete ltd.",
 	"license": "MIT",
 	"scripts": {
-		"build": "webpack --mode=development",
-		"build:prod": "webpack --mode=production",
+		"build": "webpack",
+		"build:prod": "NODE_ENV=production webpack",
 		"watch": "run-p -n watch:*",
 		"watch:js": "webpack --watch",
-		"dart": "run-p -n dart:watch:*",
-		"dart:watch:sass": "dart-sass modules/@corllete/apos-ds-page-type/assets/scss/app.scss modules/@corllete/apos-ds-page-type/ui/css/bundle.css --style=expanded --load-path=node_modules --load-path=modules/@corllete/apos-ds-page-type/assets/css --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"preversion": "npm run lint",
+		"version": "npm run build:prod && git add -A",
+		"postversion": "git push origin main && git push --tags"
 	},
 	"repository": {
 		"type": "git",
@@ -38,13 +39,13 @@
 		"file-loader": "^5.0.2",
 		"postcss-loader": "^3.0.0",
 		"sass-loader": "^7.3.1",
+		"semver": "^5.7.1",
 		"webpack": "^4.41.5",
 		"webpack-cli": "^3.3.10"
 	},
 	"dependencies": {
 		"@dagrejs/graphlib": "^2.1.4",
 		"@sailshq/lodash": "^3.10.4",
-		"highlight.js": "^10.2.0",
 		"material-components-web": "^7.0.0",
 		"npm-run-all": "^4.1.5",
 		"remove": "^0.1.5"

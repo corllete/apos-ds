@@ -4,5 +4,9 @@ module.exports = {
     MDC: 'writeable',
     hljs: 'readonly'
   },
-  ignorePatterns: [ 'assets/js/lib', 'assets/css/highlight', 'ui' ]
+  ignorePatterns: [
+    'modules/@corllete/apos-ds-page-type/assets/js/lib',
+    'modules/@corllete/aspo-ds-page-type/assets/css/highlight',
+    'ui'
+  ]
 };

@@ -26,7 +26,7 @@ function normalizeTypeHelper(arr, options = {}) {
         if (options.type === 'p') {
           const [ size, line ] = h.split('/', 2);
           if (size && line) {
-            const regex = new RegExp(/^(\d+(\.\d+)?)$/);
+            const regex = /^(\d+(\.\d+)?)$/;
             res = {
               size: regex.test(size) ? +size : size,
               line: regex.test(line) ? +line : line

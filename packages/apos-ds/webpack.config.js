@@ -4,12 +4,13 @@ const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
 const modulePath = './modules/@corllete/apos-ds-page-type';
+const dist = mode === 'production' ? '/dist' : '';
 
 const paths = {
   jsIn: './assets/js/app.js',
-  jsOut: 'ui/js/bundle.js',
+  jsOut: `ui${dist}/js/bundle.js`,
   cssIn: './assets/scss/app.scss',
-  cssOut: 'ui/css/bundle.css',
+  cssOut: `ui${dist}/css/bundle.css`,
   scssInclude: [ './node_modules', path.join(__dirname, modulePath, 'assets/scss') ]
 };
 
@@ -70,17 +71,17 @@ module.exports = [ {
       patterns: [
         {
           from: 'assets/css/preview.css',
-          to: 'ui/css/preview.css',
+          to: `ui${dist}/css/preview.css`,
           toType: 'file'
         },
         {
           from: 'assets/js/preview.js',
-          to: 'ui/js/preview.js',
+          to: `ui${dist}/js/preview.js`,
           toType: 'file'
         },
         {
           from: 'assets/js/lib/highlight.common.min.js',
-          to: 'ui/js/highlight.common.min.js',
+          to: `ui${dist}/js/highlight.common.min.js`,
           toType: 'file'
         }
       ]

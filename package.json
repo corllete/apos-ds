@@ -13,10 +13,13 @@
     "clean:app": "lerna clean --yes --scope=a3-boilerplate && npm run bootstrap:app",
     "living-on-the-edge": "lerna add 'github:apostrophecms/apostrophe#3.0' --scope=a3-boilerplate",
     "back-to-normal": "lerna add apostrophe@^3.0.0-alpha.3 --scope=a3-boilerplate",
-    "postinstall": "npm run bootstrap && npm run build && npm run assets"
+    "postinstall": "npm run bootstrap && npm run build && npm run assets",
+    "publish": "npx lerna publish --canary --dist-tag alpha",
+    "publish:local": "npx lerna publish --canary --dist-tag alpha --registry http://localhost:4873"
   },
   "devDependencies": {
     "lerna": "^3.22.1",
-    "lerna-update-wizard": "^0.17.8"
+    "lerna-update-wizard": "^0.17.8",
+    "lerna-wizard": "^1.1.1"
   }
 }

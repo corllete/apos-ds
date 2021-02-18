@@ -11,8 +11,9 @@ module.exports = function (self, options) {
           self.apos.util.warn('Bundle disabled, nothing to do.');
           return;
         }
-        const uiPath = `${self.apos.rootDir}/node_modules/@corllete/apos-ds/modules/@corllete/apos-ds-page-type/ui`;
+        let uiPath = `${self.apos.rootDir}/node_modules/@corllete/apos-ds/modules/@corllete/apos-ds-page-type/ui`;
         const publishPath = `${self.apos.rootDir}/public/apos-ds`;
+        const dist = '/dist';
         try {
           fs.unlinkSync(publishPath);
         } catch (e) {
@@ -20,6 +21,7 @@ module.exports = function (self, options) {
         }
         require('remove').removeSync(publishPath, { ignoreErrors: true });
         if (process.env.NODE_ENV === 'production') {
+          uiPath += dist;
           fs.mkdirSync(publishPath);
           fs.mkdirSync(publishPath + '/js');
           fs.mkdirSync(publishPath + '/css');

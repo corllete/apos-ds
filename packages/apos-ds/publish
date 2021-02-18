@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ ! -z "$1" ]]; then
+  update_type="$1"
+fi
+
+if [[ ! -z "$2" ]]; then
+  dry="$2"
+fi
+
+echo
+if [[ ! "$update_type" =~ ^(patch|minor|major|prepatch|preminor|premajor|prerelease|from-git)$ ]]; then
+  error=1
+  echo "Please specify update type - patch | minor | major | prepatch | preminor | premajor | prerelease | from-git"
+  echo "More info: https://docs.npmjs.com/cli/v7/commands/npm-version"
+fi
+
+if [[ ! -z "$error" ]]; then
+  echo
+  echo "Usage: "
+  echo "./publish patch|minor|major [dry]"
+else
+  if [[ ! -z "$dry" ]]; then
+    echo "DRY RUN"
+  fi
+
+  # tag="latest"
+  tag="alpha"
+
+  if [[ ! -z "$dry" ]]; then
+    set +e
+    last_version=$(npm view @corllete/apos-ds version)
+    if [ $? -ne 0 ]; then
+      last_version="1.0.0-alpha.0"
+    fi
+    next_version=$(npx semver $last_version -i $update_type)
+    echo "1. [dry] current version $last_version -> $next_version"
+    set -e
+  else 
+    # update_version=$(npm version $update_type -m "Bump version %s")
+    echo "1. [publish] $last_version -> $update_version"
+  fi
+
+  if [[ ! -z "$dry" ]]; then
+    echo "2. [dry] npm publish --dry-run --tag=$tag"
+    npm publish --dry-run --tag=$tag
+  else 
+    # publish=$(npm publish --tag=$tag)
+    echo "2. [publish] npm publish -> ${publish}"
+  fi
+fi
+
+echo
+
+    # test package.json commands
+    # "preversion": "npm run lint",
+		# "version": "npm run build:prod && git add -n .",
+		# "postversion": "echo 'git push origin main' && echo 'git push --tags'"
