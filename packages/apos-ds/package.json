@@ -17,7 +17,7 @@
 		"watch:js": "webpack --watch",
 		"lint": "eslint .",
 		"preversion": "npm run lint",
-		"version": "npm run build:prod && git add -A",
+		"version": "npm run build:prod && git add .",
 		"postversion": "git push origin main && git push --tags"
 	},
 	"repository": {
@@ -56,5 +56,5 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "12532bba69ca45604b644848943e36c5cff80087"
+	"gitHead": "6d24d8e0e2d322a808f3c5cf0fd21ef801e53d1f"
 }
