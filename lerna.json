@@ -3,7 +3,6 @@
     "packages/*"
   ],
   "version": "1.0.0-alpha.4",
-  "granularPathspec": false,
   "command": {
     "publish": {
       "allowBranch": "main",
