@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "dev": "lerna run dev --stream",
     "build": "lerna run build --stream",
@@ -14,7 +15,7 @@
     "living-on-the-edge": "lerna add 'github:apostrophecms/apostrophe#3.0' --scope=a3-boilerplate",
     "back-to-normal": "lerna add apostrophe@^3.0.0-alpha.3 --scope=a3-boilerplate",
     "postinstall": "npm run bootstrap && npm run build && npm run assets",
-    "publish": "lerna publish --canary --dist-tag alpha",
+    "publish:npm": "lerna publish --canary --dist-tag alpha",
     "publish:local": "lerna publish --canary --dist-tag alpha --registry http://localhost:4873"
   },
   "devDependencies": {
