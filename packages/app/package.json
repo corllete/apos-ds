@@ -1,7 +1,7 @@
 {
   "name": "a3-boilerplate",
   "private": "true",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Apostrophe 3 Boilerplate Site",
   "main": "app.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@corllete/apos-ds": "^1.0.0-alpha.5",
+    "@corllete/apos-ds": "^1.0.0-alpha.6",
     "@material/button": "^10.0.0",
     "@material/fab": "^10.0.0",
     "@material/icon-button": "^10.0.0",
