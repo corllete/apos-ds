@@ -22,7 +22,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/@corllete/apos-ds.git",
+		"url": "https://github.com/corllete/apos-ds.git",
 		"directory": "packages/apos-ds"
 	},
 	"devDependencies": {
@@ -52,5 +52,9 @@
 	},
 	"engines": {
 		"node": ">=12.0.0"
-	}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "4717410bd866673ab16179063e1d88764e24847a"
 }

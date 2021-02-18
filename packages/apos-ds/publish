@@ -39,7 +39,7 @@ else
     echo "1. [dry] current version $last_version -> $next_version"
     set -e
   else 
-    # update_version=$(npm version $update_type -m "Bump version %s")
+    update_version=$(npm version $update_type -m "chore(release): publish %s")
     echo "1. [publish] $last_version -> $update_version"
   fi
 
@@ -47,7 +47,7 @@ else
     echo "2. [dry] npm publish --dry-run --tag=$tag"
     npm publish --dry-run --tag=$tag
   else 
-    # publish=$(npm publish --tag=$tag)
+    publish=$(npm publish --tag=$tag)
     echo "2. [publish] npm publish -> ${publish}"
   fi
 fi
