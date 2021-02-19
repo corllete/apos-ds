@@ -52,7 +52,7 @@ On the way!
 
 ## Where is the npm package?
 
-`npm i @corllete/apos-ds`
+`npm i @corllete/apos-ds@alpha`
 
 [The full story](packages/apos-ds)
 

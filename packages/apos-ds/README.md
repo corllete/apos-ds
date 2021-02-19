@@ -7,7 +7,7 @@ This bundle allows you to build design system, pattern library or just document 
 From the root of your Apostrophe CMS v3 application:
 
 ```sh
-npm i @corllete/apos-ds
+npm i @corllete/apos-ds@alpha
 ```
 
 ## Publish the assets from the bundle
