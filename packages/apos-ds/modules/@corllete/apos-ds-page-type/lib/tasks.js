@@ -69,7 +69,7 @@ module.exports = function (self, options) {
           const uploadfsFolder = path.join('/assets', `/${releaseId}`, '/apos-ds');
           await copyIn(path.join(localFolder, '/js/bundle.js'), path.join(uploadfsFolder, '/js/bundle.js'));
           await copyIn(path.join(localFolder, '/js/preview.js'), path.join(uploadfsFolder, '/js/preview.js'));
-          await copyIn(path.join(localFolder, '/js/highlight.common.min.js'), path.join(uploadfsFolder, '/js/highlight.common.min.js.js'));
+          await copyIn(path.join(localFolder, '/js/highlight.common.min.js'), path.join(uploadfsFolder, '/js/highlight.common.min.js'));
           await copyIn(path.join(localFolder, '/css/bundle.css'), path.join(uploadfsFolder, '/css/bundle.css'));
           await copyIn(path.join(localFolder, '/css/preview.css'), path.join(uploadfsFolder, '/css/preview.css'));
           self.apos.util.log('Published:');
