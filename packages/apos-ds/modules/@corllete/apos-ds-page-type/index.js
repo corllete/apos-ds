@@ -46,7 +46,7 @@ module.exports = {
         if (process.env.NODE_ENV === 'production') {
           const releaseId = self.apos.asset.getReleaseId();
           const uploadfsFolder = `/assets/${releaseId}`;
-          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/css`;
+          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/apos-ds/css`;
         } else {
           base = '/apos-ds/css';
         }
@@ -64,7 +64,7 @@ module.exports = {
         if (process.env.NODE_ENV === 'production') {
           const releaseId = self.apos.asset.getReleaseId();
           const uploadfsFolder = `/assets/${releaseId}`;
-          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/js`;
+          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/apos-ds/js`;
         } else {
           base = '/apos-ds/js';
         }
