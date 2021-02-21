@@ -6,11 +6,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
+    "dev": "nodemon --delay 1000ms -x \"nodemon app.js\"",
     "build": "webpack && node app @apostrophecms/asset:build",
     "assets": "node app @corllete/apos-ds-page-type:publish-assets",
-    "dev": "nodemon --delay 1000ms -x \"nodemon app.js\"",
-    "storybook": "node app @apostrophecms/storybook:run",
-    "postinstall": "npm run build"
+    "storybook": "node app @apostrophecms/storybook:run"
   },
   "repository": {
     "type": "git",

@@ -6,7 +6,7 @@ Install dependencies: `npm install`
 
 ## Running the project
 
-Run `npm run dev` to build the Apostrophe UI and start the site up. Remember, this is during alpha development, so we're all in "dev mode."
+Run `npm run build && npm run dev` to build the Apostrophe UI and start the site up. Remember, this is during alpha development, so we're all in "dev mode."
 
 ## You really want the docs
 
