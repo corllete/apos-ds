@@ -14,7 +14,7 @@ It'll take a while but only the first time. Promise.
 
 When your mongodb is up and running:
 ```sh
-npm i && npm run prepare
+npm i && npm run prep
 ```
 It may take a while...
 
