@@ -29,6 +29,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - uses: webfactory/ssh-agent@v0.4.1
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.GIT_KEY }}
     - run: npm ci
     - run: npm test
