@@ -31,4 +31,5 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.GIT_KEY }}
     - run: npm ci
+    - run: npm run bootstrap
     - run: npm test
