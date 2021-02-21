@@ -213,14 +213,11 @@ module.exports = function (self, options) {
     });
   }
 
-  // Process story globs from the sources
-  function initStoryPaths() {
-    const promises = [];
-    self.sources.forEach(s => {
-      promises.push(initSource(s));
-    });
-
-    return Promise.all(promises);
+  // Process story globs from the sources in the right order
+  async function initStoryPaths() {
+    for (const s of self.sources) {
+      await initSource(s);
+    }
   }
 
   // Build config from paths
