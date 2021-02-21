@@ -14,6 +14,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    environment: ci
+
     strategy:
       matrix:
         node-version: [12.x, 14.x, 15.x]
@@ -25,5 +27,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - run: npm ci
     - run: npm test
