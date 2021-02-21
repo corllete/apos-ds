@@ -14,7 +14,7 @@
 	"scripts": {
 		"build": "webpack",
 		"build:prod": "NODE_ENV=production webpack",
-		"test": "node node_modules/.bin/run-p -n test:*",
+		"test": "npm run test:lint && npm run test:spec",
 		"test:lint": "eslint .",
 		"test:spec": "mocha --file test/setup.js 'test/**/*.test.js'",
 		"test:spec:update": "npm run test:spec -- --update",
