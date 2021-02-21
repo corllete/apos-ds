@@ -1,5 +1,12 @@
 module.exports = {
-  extends: 'apostrophe',
+  extends: [
+    'apostrophe'
+  ],
+  env: {
+    commonjs: true,
+    node: true,
+    mocha: true
+  },
   globals: {
     MDC: 'writeable',
     hljs: 'readonly'
@@ -7,6 +14,6 @@ module.exports = {
   ignorePatterns: [
     'modules/@corllete/apos-ds-page-type/assets/js/lib',
     'modules/@corllete/aspo-ds-page-type/assets/css/highlight',
-    'ui'
+    'ui/'
   ]
 };

@@ -6,6 +6,7 @@
     "dev": "lerna run dev --stream",
     "build": "lerna run build --stream",
     "assets": "lerna run assets --stream",
+    "test": "lerna run test --stream",
     "bootstrap": "lerna bootstrap",
     "bootstrap:ds": "lerna bootstrap --scope=@corllete/apos-ds",
     "bootstrap:app": "lerna bootstrap --scope=a3-boilerplate",
@@ -13,7 +14,7 @@
     "clean:ds": "lerna clean --yes --scope=@corllete/apos-ds && npm run bootstrap:ds",
     "clean:app": "lerna clean --yes --scope=a3-boilerplate && npm run bootstrap:app",
     "living-on-the-edge": "lerna add 'github:apostrophecms/apostrophe#3.0' --scope=a3-boilerplate",
-    "back-to-normal": "lerna add apostrophe@^3.0.0-alpha.3 --scope=a3-boilerplate",
+    "back-to-normal": "lerna add apostrophe@alpha --scope=a3-boilerplate",
     "postinstall": "npm run bootstrap && npm run build && npm run assets",
     "publish:npm": "lerna publish prerelease --dist-tag alpha -m \"chore(release): release %s\"",
     "publish:local": "lerna publish prerelease --dist-tag alpha --registry http://localhost:4873"

@@ -214,7 +214,7 @@ module.exports = function (self, options) {
   }
 
   // Process story globs from the sources
-  function findStoryPaths() {
+  function initStoryPaths() {
     const promises = [];
     self.sources.forEach(s => {
       promises.push(initSource(s));
@@ -226,7 +226,7 @@ module.exports = function (self, options) {
   // Build config from paths
   function buildConfig() {
     self.paths.forEach((c) => {
-      const config = require(c.path);
+      const config = require(path.resolve(c.path));
       processConfig(config.module || c.module, config);
     });
     finishCategories();
@@ -234,7 +234,7 @@ module.exports = function (self, options) {
 
   return {
     initCategories,
-    findStoryPaths,
+    initStoryPaths,
     buildConfig,
     initModules
   };

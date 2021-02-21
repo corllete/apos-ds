@@ -1,4 +1,6 @@
+npm-debug.log
 node_modules
+!test/mocks/node_modules
 modules/@corllete/apos-ds-page-type/ui/css
 modules/@corllete/apos-ds-page-type/ui/js
 *.tgz

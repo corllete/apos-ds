@@ -8,15 +8,20 @@
 		"nunjucks"
 	],
 	"main": "index.js",
+	"type": "commonjs",
 	"author": "Corllete ltd.",
 	"license": "MIT",
 	"scripts": {
 		"build": "webpack",
 		"build:prod": "NODE_ENV=production webpack",
+		"test": "run-p -n test:*",
+		"test:lint": "eslint .",
+		"test:spec": "mocha --file test/setup.js 'test/**/*.test.js'",
+		"test:spec:update": "npm run test:spec -- --update",
 		"watch": "run-p -n watch:*",
 		"watch:js": "webpack --watch",
-		"lint": "eslint .",
-		"preversion": "npm run lint",
+		"watch:spec": "npm run test:spec -- -w",
+		"preversion": "npm run test",
 		"version": "npm run build:prod && git add .",
 		"postversion": "git push origin main && git push --tags"
 	},
@@ -25,11 +30,20 @@
 		"url": "https://github.com/corllete/apos-ds.git",
 		"directory": "packages/apos-ds"
 	},
+	"dependencies": {
+		"@dagrejs/graphlib": "^2.1.4",
+		"@sailshq/lodash": "^3.10.4",
+		"material-components-web": "^7.0.0",
+		"npm-run-all": "^4.1.5",
+		"remove": "^0.1.5"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.7.7",
 		"@babel/preset-env": "^7.7.7",
 		"autoprefixer": "^9.7.3",
 		"babel-loader": "^8.0.6",
+		"chai": "^4.3.0",
+		"chai-spies": "^1.0.0",
 		"copy-webpack-plugin": "^6.4.1",
 		"css-loader": "^1.0.1",
 		"dart-sass": "^1.25.0",
@@ -37,18 +51,13 @@
 		"eslint-config-apostrophe": "^3.4.0",
 		"extract-loader": "^3.1.0",
 		"file-loader": "^5.0.2",
+		"mocha": "^8.3.0",
+		"mocha-chai-jest-snapshot": "^1.1.1",
 		"postcss-loader": "^3.0.0",
 		"sass-loader": "^7.3.1",
 		"semver": "^5.7.1",
 		"webpack": "^4.41.5",
 		"webpack-cli": "^3.3.10"
-	},
-	"dependencies": {
-		"@dagrejs/graphlib": "^2.1.4",
-		"@sailshq/lodash": "^3.10.4",
-		"material-components-web": "^7.0.0",
-		"npm-run-all": "^4.1.5",
-		"remove": "^0.1.5"
 	},
 	"engines": {
 		"node": ">=12.0.0"
