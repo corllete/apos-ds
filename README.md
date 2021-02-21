@@ -1,3 +1,5 @@
+![Tests Status](https://github.com/corllete/apos-ds/actions/workflows/tests.yml/badge.svg)
+
 # What?
 
 It's yet another design system but experimental and built for Nunjucks components, working on top of the awesome [Apostrophe](https://apostrophecms.com/) (version 3 alpha).
