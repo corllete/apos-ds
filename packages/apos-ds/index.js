@@ -47,7 +47,7 @@ module.exports = {
     self.initModules();
     self.initCategories();
 
-    await self.findStoryPaths();
+    await self.initStoryPaths();
     await self.buildConfig();
 
     self.checkForWarnings();
@@ -67,7 +67,7 @@ module.exports = {
 
     const {
       initCategories,
-      findStoryPaths,
+      initStoryPaths,
       buildConfig,
       initModules
     } = require('./lib/story')(self, options);
@@ -78,14 +78,14 @@ module.exports = {
       // Transform option.modules to self.sources
       initModules,
 
-      // Convert options.categories (if any) to self.categories objects
+      // Extend (if any) self.categories objects
       initCategories,
 
-      // Transform extract paths from self.soruces and store them into self.paths
-      findStoryPaths,
+      // Extract paths from self.soruces and store them into self.paths
+      initStoryPaths,
 
-      // Go through every path in self.paths and build a single self.config
-      // containing all stories data (categories, stories, modules) from every
+      // Go through every path in self.paths and build self.config
+      // containing all stories meta data (categories, stories, modules) from every
       // story config found.
       buildConfig,
 

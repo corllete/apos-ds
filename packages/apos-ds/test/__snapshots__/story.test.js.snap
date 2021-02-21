@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Resolve Stories Gather Story metadata from  Config Paths should initialize stories from their configuration 1`] = `
+Array [
+  Object {
+    "module": "module2",
+    "path": "test/mocks/node_modules/module2/views/**/*.stories.js",
+  },
+  Object {
+    "module": "module2",
+    "path": "test/mocks/modules/module2/views/**/*.stories.js",
+  },
+]
+`;
+
+exports[`Resolve Stories Gather Story metadata from  Config Paths should initialize stories from their configuration 2`] = `
+Array [
+  Object {
+    "module": "module2",
+    "path": "test/mocks/modules/module2/views/findme.stories.js",
+  },
+]
+`;
+
+exports[`Resolve Stories Gather Story metadata from  Config Paths should initialize stories from their configuration 3`] = `
+Object {
+  "testconfigid": Object {
+    "_id": "testconfigid",
+    "category": "Atoms :: Test",
+    "categoryId": "atoms-test",
+    "label": "Test Config",
+    "module": "module2",
+    "name": "testConfigId",
+    "stories": Array [
+      Object {
+        "_id": "testconfigid-story1",
+        "categoryId": "atoms-test",
+        "details": false,
+        "label": "Story 1",
+        "module": "module2",
+        "name": "story1",
+        "state": "complete",
+        "template": "atoms/test/story1.njk",
+      },
+      Object {
+        "_id": "testconfigid-story2",
+        "categoryId": "atoms-test",
+        "details": false,
+        "label": "story2",
+        "module": "module2",
+        "name": "story2",
+        "state": "inreview",
+        "template": "atoms/test/story2.njk",
+      },
+      Object {
+        "_id": "testconfigid-story3",
+        "categoryId": "atoms-test",
+        "details": false,
+        "label": "story3",
+        "module": "module2",
+        "name": "story3",
+        "state": "inprogress",
+        "template": "atoms/test/story3.njk",
+      },
+      Object {
+        "_id": "testconfigid-storyfull",
+        "categoryId": "atoms-test",
+        "details": true,
+        "label": "Story Full",
+        "module": "module2",
+        "name": "storyFull",
+        "sources": Array [
+          Object {
+            "name": "fn",
+            "params": Object {
+              "label": Object {
+                "label": "Component label",
+                "type": "string",
+              },
+              "options": Object {
+                "label": "Options",
+                "schema": Object {
+                  "opt1": Object {
+                    "help": "One of \`val1\` | \`val2\` | \`val3\`",
+                    "type": "string",
+                  },
+                  "opt2": Object {
+                    "help": "set some boolean option",
+                    "type": "boolean",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "path": "module2:atoms/test/macro.html",
+            "type": "macro",
+          },
+          Object {
+            "name": "fn",
+            "path": "module2:atoms/test/macro.html",
+            "type": "fragment",
+          },
+          Object {
+            "name": "includePreviewName",
+            "path": "module1:includes/component.html",
+            "type": "include",
+          },
+        ],
+        "state": "inprogress",
+        "template": "atoms/test/story.full.njk",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Resolve Stories Gather Story metadata from  Config Paths should initialize stories from their configuration 4`] = `
+Object {
+  "testconfigid-story1": Object {
+    "category": "atoms-test",
+    "config": "testconfigid",
+  },
+  "testconfigid-story2": Object {
+    "category": "atoms-test",
+    "config": "testconfigid",
+  },
+  "testconfigid-story3": Object {
+    "category": "atoms-test",
+    "config": "testconfigid",
+  },
+  "testconfigid-storyfull": Object {
+    "category": "atoms-test",
+    "config": "testconfigid",
+  },
+}
+`;
+
+exports[`Resolve Stories Gather Story metadata from  Config Paths should initialize stories from their configuration 5`] = `
+Object {
+  "atoms": Object {
+    "_id": "atoms",
+    "all": Array [
+      "testconfigid",
+    ],
+    "children": Array [
+      "atoms-test",
+    ],
+    "items": Array [],
+    "label": "Atoms",
+    "list": true,
+    "parents": Array [],
+  },
+  "atoms-test": Object {
+    "_id": "atoms-test",
+    "all": Array [
+      "testconfigid",
+    ],
+    "children": Array [],
+    "items": Array [
+      "testconfigid",
+    ],
+    "label": "Test",
+    "list": true,
+    "parents": Array [
+      "atoms",
+    ],
+  },
+  "molecules": Object {
+    "_id": "molecules",
+    "all": Array [],
+    "children": Array [],
+    "items": Array [],
+    "label": "Molecules",
+    "list": true,
+    "parents": Array [],
+  },
+  "organisms": Object {
+    "_id": "organisms",
+    "all": Array [],
+    "children": Array [],
+    "items": Array [],
+    "label": "Organisms",
+    "list": true,
+    "parents": Array [],
+  },
+  "pages": Object {
+    "_id": "pages",
+    "all": Array [],
+    "children": Array [],
+    "items": Array [],
+    "label": "Pages",
+    "list": false,
+    "parents": Array [],
+  },
+  "templates": Object {
+    "_id": "templates",
+    "all": Array [],
+    "children": Array [],
+    "items": Array [],
+    "label": "Templates",
+    "list": false,
+    "parents": Array [],
+  },
+}
+`;
+
+exports[`Resolve Stories Initialize Categories should initialize from minimal category definitions from options 1`] = `
+Object {
+  "test": Object {
+    "_id": "test",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Test",
+    "list": true,
+    "parents": Set {},
+  },
+}
+`;
+
+exports[`Resolve Stories Initialize Categories should initialize the default category definition 1`] = `
+Object {
+  "atoms": Object {
+    "_id": "atoms",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Atoms",
+    "list": true,
+    "parents": Set {},
+  },
+  "ds-docs": Object {
+    "_id": "ds-docs",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Docs",
+    "list": true,
+    "parents": Set {},
+  },
+  "molecules": Object {
+    "_id": "molecules",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Molecules",
+    "list": true,
+    "parents": Set {},
+  },
+  "organisms": Object {
+    "_id": "organisms",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Organisms",
+    "list": true,
+    "parents": Set {},
+  },
+  "pages": Object {
+    "_id": "pages",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Pages",
+    "list": false,
+    "parents": Set {},
+  },
+  "templates": Object {
+    "_id": "templates",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Templates",
+    "list": false,
+    "parents": Set {},
+  },
+}
+`;
