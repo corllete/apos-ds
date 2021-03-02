@@ -35,14 +35,14 @@ function normalizeTypeHelper(arr, options = {}) {
             // it's a css class name
             res = {
               cls: h,
-              label: '.' + h
+              label: 'p.' + h
             };
           }
         } else {
           // Header - it's a css class name
           res = {
             cls: h,
-            label: '.' + h
+            label: `h${i + 1}.` + h
           };
         }
       }
@@ -84,28 +84,28 @@ function normalizeTypeHelper(arr, options = {}) {
 
     // Pre-compute styles
     const previewStyle = [];
-    if (res.size) {
+    if (res.size && typeof res.size !== 'boolean') {
       previewStyle.push(`font-size: ${res.size};`);
     }
-    if (res.line) {
+    if (res.line && typeof res.line !== 'boolean') {
       previewStyle.push(`line-height: ${res.line};`);
     }
-    if (res.font) {
+    if (res.font && typeof res.font !== 'boolean') {
       previewStyle.push(`font-family: '${res.font}';`);
     }
-    if (res.color) {
+    if (res.color && typeof res.color !== 'boolean') {
       previewStyle.push(`color: ${res.color};`);
     }
-    if (res.weight) {
+    if (res.weight && typeof res.weight !== 'boolean') {
       previewStyle.push(`font-weight: ${res.weight};`);
     }
-    if (typeof res.tracking !== 'undefined') {
+    if (res.tracking && typeof res.tracking !== 'boolean') {
       previewStyle.push(`letter-spacing: ${res.tracking};`);
     }
-    if (typeof res.padding !== 'undefined') {
+    if (res.padding && typeof res.padding !== 'boolean') {
       previewStyle.push(`padding: ${res.padding};`);
     }
-    if (typeof res.margin !== 'undefined') {
+    if (res.margin && typeof res.margin !== 'boolean') {
       previewStyle.push(`margin: ${res.margin};`);
     }
 
@@ -116,6 +116,25 @@ function normalizeTypeHelper(arr, options = {}) {
 
 function normalizeTypeOptionsHelper(options = {}) {
   const res = { ...options };
+  // defaults
+  switch (options.type) {
+    case 'p':
+    case 'h':
+      if (typeof res.color === 'undefined') {
+        res.color = true;
+      }
+      if (typeof res.weight === 'undefined') {
+        res.weight = true;
+      }
+      if (typeof res.tracking === 'undefined') {
+        res.tracking = true;
+      }
+      if (typeof res.line === 'undefined') {
+        res.line = true;
+      }
+      break;
+  }
+
   // Pre-compute styles
   const mainStyle = [];
   if (options.background && typeof options.background !== 'boolean') {
