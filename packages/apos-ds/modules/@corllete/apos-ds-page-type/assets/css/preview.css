@@ -522,6 +522,18 @@ body, html {
   padding: 0;
 }
 
+a.ds-toggle__trigger,	
+a.ds-toggle__trigger:focus,	
+a.ds-toggle__trigger:active {	
+  color: var(--ds-main-text-color);	
+  text-decoration: none;	
+}	
+
+a.ds-toggle__trigger:hover {	
+  color: var(--ds-main-hover-color);	
+  text-decoration: none;	
+}
+
 .ds-paragraph__crating--details {
   padding-top: 1rem;
 }

@@ -315,6 +315,7 @@
           padding: '5px',
           margin: '0',
           cls: 'ds-demo-type-color',
+          className: '.some-slass-as-info, h2',
           varName: '$ds-heading-text-color'
         }
       ], 
@@ -325,6 +326,7 @@
         label: 'Caption {level}',
         metaColor: 'white',
         background: '#ff5555',
+        cls: 'container-class',
         single: true,
         details: true
       }
@@ -358,6 +360,7 @@
             padding: '5px',
             margin: '0',
             cls: 'ds-demo-type-color',
+            className: '.some-slass-as-info, h',
             varName: '$ds-heading-text-color'
           }
         ], 
@@ -368,6 +371,7 @@
           label: 'Caption {level}',
           metaColor: 'white',
           background: '#ff5555',
+          cls: 'container-class',
           single: true,
           details: true
         }
@@ -590,6 +594,7 @@
   {% dssection 'Paragraph - items as objects' %}
     {{ types.paragraph([{
       cls: 'ds-demo-type-color',
+      className: '.some-class-as-info, p',
       size: '1.2rem',
       line: '1.7rem',
       label: 'Secion',
@@ -622,6 +627,7 @@
 
       {{ types.paragraph([{
         cls: 'ds-demo-type-color',
+        className: '.some-class, p',
         size: '1.2rem',
         line: '1.7rem',
         label: 'Secion',
@@ -677,7 +683,7 @@
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
-      {{ types.cell({ 
+      {{ types.cell({
         headings: [38, 28, 21], 
         paragraphs: ['20/30', '15/22.5'] 
       }, { span: 6, background: '#f8f8f8' }) }}

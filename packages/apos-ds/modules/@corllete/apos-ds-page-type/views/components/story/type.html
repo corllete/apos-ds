@@ -52,7 +52,7 @@ Verba tu fingas et ea dicas, quae non sentias?
   {% set rootId = apos.util.generateId() %}
   {% set options = apos.dsp.normalizeHeadingOptions(opts) %}
   {% set collection = apos.dsp.normalizeHeadings(arr, options) %}
-  {% set cls = ' ' + options.cls if options.cls %}
+  {% set cls = ' ' + options.cls %}
   {% if options.detect %}
     {% set cls = cls + ' ds-type--detect-global' %}
   {% endif %}
@@ -102,7 +102,7 @@ Verba tu fingas et ea dicas, quae non sentias?
         </div>
         {{ headingPreview(item, options) }}
         {% if options.details %}
-          {{ details(item, {} | merge(options, { line: true })) }}
+          {{ details(item, options) }}
         {% endif %}
       </div>
     {% endfor %}
@@ -122,7 +122,7 @@ Verba tu fingas et ea dicas, quae non sentias?
   {% set rootId = apos.util.generateId() %}
   {% set options = apos.dsp.normalizeParagraphOptions(opts) %}
   {% set collection = apos.dsp.normalizeParagraphs(items, options) %}
-  {% set cls = ' ' + options.cls if options.cls %}
+  {% set cls = ' ' + options.cls %}
   {% if options.detect %}
     {% set cls = cls + ' ds-type--detect-global' %}
   {% endif %}
@@ -205,15 +205,26 @@ Verba tu fingas et ea dicas, quae non sentias?
 
 {% macro details(item, options) %}
   <ul class="ds-heading__details">
-    <li>color: <span class="ds-type--set" data-type="color">{{ item.color }}</span></li>
+    {% if item.className %}
+      {% if options.type == 'p' or options.type == 'h' %}
+          <li>CSS: {{ item.className }}</li>
+      {% endif %}
+    {% endif %}
+    {% if options.color %}{# boolean options, default true #}
+      <li>color: <span class="ds-type--set" data-type="color">{{ item.color }}</span></li>
+    {% endif %}
     {% if options.image %}
       <li>background-image: <span class="ds-type--set-global" data-type="image">{{ options.image }}</span></li>
     {% endif %}
     {% if options.background %}
       <li>background-color: <span class="ds-type--set-global" data-type="background">{{ options.background }}</span></li>
     {% endif %}
-    <li>font-weight: <span class="ds-type--set" data-type="weight">{{ item.weight }}</span></li>
-    <li>letter-spacing: <span class="ds-type--set" data-type="letter">{{ item.tracking }}</span></li>
+    {% if options.weight %}{# boolean options, default true #}
+      <li>font-weight: <span class="ds-type--set" data-type="weight">{{ item.weight }}</span></li>
+    {% endif %}
+    {% if options.tracking %}{# boolean options, default true #}
+      <li>letter-spacing: <span class="ds-type--set" data-type="letter">{{ item.tracking }}</span></li>
+    {% endif %}
     {% if options.line %}
       <li>line-height: <span class="ds-type--set" data-type="line">{{ item.line }}</span></li>
     {% endif %}
