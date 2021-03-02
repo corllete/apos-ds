@@ -249,22 +249,8 @@ body, html {
 
 /* Content global */
 .ds-main-content {
-  /*font-family: Roboto, sans-serif;*/
   margin: 1rem;
   padding: 0;
-  color: var(--ds-main-text-color);
-}
-
-.ds-main-content a,
-.ds-main-content a:focus,
-.ds-main-content a:active {
-  color: var(--ds-main-text-color);
-  text-decoration: none;
-}
-
-.ds-main-content a:hover {
-  color: var(--ds-main-hover-color);
-  text-decoration: none;
 }
 
 /* Flex layouts & Positioning */
