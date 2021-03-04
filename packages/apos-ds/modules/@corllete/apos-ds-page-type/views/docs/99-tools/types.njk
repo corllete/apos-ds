@@ -64,6 +64,22 @@
     {% enddscodecell %}
   {% enddssection %}
 
+  {% dssection 'Heading truncate' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        You may avoid truncating and showing multi-row heading with <code>truncate: false</code> option. 
+      </div>
+    {% enddsrow %}
+    {{ types.heading([98], { span: 12, truncate: false }) }}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+        {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+        {{ types.heading([98], { span: 12, truncate: false }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
   {% dssection 'Number of headings' %}
     {% dsrow %}
       <div class="ds-typography--code">

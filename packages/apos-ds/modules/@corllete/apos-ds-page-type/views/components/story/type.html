@@ -128,25 +128,23 @@ Verba tu fingas et ea dicas, quae non sentias?
   {% endif %}
   {% if options.rating %}
     {% set cls = cls + ' ds-type-fix-top-border' %}
-  {% endif %}
-  {% if options.rating %}
-  <div 
-    class="ds-type--detect-crating"
-    data-root-target="self"
-    data-preview-target=".ds-paragraph__crating"
-    data-background-target=".ds-paragraph"
-    data-foreground-target=".ds-paragraph__preview">
-    <div class="ds-paragraph__crating ds-toggle"{#  data-toggle-state="false" #}>
-      <a class="ds-toggle__trigger" href="#" title="Toggle code">
-        <span class="ds-paragraph__crating--label ds-type--set-crating" data-type="crating-label">Not detected</span>
-        <span class="ds-paragraph__crating--ratio ds-type--set-crating" data-type="crating-ratio"></span>
-        <span class="ds-paragraph__toggle-icon ds-toggle__icon material-icons"></span>
-      </a>
-      {# Avoid padding in the content, move details as child #}
-      <div class="ds-toggle__content" style="display: none">
-        <div class="ds-paragraph__crating--details ds-type--set-crating" data-type="crating-details"></div>
+    <div 
+      class="ds-type--detect-crating"
+      data-root-target="self"
+      data-preview-target=".ds-paragraph__crating"
+      data-background-target=".ds-paragraph"
+      data-foreground-target=".ds-paragraph__preview">
+      <div class="ds-paragraph__crating ds-toggle"{#  data-toggle-state="false" #}>
+        <a class="ds-toggle__trigger" href="#" title="Toggle code">
+          <span class="ds-paragraph__crating--label ds-type--set-crating" data-type="crating-label">Not detected</span>
+          <span class="ds-paragraph__crating--ratio ds-type--set-crating" data-type="crating-ratio"></span>
+          <span class="ds-paragraph__toggle-icon ds-toggle__icon material-icons"></span>
+        </a>
+        {# Avoid padding in the content, move details as child #}
+        <div class="ds-toggle__content" style="display: none">
+          <div class="ds-paragraph__crating--details ds-type--set-crating" data-type="crating-details"></div>
+        </div>
       </div>
-    </div>
   {% endif %}
   <div 
     id="{{ rootId }}"
@@ -175,12 +173,15 @@ Verba tu fingas et ea dicas, quae non sentias?
     {% endfor %}
   </div>
   {% if options.rating %}
-  </div>
+    </div>
   {% endif %}
 {% endmacro %}
 
 {% macro headingPreview(item, options) %}
   {% set cls = ' ' + item.cls if item.cls %}
+  {% if options.truncate %}
+    {% set cls = cls + ' ds-heading__preview--truncated' %}
+  {% endif %}
   {% set label = pangramSingle if options.single else pangram %}
   {% if options.alt %}
     {% set label = pangramSingle %}
