@@ -38,6 +38,11 @@ function normalizeTypeHelper(arr, options = {}) {
               label: 'p.' + h
             };
           }
+        } else if (options.type === 'custom') {
+          // custom type
+          res = {
+            tag: h
+          };
         } else {
           // Header - it's a css class name
           res = {
@@ -50,7 +55,7 @@ function normalizeTypeHelper(arr, options = {}) {
 
     // Merge global with item data
     const {
-      font, color, weight, tracking, padding, background, image, label, truncate
+      font, color, weight, tracking, padding, background, image, label, truncate, content
     } = options;
     res = {
       weight,
@@ -58,12 +63,26 @@ function normalizeTypeHelper(arr, options = {}) {
       padding,
       label,
       truncate,
+      content,
       ...res,
       font,
       color,
       background,
       image
     };
+
+    // custom type with defaults
+    if (options.type === 'custom') {
+      if (!res.tag) {
+        res.tag = 'div';
+      }
+      if (!res.content) {
+        res.content = res.tag;
+      }
+      if (!res.label) {
+        res.label = res.tag;
+      }
+    }
 
     // normalize size
     if (typeof res.size === 'number') {
@@ -121,6 +140,7 @@ function normalizeTypeOptionsHelper(options = {}) {
   switch (opts.type) {
     case 'p':
     case 'h':
+    case 'custom':
       // both
       if (typeof opts.color === 'undefined') {
         opts.color = true;

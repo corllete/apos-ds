@@ -106,6 +106,20 @@ module.exports = function (self, options) {
       });
     },
 
+    normalizeCustomTypes(arr, options = {}) {
+      return normalizeTypeHelper(arr, {
+        ...options,
+        type: 'custom'
+      });
+    },
+
+    normalizeCustomTypeOptions(options = {}) {
+      return normalizeTypeOptionsHelper({
+        ...options,
+        type: 'custom'
+      });
+    },
+
     // Used only for color palettes
     normalizeColorPalette(arr, options = {}) {
       const opts = { ...options };

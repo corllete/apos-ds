@@ -30,6 +30,9 @@ Verba tu fingas et ea dicas, quae non sentias?
     {% if obj.paragraphs %}
       {{ paragraphs(obj.paragraphs, options) }}
     {% endif %}
+    {% if obj.custom %}
+      {{ customTypes(obj.custom, options) }}
+    {% endif %}
   {% enddscell %}
 {% endmacro %}
 
@@ -39,6 +42,9 @@ Verba tu fingas et ea dicas, quae non sentias?
   {% endif %}
   {% if obj.paragraphs %}
     {{ paragraphs(obj.paragraphs, options) }}
+  {% endif %}
+  {% if obj.custom %}
+    {{ customTypes(obj.custom, options) }}
   {% endif %}
 {% endmacro %}
 
@@ -177,6 +183,73 @@ Verba tu fingas et ea dicas, quae non sentias?
   {% endif %}
 {% endmacro %}
 
+
+
+{% macro custom(arr, options) %}
+  {% dscell options.span %}
+    {{ customTypes(arr, options) }}
+  {% enddscell %}
+{% endmacro %}
+
+{% macro customTypes(items, opts) %}
+  {% set rootId = apos.util.generateId() %}
+  {% set options = apos.dsp.normalizeCustomTypeOptions(opts) %}
+  {% set collection = apos.dsp.normalizeCustomTypes(items, options) %}
+  {% set cls = ' ' + options.cls %}
+  {% if options.detect %}
+    {% set cls = cls + ' ds-type--detect-global' %}
+  {% endif %}
+  {% if options.rating %}
+    {% set cls = cls + ' ds-type-fix-top-border' %}
+    <div 
+      class="ds-type--detect-crating"
+      data-root-target="self"
+      data-preview-target=".ds-custom-type__crating"
+      data-background-target=".ds-custom-type"
+      data-foreground-target=".ds-custom-type__preview">
+      <div class="ds-custom-type__crating ds-toggle"{#  data-toggle-state="false" #}>
+        <a class="ds-toggle__trigger" href="#" title="Toggle code">
+          <span class="ds-custom-type__crating--label ds-type--set-crating" data-type="crating-label">Not detected</span>
+          <span class="ds-custom-type__crating--ratio ds-type--set-crating" data-type="crating-ratio"></span>
+          <span class="ds-custom-type__toggle-icon ds-toggle__icon material-icons"></span>
+        </a>
+        {# Avoid padding in the content, move details as child #}
+        <div class="ds-toggle__content" style="display: none">
+          <div class="ds-custom-type__crating--details ds-type--set-crating" data-type="crating-details"></div>
+        </div>
+      </div>
+  {% endif %}
+  <div 
+    id="{{ rootId }}"
+    class="ds-custom-type{{ cls }}" 
+    data-target="self" 
+    style="{{ options.mainStyle }}">
+    {% if options.header %}
+      <div class="ds-custom-type__header{% if options.detect %} ds-type--detect{% endif %}" data-target="#{{ rootId }} .ds-custom-type__preview">
+        <span class="ds-type--set" data-type="font">{{ options.font }}</span>
+      </div>
+    {% endif %} 
+    {% for item in collection %}
+      {% set label = item.label if item.label else 'Paragraph' %}
+      <div class="ds-custom-type__item{% if options.detect %} ds-type--detect{% endif %}" data-target=".ds-custom-type__preview">
+        <div class="ds-custom-type__meta">
+          {{ label }}
+          {% if item.varName %}
+            <div>{{ item.varName }}</div>
+          {% endif %}
+        </div>
+        {{ customTypePreview(item, options) }}
+        {% if options.details %}
+          {{ details(item, options) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if options.rating %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
 {% macro headingPreview(item, options) %}
   {% set cls = ' ' + item.cls if item.cls %}
   {% if item.truncate %}
@@ -202,6 +275,15 @@ Verba tu fingas et ea dicas, quae non sentias?
   <p{%if options.id%} id="{{ options.id }}"{%endif%} class="ds-paragraph__preview{{ cls }}" style="{{ item.previewStyle }}">
     {{ content }}
   </p>
+{% endmacro %}
+
+{% macro customTypePreview(item, options) %}
+  {% set cls = ' ' + item.cls if item.cls %}
+  {% set content = item.content %}
+  {% set tag = item.tag %}
+  <{{ tag }}{%if options.id%} id="{{ options.id }}"{%endif%} class="ds-custom-type__preview{{ cls }}" style="{{ item.previewStyle }}">
+    {{ content }}
+  </{{ tag }}>
 {% endmacro %}
 
 {% macro details(item, options) %}
