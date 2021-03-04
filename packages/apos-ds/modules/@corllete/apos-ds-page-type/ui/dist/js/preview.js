@@ -183,6 +183,7 @@
             .trim()
             .replace(/'/g, '')
             .replace(/"/g, '');
+          el.title = style.fontFamily || '';
           break;
         case 'size':
           el.textContent = style.fontSize;
@@ -215,6 +216,20 @@
     });
   }
 
+  // function getIfCssVariableFn(computed) {
+  //   if (typeof computed.getPropertyValue === 'function') {
+  //     return function getIfCssVariable(aVar) {
+  //       if (typeof computed.getPropertyValue === 'function' && (aVar || '').slice(0, 2) === '--') {
+  //         return computed.getPropertyValue(aVar);
+  //       }
+  //       return aVar;
+  //     };
+  //   }
+  //   return function getIfCssVariableNone(aVar) {
+  //     return aVar;
+  //   };
+  // }
+
   function findAndReplace(detectSelector, setSelector, replacer) {
     const detectContainerEls = document.querySelectorAll(detectSelector);
     const detectSet = [];
@@ -222,10 +237,12 @@
     // Gather info
     Array.prototype.forEach.call(detectContainerEls, function (el, i) {
       const previewSelector = el.dataset.target;
+      let previewEl;
       if (!previewSelector) {
-        return;
+        previewEl = el;
+      } else {
+        previewEl = findEl(el, previewSelector);
       }
-      const previewEl = findEl(el, previewSelector);
       if (!previewEl) {
         return;
       }
