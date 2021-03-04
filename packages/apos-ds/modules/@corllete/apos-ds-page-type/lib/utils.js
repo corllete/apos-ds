@@ -115,39 +115,44 @@ function normalizeTypeHelper(arr, options = {}) {
 }
 
 function normalizeTypeOptionsHelper(options = {}) {
-  const res = { ...options };
+  const opts = { ...options };
   // defaults
-  switch (options.type) {
+  switch (opts.type) {
     case 'p':
     case 'h':
-      if (typeof res.color === 'undefined') {
-        res.color = true;
+      // both
+      if (typeof opts.color === 'undefined') {
+        opts.color = true;
       }
-      if (typeof res.weight === 'undefined') {
-        res.weight = true;
+      if (typeof opts.weight === 'undefined') {
+        opts.weight = true;
       }
-      if (typeof res.tracking === 'undefined') {
-        res.tracking = true;
+      if (typeof opts.tracking === 'undefined') {
+        opts.tracking = true;
       }
-      if (typeof res.line === 'undefined') {
-        res.line = true;
+      if (typeof opts.line === 'undefined') {
+        opts.line = true;
+      }
+      // heading only
+      if (opts.type === 'h' && typeof opts.truncate === 'undefined') {
+        opts.truncate = true;
       }
       break;
   }
 
   // Pre-compute styles
   const mainStyle = [];
-  if (options.background && typeof options.background !== 'boolean') {
-    mainStyle.push(`background-color: ${options.background};`);
+  if (opts.background && typeof opts.background !== 'boolean') {
+    mainStyle.push(`background-color: ${opts.background};`);
   }
-  if (options.image && typeof options.image !== 'boolean') {
-    mainStyle.push(`background-image: url(${options.image}); background-size: cover; background-repeat: no-repeat;`);
+  if (opts.image && typeof opts.image !== 'boolean') {
+    mainStyle.push(`background-image: url(${opts.image}); background-size: cover; background-repeat: no-repeat;`);
   }
-  if (options.metaColor) {
-    mainStyle.push(`color: ${options.metaColor};`);
+  if (opts.metaColor) {
+    mainStyle.push(`color: ${opts.metaColor};`);
   }
-  res.mainStyle = mainStyle.join(' ').trim();
-  return res;
+  opts.mainStyle = mainStyle.join(' ').trim();
+  return opts;
 }
 
 function getParentCategories(categories) {
