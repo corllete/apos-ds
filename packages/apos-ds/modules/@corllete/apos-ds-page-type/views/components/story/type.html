@@ -179,7 +179,7 @@ Verba tu fingas et ea dicas, quae non sentias?
 
 {% macro headingPreview(item, options) %}
   {% set cls = ' ' + item.cls if item.cls %}
-  {% if options.truncate %}
+  {% if item.truncate %}
     {% set cls = cls + ' ds-heading__preview--truncated' %}
   {% endif %}
   {% set label = pangramSingle if options.single else pangram %}

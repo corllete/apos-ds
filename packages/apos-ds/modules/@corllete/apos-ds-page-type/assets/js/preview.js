@@ -222,10 +222,12 @@
     // Gather info
     Array.prototype.forEach.call(detectContainerEls, function (el, i) {
       const previewSelector = el.dataset.target;
+      let previewEl;
       if (!previewSelector) {
-        return;
+        previewEl = el;
+      } else {
+        previewEl = findEl(el, previewSelector);
       }
-      const previewEl = findEl(el, previewSelector);
       if (!previewEl) {
         return;
       }

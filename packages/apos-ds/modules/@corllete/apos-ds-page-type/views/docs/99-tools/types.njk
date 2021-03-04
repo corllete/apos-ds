@@ -332,7 +332,8 @@
           margin: '0',
           cls: 'ds-demo-type-color',
           className: '.some-slass-as-info, h2',
-          varName: '$ds-heading-text-color'
+          varName: '$ds-heading-text-color',
+          truncate: true
         }
       ], 
       { 
@@ -344,6 +345,7 @@
         background: '#ff5555',
         cls: 'container-class',
         single: true,
+        truncate: false,
         details: true
       }
     ) }}
@@ -351,13 +353,22 @@
       <div class="ds-typography--code ds-justify">
         All possible heading object and options properties. 
         <code>font, color, background, image</code> can be only set in options.
-        <code>weight, tracking, padding, label</code> can be set as defaults in options
+        <code>weight, tracking, padding, label, truncate</code> can be set as defaults in options
         and overridden by the heading items.<br />
-        <code>margin</code> doesn't make sense in typography context, but you still have 
-        the chance to force it. Class options will be overriden by the manual values (style tag property) for both
-        options and heading objects. <code>background</code> and <code>image</code> options can be
-        boolean <code>true</code> or color/image url. In the former case they would be only shown in details 
-        and their values will be auto detected from the css computed data (requires force detect option).
+        <p>
+          <code>margin</code> doesn't make sense in typography context, but you still have 
+          the chance to force it. Class options will be overriden by the manual values (style tag property) for both
+          options and heading objects. 
+        </p>
+        <p>
+          <code>background</code> and <code>image</code> options can be
+          boolean <code>true</code> or color/image url. In the former case they would be only shown in details 
+          and their values will be auto detected from the css computed data (requires force detect option).
+        </p>
+        <p> 
+          <code>color, weight, tracking, line</code> could have boolean value when auto-detect and details are enabled in which 
+          case they will be added in the details section.
+        </p>
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk', { toggle: false } %}
@@ -377,7 +388,8 @@
             margin: '0',
             cls: 'ds-demo-type-color',
             className: '.some-slass-as-info, h',
-            varName: '$ds-heading-text-color'
+            varName: '$ds-heading-text-color',
+            truncate: true
           }
         ], 
         { 
@@ -389,6 +401,7 @@
           background: '#ff5555',
           cls: 'container-class',
           single: true,
+          truncate: false,
           details: true
         }
       ) }}

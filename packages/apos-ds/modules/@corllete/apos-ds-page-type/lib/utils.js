@@ -50,13 +50,14 @@ function normalizeTypeHelper(arr, options = {}) {
 
     // Merge global with item data
     const {
-      font, color, weight, tracking, padding, background, image, label
+      font, color, weight, tracking, padding, background, image, label, truncate
     } = options;
     res = {
       weight,
       tracking,
       padding,
       label,
+      truncate,
       ...res,
       font,
       color,

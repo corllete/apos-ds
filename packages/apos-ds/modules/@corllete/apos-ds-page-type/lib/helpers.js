@@ -104,6 +104,27 @@ module.exports = function (self, options) {
         ...options,
         type: 'p'
       });
+    },
+
+    // Used only for color palettes
+    normalizeColorPalette(arr, options = {}) {
+      const opts = { ...options };
+      // defaults
+      if (typeof opts.showClass === 'undefined') {
+        opts.showClass = false;
+      }
+
+      return arr
+        .map(item => {
+          if (typeof item === 'string') {
+            return { value: item };
+          }
+          return item;
+        })
+        .map(item => ({
+          ...options,
+          ...item
+        }));
     }
   };
 };
