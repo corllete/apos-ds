@@ -138,8 +138,8 @@
   {% enddssection %}
 
   {% dssection 'Colors with auto detect' %}
-    {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true }) }}
-    {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true }) }}
+    {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true, showClass: true }) }}
+    {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true, showClass: true }) }}
     {{ colors.color('Background Dark', 'trs-demo-color-bg-dark', '', { span: 2, detect: true }) }}
     {{ colors.color('Background Light', 'trs-demo-color-bg', '', { span: 2, detect: true }) }}
 
@@ -147,8 +147,8 @@
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
 
-      {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true }) }}
-      {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true }) }}
+      {{ colors.color('Primary', 'trs-demo-color-primary', "$trs-primary-color", { detect: true, showClass: true }) }}
+      {{ colors.color('Secondary', 'trs-demo-color-secondary', "$trs-secondary-color", { detect: true, showClass: true }) }}
       {{ colors.color('Background Dark', 'trs-demo-color-bg-dark', '', { span: 2, detect: true }) }}
       {{ colors.color('Background Light', 'trs-demo-color-bg', '', { span: 2, detect: true }) }}
       
@@ -306,25 +306,29 @@
   {% dssection 'Color palette - auto-detect color value from class name' %}
     {{ colors.palette([
       [
-        {name: "100", value: "trs-demo-color-palette1"},
+        {name: "100", value: "trs-demo-color-palette1", varName: "$some-sass-var", showClass: false},
         {name: "200", value: "trs-demo-color-palette2"},
         {name: "300", value: "trs-demo-color-palette3"},
-        {name: "400", value: "trs-demo-color-palette4"}
+        {name: "400", value: "trs-demo-color-palette4", showClass: false}
       ]
-    ], { detect: true }) }}
+    ], { detect: true, showClass: true }) }}
 
     {% dscodecell 12, 'njk', { toggle: false } %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
 
+      {# 
+        showClass is enabled globally and can be adjusted by item.
+        Enabling showClass makes only sense when you do auto-detection.
+      #}
       {{ colors.palette([
         [
-          {name: "100", value: "trs-demo-color-palette1"},
+          {name: "100", value: "trs-demo-color-palette1", varName: "$some-sass-var", showClass: false},
           {name: "200", value: "trs-demo-color-palette2"},
           {name: "300", value: "trs-demo-color-palette3"},
-          {name: "400", value: "trs-demo-color-palette4"}
+        {name: "400", value: "trs-demo-color-palette4", showClass: false}
         ]
-      ], { detect: true }) }}
+      ], { detect: true, showClass: true }) }}
       
       {% endraw %}
     {% enddscodecell %}
@@ -333,24 +337,24 @@
   {% dssection 'Color palette - multi' %}
     {{ colors.palette([
       [
-        {value: "#ffff00"},
-        {value: "#ffff22"},
-        {value: "#ffff44"},
-        {value: "#ffff66"},
-        {value: "#ffff88"},
-        {value: "#ffffaa"},
-        {value: "#ffffcc"},
-        {value: "#ffffee"}
+        "#ffff00",
+        "#ffff22",
+        "#ffff44",
+        "#ffff66",
+        "#ffff88",
+        "#ffffaa",
+        "#ffffcc",
+        "#ffffee"
       ],
       [
-        {value: "#ff00ff"},
-        {value: "#ff22ff"},
-        {value: "#ff44ff"},
-        {value: "#ff66ff"},
-        {value: "#ff88ff"},
-        {value: "#ffaaff"},
-        {value: "#ffccff"},
-        {value: "#ffeeff"}
+        "#ff00ff",
+        "#ff22ff",
+        "#ff44ff",
+        "#ff66ff",
+        "#ff88ff",
+        "#ffaaff",
+        "#ffccff",
+        "#ffeeff"
       ],
       [
         {value: "#00ffff"},
@@ -368,26 +372,27 @@
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/colors.html" as colors %}
 
+      {# You may provide string instead of object if you don't need other options #}
       {{ colors.palette([
         [
-          {value: "#ffff00"},
-          {value: "#ffff22"},
-          {value: "#ffff44"},
-          {value: "#ffff66"},
-          {value: "#ffff88"},
-          {value: "#ffffaa"},
-          {value: "#ffffcc"},
-          {value: "#ffffee"}
+          "#ffff00",
+          "#ffff22",
+          "#ffff44",
+          "#ffff66",
+          "#ffff88",
+          "#ffffaa",
+          "#ffffcc",
+          "#ffffee"
         ],
         [
-          {value: "#ff00ff"},
-          {value: "#ff22ff"},
-          {value: "#ff44ff"},
-          {value: "#ff66ff"},
-          {value: "#ff88ff"},
-          {value: "#ffaaff"},
-          {value: "#ffccff"},
-          {value: "#ffeeff"}
+          "#ff00ff",
+          "#ff22ff",
+          "#ff44ff",
+          "#ff66ff",
+          "#ff88ff",
+          "#ffaaff",
+          "#ffccff",
+          "#ffeeff"
         ],
         [
           {value: "#00ffff"},

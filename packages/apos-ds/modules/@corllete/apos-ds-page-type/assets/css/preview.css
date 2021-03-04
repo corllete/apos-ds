@@ -637,7 +637,7 @@ a.ds-toggle__trigger:hover {
   height: auto;
 }
 
-.ds-color__value--detect,
+.ds-color__value,
 .ds-color--set {
   text-transform: uppercase;
 } 
