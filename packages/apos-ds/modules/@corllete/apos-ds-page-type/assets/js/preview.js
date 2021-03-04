@@ -183,6 +183,7 @@
             .trim()
             .replace(/'/g, '')
             .replace(/"/g, '');
+          el.title = style.fontFamily || '';
           break;
         case 'size':
           el.textContent = style.fontSize;
@@ -214,6 +215,20 @@
       }
     });
   }
+
+  // function getIfCssVariableFn(computed) {
+  //   if (typeof computed.getPropertyValue === 'function') {
+  //     return function getIfCssVariable(aVar) {
+  //       if (typeof computed.getPropertyValue === 'function' && (aVar || '').slice(0, 2) === '--') {
+  //         return computed.getPropertyValue(aVar);
+  //       }
+  //       return aVar;
+  //     };
+  //   }
+  //   return function getIfCssVariableNone(aVar) {
+  //     return aVar;
+  //   };
+  // }
 
   function findAndReplace(detectSelector, setSelector, replacer) {
     const detectContainerEls = document.querySelectorAll(detectSelector);

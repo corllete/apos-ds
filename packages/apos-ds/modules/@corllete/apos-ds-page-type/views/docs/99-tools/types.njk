@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block preview %}
-  {% dssection 'Heading usage' %}
+  {% dssection 'Headings' %}
     {% dscodecell 6, 'njk' %}
       {% raw %}
         {# Usage #}
@@ -409,7 +409,7 @@
     {% enddscodecell %}
   {% enddssection %}
 
-  {% dssection 'Paragraph usage' %}
+  {% dssection 'Paragraphs' %}
     {% dscodecell 6, 'njk' %}
       {% raw %}
       {# Usage #}
@@ -677,7 +677,227 @@
     {% enddscodecell %}
   {% enddssection %}
 
-  {% dssection 'Types usage' %}
+
+  {% dssection 'Custom types' %}
+    {% dscodecell 6, 'njk' %}
+      {% raw %}
+      {# Usage #}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {# Render in grid cell #}
+      {{ types.custom(items, options) }}
+      {# No grid #}
+      {{ types.customTypes(items, options) }}
+      {% endraw %}
+    {% enddscodecell %}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        General use of the custom types macro. When rendered with grid, 
+        <code>options.span</code> controls the cell span. 
+      </div>
+    {% enddscell %}
+  {% enddssection %}
+
+
+
+  {% dssection 'Custom types basic example' %}
+    {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', label: 'Custom label from options' }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        Basic custom type (think of tag) render based on provided tag name and background color, span and label options. 
+        It renders <code>strong, em</code> applying only the provided options with no additional styling coming from the design system.
+        The rest is up to your global application styles. 
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', label: 'Custom label from options' }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Custom type options and definition' %}
+    {{ types.custom([
+      {
+        tag: 'blockquote',
+        content: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Sed in libero ut nibh placerat accumsan. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla. Nulla facilisi. Nam at tortor in tellus interdum sagittis.',
+        label: 'Quotes'
+      },
+      {
+        tag: 'em',
+        content: 'An emphasis example'
+      }
+    ], { 
+      span: 4, 
+      color: '#ffffff',
+      metaColor: '#ffffff',
+      background: '#ff5555', 
+      label: 'Custom label from options',
+      weight: 400,
+      tracking: 'normal',
+      small: true,
+      details: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        The definition is the same as paragraph with the exception of <code>content, tag</code>.
+        <code>xsmall | small | medium | large </code> options are not available as the predefined text is replaced by
+        <code>content</code> definition key.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.custom([
+        {
+          tag: 'blockquote',
+          content: 'A blockquote example',
+          label: 'Quotes'
+        },
+        {
+          tag: 'em',
+          content: 'An emphasis example'
+        }
+      ], { 
+        span: 4, 
+        color: '#ffffff',
+        metaColor: '#ffffff',
+        background: '#ff5555', 
+        label: 'Custom label from options',
+        weight: 400,
+        tracking: 'normal',
+        small: true,
+        details: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Custom type contrast rating' %}
+    {% dsrow %}
+      <div class="ds-typography--code">
+        Detect automatically the contrast rating according to WCAG 2.0 standards via option <code>rating: true</code>.
+        <code>detect: true</code> is not required in order this to work properly.
+        <p>This is also an example of providing the <code>content</code> definition key via options.
+      </div>
+    {% enddsrow %}
+    {{ types.custom(['em'], { 
+      span: 3, 
+      content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+      color: '#c0c0c0',
+      background: '#ffffff', 
+      metaColor: '#000',
+      rating: true,
+      small: true
+    }) }}
+    {{ types.custom(['strong'], { 
+      span: 3, 
+      content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+      color: '#ffffff',
+      background: '#ff5555', 
+      metaColor: '#ffffff',
+      rating: true,
+      small: true
+    }) }}
+    {{ types.custom(['code'], { 
+      span: 3, 
+      content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+      background: '#ffffff', 
+      rating: true,
+      small: true
+    }) }}
+    {{ types.custom(['blockquote'], { 
+      span: 3, 
+      content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+      background: 'rgba(255, 255, 255, 0.1)', 
+      rating: true,
+      small: true
+    }) }}
+    
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+        {{ types.custom(['em'], { 
+          span: 3, 
+          content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+          color: '#c0c0c0',
+          background: '#ffffff', 
+          metaColor: '#000',
+          rating: true,
+          small: true
+        }) }}
+
+        {{ types.custom(['strong'], { 
+          span: 3, 
+          content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+          color: '#ffffff',
+          background: '#ff5555', 
+          metaColor: '#ffffff',
+          rating: true,
+          small: true
+        }) }}
+
+        {{ types.custom(['code'], { 
+          span: 3, 
+          content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+          background: '#ffffff', 
+          rating: true,
+          small: true
+        }) }}
+
+        {{ types.custom(['blockquote'], { 
+          span: 3, 
+          content: 'Aenean ut eros et nisl sagittis vestibulum. Etiam ultricies nisi vel augue.',
+          background: 'rgba(255, 255, 255, 0.1)', 
+          rating: true,
+          small: true
+        }) }}
+
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Custom types autodetect details' %}
+    {{ types.custom(['blockquote'], { 
+      span: 4, 
+      color: '#ffffff',
+      metaColor: '#ffffff',
+      background: '#ff5555', 
+      label: 'Custom label',
+      xsmall: true,
+      header: true,
+      details: true,
+      detect: true
+    }) }}
+    {% dscell 4 %}
+      <div class="ds-typography--code">
+        The <code>detect: true</code> options is auto-detecting all meta data from the computed dom style.
+      </div>
+    {% enddscell %}
+    {% dscodecell 12, 'njk', { toggle: false } %}
+      {% raw %}
+      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
+
+      {{ types.custom(['code', 'blockquote'], { 
+        span: 4, 
+        color: '#ffffff',
+        metaColor: '#ffffff',
+        background: '#ff5555', 
+        label: 'Custom label',
+        xsmall: true,
+        header: true,
+        details: true,
+        detect: true
+      }) }}
+      {% endraw %}
+    {% enddscodecell %}
+  {% enddssection %}
+
+  {% dssection 'Types Collection' %}
     {% dscodecell 6, 'njk' %}
       {% raw %}
       {# Usage #}
@@ -699,7 +919,17 @@
   {% dssection 'Types example' %}
     {{ types.cell({ 
       headings: [38, 28, 21], 
-      paragraphs: ['20/30', '15/22.5'] 
+      paragraphs: ['20/30', '15/22.5'],
+      custom: [
+        {
+          tag: 'blockquote',
+          content: 'Praesent ut ligula non mi varius sagittis. Curabitur blandit mollis lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.'
+        },
+        {
+          tag: 'small',
+          content: 'Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Integer tincidunt.'
+        }
+      ]
     }, { span: 6, background: '#f8f8f8' }) }}
     {% dscell 4 %}
       <div class="ds-typography--code">
