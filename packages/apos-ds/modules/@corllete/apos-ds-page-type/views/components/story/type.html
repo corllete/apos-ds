@@ -289,9 +289,9 @@ Verba tu fingas et ea dicas, quae non sentias?
 {% macro details(item, options) %}
   <ul class="ds-heading__details">
     {% if item.className %}
-      {% if options.type == 'p' or options.type == 'h' %}
-          <li>CSS: {{ item.className }}</li>
-      {% endif %}
+      {# {% if options.type == 'p' or options.type == 'h' %} #}
+        <li>CSS: {{ item.className }}</li>
+      {# {% endif %} #}
     {% endif %}
     {% if options.color %}{# boolean options, default true #}
       <li>color: <span class="ds-type--set" data-type="color">{{ item.color }}</span></li>
