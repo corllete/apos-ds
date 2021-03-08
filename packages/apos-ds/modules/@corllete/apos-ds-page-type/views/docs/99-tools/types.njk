@@ -132,37 +132,6 @@
     {% enddscodecell %}
   {% enddssection %}
 
-  {% dssection 'Heading - show font header' %}
-    {{ types.heading(1, { 
-        span: 3,
-        header: true,
-        background: '#ff5555', 
-        single: true, 
-        details: true, 
-        detect: true 
-    }) }}
-    {% dscell 4 %}
-      <div>
-        This option requires forced auto-detect.
-      </div>
-    {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
-      {% raw %}
-      {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
-
-      {{ types.heading(1, { 
-          span: 3,
-          header: true,
-          background: '#ff5555', 
-          single: true, 
-          details: true, 
-          detect: true 
-      }) }}
-      {% endraw %}
-    {% enddscodecell %}
-  {% enddssection %}
-
-
   {% dssection 'Heading contrast rating' %}
     {% dsrow %}
       <div class="ds-typography--code">
@@ -243,7 +212,7 @@
         When providing classes it is good to set the <code>options.metaColor</code> to match exactly
         the heading color. The meta details will use that color with appropriate opacity.
       {% enddshint %}
-      <div class="ds-typography--code ds-justify">
+      <div class="ds-typography--code">
         Pass classes as heading items and auto-detected the values. 
         The background color of the preview can be controlled by <code>options.cls</code>
         CSS classes used here are provided via {%raw%}<code>{% block css %}</code>{%endraw%} in the current story. 
@@ -271,7 +240,7 @@
       [
         {
           level: 2,
-          cls: 'ds-demo-type-color ds-demo-type-color-bg',
+          cls: 'ds-demo-type-color',
           varName: '$ds-caption-text-color'
         }
       ], 
@@ -280,6 +249,7 @@
         label: 'Caption {level}',
         metaColor: 'white',
         cls: 'ds-demo-type-color-bg',
+        showClass: true,
         single: true,
         details: true,
         background: true,
@@ -299,7 +269,7 @@
         [
           {
             level: 2,
-            cls: 'ds-demo-type-color ds-demo-type-color-bg',
+            cls: 'ds-demo-type-color',
             varName: '$ds-caption-text-color'
           }
         ], 
@@ -308,6 +278,7 @@
           label: 'Caption {level}',
           metaColor: 'white',
           cls: 'ds-demo-type-color-bg',
+          showClass: true,
           single: true,
           details: true,
           background: true,
@@ -324,6 +295,7 @@
         {
           level: 2,
           label: 'Heading 2',
+          font: 'Roboto',
           size: '28px',
           weight: '400',
           tracking: '-2',
@@ -338,7 +310,7 @@
       ], 
       { 
         span: 4,
-        font: 'Roboto',
+        font: 'Helvetica',
         color: '#ffffff',
         label: 'Caption {level}',
         metaColor: 'white',
@@ -349,21 +321,30 @@
         details: true
       }
     ) }}
-    {% dscell 4 %}
-      <div class="ds-typography--code ds-justify">
+    {% dscell 6 %}
+      <div class="ds-typography--code">
         All possible heading object and options properties. 
-        <code>font, color, background, image</code> can be only set in options.
-        <code>weight, tracking, padding, label, truncate</code> can be set as defaults in options
-        and overridden by the heading items.<br />
+        <code>color, background, image</code> can be only set in options.
+        <code>font, weight, tracking, line, padding, label, truncate, showClass</code> can be set as defaults in options
+        and overridden by the heading items.
+        <p>
+          <code>showClass: true</code> would show in the header the <code>item.cls</code> property (added to your heading tag to modify the presentation) 
+          if you provided one.<br />
+
+          <code>className</code> property will be shown in details if the above is not true. It is just a label, informational, it's in no
+          way used to alter the presentation.<br />
+
+          <code>options.cls</code> is DIFFERENT than <code>item.cls</code>. The former is used to adjust the entire container
+          of the helper component (most useful for bacgrounds), the latter is applied to YOUR presentation tag (h1, h2, etc).<br />
+          
+          <code>background</code> and <code>image</code> options can be
+          boolean <code>true</code> or color/image url. In the former case they would be only shown in details 
+          and their values will be auto detected from the css computed data (requires force detect option).
+        </p>
         <p>
           <code>margin</code> doesn't make sense in typography context, but you still have 
           the chance to force it. Class options will be overriden by the manual values (style tag property) for both
           options and heading objects. 
-        </p>
-        <p>
-          <code>background</code> and <code>image</code> options can be
-          boolean <code>true</code> or color/image url. In the former case they would be only shown in details 
-          and their values will be auto detected from the css computed data (requires force detect option).
         </p>
         <p> 
           <code>color, weight, tracking, line</code> could have boolean value when auto-detect and details are enabled in which 
@@ -380,6 +361,7 @@
           {
             level: 2,
             label: 'Heading 2',
+            font: 'Roboto',
             size: '28px',
             weight: '400',
             tracking: '-2',
@@ -387,14 +369,14 @@
             padding: '5px',
             margin: '0',
             cls: 'ds-demo-type-color',
-            className: '.some-slass-as-info, h',
+            className: '.some-slass-as-info, h2',
             varName: '$ds-heading-text-color',
             truncate: true
           }
         ], 
         { 
           span: 4,
-          font: 'Roboto',
+          font: 'Helvetica',
           color: '#ffffff',
           label: 'Caption {level}',
           metaColor: 'white',
@@ -560,7 +542,6 @@
       background: '#ff5555', 
       label: 'Custom label',
       xsmall: true,
-      header: true,
       details: true,
       detect: true
     }) }}
@@ -580,7 +561,6 @@
         background: '#ff5555', 
         label: 'Custom label',
         xsmall: true,
-        header: true,
         details: true,
         detect: true
       }) }}
@@ -593,7 +573,6 @@
       span: 4, 
       cls: 'ds-demo-type-color-bg', 
       metaColor: '#ffffff',
-      header: true,
       details: true,
       detect: true
     }) }}
@@ -612,7 +591,6 @@
         label: 'Section A',
         cls: 'ds-demo-type-color-bg', 
         metaColor: '#ffffff',
-        header: true,
         details: true,
         detect: true
       }) }}
@@ -636,18 +614,14 @@
       color: '#ffffff',
       background: '#ff5555', 
       metaColor: '#ffffff',
-      header: true,
       details: true,
       detect: true
     }) }}
     {% dscell 4 %}
       <div class="ds-typography--code">
         Example of all available paragraph properties and options. 
-        <code>font, color, background, image</code> can be only set in options.
-        <code>weight, tracking, padding, label</code> can be set as defaults in options
-        and overridden by the heading items.<br />
-        Keep in mind that the <code>cls</code> rule here has no meaning as it's overridden by the 
-        custom style properties.
+        It inherits item definition and options from headings (except those specific to heading that doesn't make
+        sense in paragraph context such as <code>level</code>).
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk', { toggle: false } %}
@@ -669,7 +643,6 @@
         color: '#ffffff',
         background: '#ff5555', 
         metaColor: '#ffffff',
-        header: true,
         details: true,
         detect: true
       }) }}
@@ -701,7 +674,7 @@
 
 
   {% dssection 'Custom types basic example' %}
-    {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', label: 'Custom label from options' }) }}
+    {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', content: 'Custom content from options' }) }}
     {% dscell 4 %}
       <div class="ds-typography--code">
         Basic custom type (think of tag) render based on provided tag name and background color, span and label options. 
@@ -713,7 +686,7 @@
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
-      {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', label: 'Custom label from options' }) }}
+      {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', content: 'Custom content from options' }) }}
       {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
@@ -868,14 +841,12 @@
       metaColor: '#ffffff',
       background: '#ff5555', 
       label: 'Custom label',
-      xsmall: true,
-      header: true,
       details: true,
       detect: true
     }) }}
     {% dscell 4 %}
       <div class="ds-typography--code">
-        The <code>detect: true</code> options is auto-detecting all meta data from the computed dom style.
+        The <code>detect: true</code> option is auto-detecting all meta data from the computed dom style.
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk', { toggle: false } %}
@@ -888,8 +859,6 @@
         metaColor: '#ffffff',
         background: '#ff5555', 
         label: 'Custom label',
-        xsmall: true,
-        header: true,
         details: true,
         detect: true
       }) }}
@@ -911,7 +880,7 @@
     {% enddscodecell %}
     {% dscell 4 %}
       <div class="ds-typography--code">
-        Combine <code>headings</code> and <code>paragraphs</code> in a single view.
+        Combine <code>headings</code>, <code>paragraphs</code> and <code>custom</code> in a single view.
       </div>
     {% enddscell %}
   {% enddssection %}
@@ -934,7 +903,7 @@
     {% dscell 4 %}
       <div class="ds-typography--code">
         General use of the <strong>type macro</strong>. <code>items</code> is an object 
-        which may contain <code>headings: [items]</code> and.or <code>paragraphs: [items]</code>
+        which may contain <code>headings: [items]</code> and/or <code>paragraphs: [items]</code> and/or <code>custom: [items]</code>
         in the format for each described above. <code>options.span</code> controls the grid's cell span. 
       </div>
     {% enddscell %}

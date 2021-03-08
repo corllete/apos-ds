@@ -462,9 +462,6 @@ body, html {
   margin: 10px 0;
 }
 
-.ds-paragraph__header,
-.ds-custom-type__header,
-.ds-heading__header,
 .ds-paragraph__meta,
 .ds-custom-type__meta,
 .ds-heading__meta,
@@ -479,17 +476,6 @@ body, html {
 .ds-custom-type__details,
 .ds-heading__details {
   font-size: 1rem;
-}
-
-.ds-paragraph__header,
-.ds-custom-type__header,
-.ds-heading__header {
-  -moz-opacity: 0.7;
-  opacity: 0.7;
-  font-weight: 500;
-  font-size: 2rem;
-  text-rendering: optimizeLegibility;
-  margin-bottom: 1rem;
 }
 
 .ds-type--set[data-type="font"] {
