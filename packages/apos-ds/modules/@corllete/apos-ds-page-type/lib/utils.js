@@ -55,17 +55,20 @@ function normalizeTypeHelper(arr, options = {}) {
 
     // Merge global with item data
     const {
-      font, color, weight, tracking, padding, background, image, label, truncate, content
+      font, color, line, weight, tracking, padding, background,
+      image, label, truncate, content, showClass
     } = options;
     res = {
       weight,
       tracking,
+      line,
       padding,
       label,
       truncate,
       content,
-      ...res,
       font,
+      showClass,
+      ...res,
       color,
       background,
       image
@@ -95,11 +98,15 @@ function normalizeTypeHelper(arr, options = {}) {
     }
     res.level = res.level || i + 1;
     // allow level mask for classes and labels
-    if (typeof res.label === 'string') {
+    if (res.label && typeof res.label === 'string') {
       res.label = res.label.replace(/\{level\}/g, res.level);
     }
-    if (typeof res.cls === 'string') {
+    if (res.cls && typeof res.cls === 'string') {
       res.cls = res.cls.replace(/\{level\}/g, res.level);
+      // if cls should be shown, disable className property
+      if (res.showClass) {
+        res.className = false;
+      }
     }
 
     // Pre-compute styles
@@ -141,22 +148,29 @@ function normalizeTypeOptionsHelper(options = {}) {
     case 'p':
     case 'h':
     case 'custom':
-      // both
-      if (typeof opts.color === 'undefined') {
+      // enable by default if detect is true
+      if (typeof opts.color === 'undefined' && opts.detect) {
         opts.color = true;
       }
-      if (typeof opts.weight === 'undefined') {
+      if (typeof opts.weight === 'undefined' && opts.detect) {
         opts.weight = true;
       }
-      if (typeof opts.tracking === 'undefined') {
+      if (typeof opts.tracking === 'undefined' && opts.detect) {
         opts.tracking = true;
       }
-      if (typeof opts.line === 'undefined') {
+      if (typeof opts.line === 'undefined' && opts.detect) {
         opts.line = true;
+      }
+      if (typeof opts.font === 'undefined' && opts.detect) {
+        opts.font = true;
       }
       // heading only
       if (opts.type === 'h' && typeof opts.truncate === 'undefined') {
         opts.truncate = true;
+      }
+      // custom only
+      if (opts.type === 'custom' && typeof opts.size === 'undefined' && opts.detect) {
+        opts.size = true;
       }
       break;
   }
