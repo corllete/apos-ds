@@ -475,7 +475,33 @@ body, html {
 .ds-paragraph__details,
 .ds-custom-type__details,
 .ds-heading__details {
-  font-size: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+dl.ds-heading__details,
+dl.ds-paragraph__details,
+dl.ds-custom-type__details {
+	margin: 1em 0;
+  opacity: 1;
+}
+dl.ds-heading__details dt,
+dl.ds-paragraph__details dt,
+dl.ds-custom-type__details dt {
+	clear: left;
+	float: left;
+	width: 140px;
+	margin: 0;
+  padding-right: 5px;
+  box-sizing: border-box;
+  opacity: .5;
+}
+dl.ds-heading__details dd,
+dl.ds-paragraph__details dd,
+dl.ds-custom-type__details dd {
+	padding: 0;
+	font-weight: bold;
+  box-sizing: border-box;
+  opacity: 1;
 }
 
 .ds-type--set[data-type="font"] {
@@ -497,7 +523,9 @@ body, html {
   opacity: 0.5;
 	text-rendering: optimizeLegibility;
 }
-
+.ds-meta__small {
+  font-size: 0.875rem;
+}
 .ds-heading__preview {
 	max-width: 100%;
 }
@@ -968,7 +996,9 @@ a.ds-toggle__trigger:hover {
 	font-weight: 400;
   letter-spacing: 0.033em;
 }
-
+.ds-summary-line span {
+  font-weight: 700;
+}
 /* Story helpers - extend and document them */
 .ds-full {
   width: 100%;

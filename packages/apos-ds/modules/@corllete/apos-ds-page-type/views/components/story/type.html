@@ -95,10 +95,10 @@ Verba tu fingas et ea dicas, quae non sentias?
         <div class="ds-heading__meta">
           {{ label }} (<span class="ds-type--set" data-type="size">{{ item.size }}</span>)
           {% if item.varName %}
-            <div>{{ item.varName }}</div>
+            <div class="ds-meta__small">{{ item.varName }}</div>
           {% endif %}
           {% if item.cls and item.showClass %}
-            <div>.{{ item.cls }}</div>
+            <div class="ds-meta__small">.{{ item.cls }}</div>
           {% endif %}
         </div>
         {{ headingPreview(item, options) }}
@@ -158,10 +158,10 @@ Verba tu fingas et ea dicas, quae non sentias?
         <div class="ds-paragraph__meta">
           {{ label }} (<span class="ds-type--set" data-type="size">{{ item.size }}</span>/<span class="ds-type--set" data-type="line">{{ item.line }}</span>)
           {% if item.varName %}
-            <div>{{ item.varName }}</div>
+            <didiv class="ds-meta__small"v>{{ item.varName }}</div>
           {% endif %}
           {% if item.cls and item.showClass %}
-            <div>.{{ item.cls }}</div>
+            <div class="ds-meta__small">.{{ item.cls }}</div>
           {% endif %}
         </div>
         {{ paragraphPreview(item, options) }}
@@ -223,10 +223,10 @@ Verba tu fingas et ea dicas, quae non sentias?
         <div class="ds-custom-type__meta">
           {{ label }} {% if options.size %}(<span class="ds-type--set" data-type="size">{{ item.size }}</span>){% endif %}
           {% if item.varName %}
-            <div>{{ item.varName }}</div>
+            <div class="ds-meta__small">{{ item.varName }}</div>
           {% endif %}
           {% if item.cls and item.showClass %}
-            <div>.{{ item.cls }}</div>
+            <div class="ds-meta__small">.{{ item.cls }}</div>
           {% endif %}
         </div>
         {{ customTypePreview(item, options) }}
@@ -278,32 +278,41 @@ Verba tu fingas et ea dicas, quae non sentias?
 {% endmacro %}
 
 {% macro details(item, options) %}
-  <ul class="ds-heading__details">
+  <dl class="ds-heading__details">
     {% if item.className %}
       {# {% if options.type == 'p' or options.type == 'h' %} #}
-        <li>CSS: {{ item.className }}</li>
-      {# {% endif %} #}
+        <dt>CSS:</dt>
+        <dd><span class="ds-type--global" data-type="className">{{ item.className }}</span></dd>
+      {# {% endif %} #} 
+    
     {% endif %}
     {% if item.color %}
-      <li>color: <span class="ds-type--set" data-type="color">{{ item.color }}</span></li>
+      <dt>color:</dt>
+      <dd><span class="ds-type--set" data-type="color">{{ item.color }}</span></dd>
     {% endif %}
     {% if options.image %}
-      <li>background-image: <span class="ds-type--set-global" data-type="image">{{ options.image }}</span></li>
+      <dt>background-image:</dt>
+      <dd><span class="ds-type--set-global" data-type="image">{{ options.image }}</span></dd>
     {% endif %}
     {% if options.background %}
-      <li>background-color: <span class="ds-type--set-global" data-type="background">{{ options.background }}</span></li>
+      <dt>background-color:</dt>
+      <dd><span class="ds-type--set-global" data-type="background">{{ options.background }}</span></dd>
     {% endif %}
     {% if item.font %} 
-      <li>font-family: <span title="{{ item.font }}" class="ds-type--set" data-type="font">{{ item.font }}</span></li>
+      <dt>font-family:</dt>
+      <dd><span title="{{ item.font }}" class="ds-type--set" data-type="font">{{ item.font }}</span></dd>
     {% endif %}
     {% if item.weight %} 
-      <li>font-weight: <span class="ds-type--set" data-type="weight">{{ item.weight }}</span></li>
+      <dt>font-weight:</dt>
+      <dd><span class="ds-type--set" data-type="weight">{{ item.weight }}</span></dd>
     {% endif %}
     {% if item.tracking %} 
-      <li>letter-spacing: <span class="ds-type--set" data-type="letter">{{ item.tracking }}</span></li>
+      <dt>letter-spacing:</dt>
+      <dd><span class="ds-type--set" data-type="letter">{{ item.tracking }}</span></dd>
     {% endif %}
     {% if item.line %}
-      <li>line-height: <span class="ds-type--set" data-type="line">{{ item.line }}</span></li>
+      <dt>line-height:</dt>
+      <dd><span class="ds-type--set" data-type="line">{{ item.line }}</span></dd>
     {% endif %}
-  </ul>
+  </dl>
 {% endmacro %}
