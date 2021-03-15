@@ -27,7 +27,7 @@
 
 {% block preview %}
   {% dssection 'Headings' %}
-    {% dscodecell 6, 'njk' %}
+    {% dscodecell 6, 'njk', { toggle: false } %}
       {% raw %}
         {# Usage #}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
@@ -55,7 +55,7 @@
       </div>
     {% enddsrow %}
     {{ types.heading([98,28,21,16,14,12], { span: 12 }) }}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -71,7 +71,7 @@
       </div>
     {% enddsrow %}
     {{ types.heading([98], { span: 12, truncate: false }) }}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -92,7 +92,7 @@
       </div>
     {% enddsrow %}
     {{ types.heading(3, { span: 12, detect: true }) }}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -116,7 +116,7 @@
         Detection must be set explicit due to performance reasons.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -168,7 +168,7 @@
       single: true
     }) }}
 
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -219,7 +219,7 @@
         Detection must be set explicit due to performance reasons.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -261,7 +261,7 @@
         Provide array of objects argument for every heading instead size numbers or string classes.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -352,7 +352,7 @@
         </p>
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -392,7 +392,7 @@
   {% enddssection %}
 
   {% dssection 'Paragraphs' %}
-    {% dscodecell 6, 'njk' %}
+    {% dscodecell 6, 'njk', { toggle: false } %}
       {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
@@ -420,7 +420,7 @@
         The rest is up to your global application styles. 
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -449,7 +449,7 @@
         The length of the text is controlled by boolean options: <code>xsmall | small | medium | large (default)</code>
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -504,7 +504,7 @@
       small: true
     }) }}
     
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -550,7 +550,7 @@
         The <code>detect: true</code> options is auto-detecting all meta data from the computed dom style.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -582,7 +582,7 @@
         auto detect details from existing css rules.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -624,7 +624,7 @@
         sense in paragraph context such as <code>level</code>).
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -652,7 +652,7 @@
 
 
   {% dssection 'Custom types' %}
-    {% dscodecell 6, 'njk' %}
+    {% dscodecell 6, 'njk', { toggle: false } %}
       {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
@@ -682,7 +682,7 @@
         The rest is up to your global application styles. 
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -720,7 +720,7 @@
         <code>content</code> definition key.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -790,7 +790,7 @@
       small: true
     }) }}
     
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -849,7 +849,7 @@
         The <code>detect: true</code> option is auto-detecting all meta data from the computed dom style.
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -867,7 +867,7 @@
   {% enddssection %}
 
   {% dssection 'Types Collection' %}
-    {% dscodecell 6, 'njk' %}
+    {% dscodecell 6, 'njk', { toggle: false } %}
       {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
@@ -907,13 +907,23 @@
         in the format for each described above. <code>options.span</code> controls the grid's cell span. 
       </div>
     {% enddscell %}
-    {% dscodecell 12, 'njk', { toggle: false } %}
+    {% dscodecell 12, 'njk' %}
       {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.cell({
         headings: [38, 28, 21], 
-        paragraphs: ['20/30', '15/22.5'] 
+        paragraphs: ['20/30', '15/22.5'],
+        custom: [
+          {
+            tag: 'blockquote',
+            content: 'Praesent ut ligula non mi varius sagittis. Curabitur blandit mollis lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.'
+          },
+          {
+            tag: 'small',
+            content: 'Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Integer tincidunt.'
+          }
+        ]
       }, { span: 6, background: '#f8f8f8' }) }}
       {% endraw %}
     {% enddscodecell %}

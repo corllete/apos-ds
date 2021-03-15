@@ -1,0 +1,40 @@
+{% import "ui:atoms/buttons/macro.html" as buttons %}
+
+{% macro card(data, opts) %}
+  <div class="mdc-card{% if opts.outlined%} mdc-card--outlined{% endif %} my-card">
+    {% if data.img %}
+      <a href="{{ data.url | default('#') }}" class="mdc-card__primary-action">
+        <div class="my-card__media mdc-card__media mdc-card__media--16-9">
+          <div class="mdc-card__media-content"><img src="{{ data.img }}" /></div>
+        </div>
+      </a>
+    {% endif %}
+
+    <div class="my-card__content">
+      <div class="my-card__title">{{ data.title }}</div>
+      <div class="my-card__subtitle">{{ data.sub }}</div>
+    </div>
+
+    {% if data.desc %}
+      <div class="my-card__content">
+        <div class="my-card__desc">{{ data.desc }}</div>
+      </div>
+    {% endif %}
+
+    {% if data.actions | length or data.primary %}
+      <div class="mdc-card__actions my-card__actions">
+        <div class="mdc-card__action-buttons">
+          {% for action in data.actions %}
+            {{ buttons.button(action.label, { url: action.url, classNames: 'mdc-card__action mdc-card__action--button' }) }}
+          {% endfor %}
+        </div>
+        {% if data.primary %}
+          <div class="my-card__action-primary">
+              {% set label = data.labe | default('More') %}
+              {{ buttons.btnUnelevated(label , { url: data.primary, classNames: 'mdc-card__action mdc-card__action--button' }) }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %} 

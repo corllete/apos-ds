@@ -6,10 +6,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "dev": "nodemon --delay 1000ms -x \"nodemon app.js\"",
-    "build": "webpack && node app @apostrophecms/asset:build",
-    "assets": "node app @corllete/apos-ds-page-type:publish-assets",
-    "storybook": "node app @apostrophecms/storybook:run"
+    "predev": "npm run build && npm run assets",
+    "dev": "webpack serve & nodemon",
+    "build": "node app @apostrophecms/asset:build",
+    "assets": "node app @corllete/apos-ds-page-type:publish-assets"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,12 @@
     "@babel/preset-env": "^7.12.11",
     "@corllete/apos-ds": "^1.0.0-alpha.12",
     "@material/button": "^10.0.0",
+    "@material/card": "^10.0.0",
     "@material/fab": "^10.0.0",
     "@material/icon-button": "^10.0.0",
     "@material/ripple": "^10.0.0",
     "@material/textfield": "^10.0.0",
-    "apostrophe": "github:apostrophecms/apostrophe#221a2c85b49c48b9c886faf340b9401b999e976b",
+    "apostrophe": "github:apostrophecms/apostrophe#3.0.0-alpha.4.2",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.3.4",
@@ -37,13 +38,19 @@
     "webpack": "^5.16.0",
     "webpack-cli": "^4.4.0"
   },
+  "devDependencies": {
+    "eslint": "^7.8.0",
+    "eslint-config-apostrophe": "^3.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.4",
+    "webpack-dev-server": "^3.11.2"
+  },
   "nodemonConfig": {
-    "verbose": true,
+    "verbose": false,
     "watch": [
       "./app.js",
       "./modules/**/*",
-      "./src/**/*",
-      "./node_modules/apostrophe/modules/@apostrophecms/**/*",
+      "./public/**/*",
       "./node_modules/@corllete/apos-ds/index.js",
       "./node_modules/@corllete/apos-ds/lib/*.js",
       "./node_modules/@corllete/apos-ds/modules/**/*"
@@ -52,22 +59,13 @@
       ".git"
     ],
     "ignore": [
-      "lib/modules/*/public/js/*.js",
+      "./src",
       "locales/*.json",
-      "public/modules/**/*.less",
-      "public/modules/**/*.js",
+      "public/apos-frontend",
       "public/uploads",
-      "public/apos-minified/*.js",
-      "public/css/master-*.less",
-      "modules/asset/ui/public/site.js",
+      "modules/asset/ui",
       "data"
     ],
-    "ext": "json, js, html, njk, scss, vue"
-  },
-  "devDependencies": {
-    "eslint": "^7.8.0",
-    "eslint-config-apostrophe": "^3.4.0",
-    "eslint-plugin-node": "^11.1.0",
-    "nodemon": "^2.0.4"
+    "ext": "json, js, html, njk, css"
   }
 }

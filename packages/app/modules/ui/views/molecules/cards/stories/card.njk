@@ -1,0 +1,158 @@
+{% extends dsPreview %}
+{% import "ui:molecules/cards/macro.html" as cards %}
+
+{% block tagline %}
+  Default cards, base extension point for the card content variations.
+{% endblock %}
+
+{% block description %}
+  <p>
+    This example demonstrates the use of story data (mocks).
+  </p>
+{% endblock %}
+
+{% block previewSimple %}
+  {# new feature - debug filter in development #}
+  {# {{ story | debug }} #}
+  <div class="ds-story__preview-even">
+    {{ cards.card(story.data.all)  }}
+  </div>
+{% endblock %}
+
+{% block variants %}
+  {% dssection 'Variants' %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card({
+          title: 'Title',
+          sub: 'Secondary text'
+        })  }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">The most simple usage.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card({
+            title: 'Title',
+            sub: 'Secondary text'
+          })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card({
+          title: 'Title',
+          sub: 'Secondary text',
+          desc: "Greyhound divisively hello coldly wonderfully marginally far upon excluding."
+        })  }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Additional description.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card({
+            title: 'Title',
+            sub: 'Secondary text',
+            desc: "Greyhound divisively hello coldly wonderfully marginally far upon excluding."
+          })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card(story.data.actions) }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Action bar.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card(story.data.actions) }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card({
+          title: 'Title',
+          sub: 'Secondary text',
+          desc: "Greyhound divisively hello coldly wonderfully marginally far upon excluding.",
+          label: 'Primary action',
+          primary: '#primary-url'
+        })  }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">With primary button (call of) action.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card({
+            title: 'Title',
+            sub: 'Secondary text',
+            desc: "Greyhound divisively hello coldly wonderfully marginally far upon excluding.",
+            label: 'Primary action',
+            primary: '#primary-url'
+          })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card({
+          title: 'Title',
+          sub: 'Secondary text',
+          url: '#',
+          img: "https://source.unsplash.com/nPz8akkUmDI/400x300"
+        })  }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Media with primary action.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card({
+            title: 'Title',
+            sub: 'Secondary text',
+            url: '#',
+            img: "https://source.unsplash.com/nPz8akkUmDI/400x300"
+          })  }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+    {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
+        <div>
+        {{ cards.card(story.data.outlined, { outlined: true }) }}
+        </div>
+    {% enddscell %}
+    {% dscell 6, { cls: 'ds-flex ds-flex--col ds-flex--jstart' } %}
+        <p class="ds-paragraph ds-hvclear">Outlined card.</p>
+        {% dscode 'njk' %}
+        {% raw %}
+          {% import "ui:molecules/cards/macro.html" as cards %}
+
+          {{ cards.card(story.data.outlined, { outlined: true }) }}
+        {% endraw %}
+        {% enddscode %}
+    {% enddscell %}
+
+  {% enddssection %}
+{% endblock %}

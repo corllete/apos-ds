@@ -13,8 +13,10 @@
     Empty value will render data attribute without value.
 #}
 {% macro button(label, options) %}
+  {% set tag = 'a' if options.url else 'button' %}
   <div class="mdc-touch-target-wrapper">
-    <button class="{{ btnClass(options) }}"
+    <{{ tag }} class="{{ btnClass(options) }}"
+      {% if options.url %}href="{{ options.url }}" {% endif %} 
       {{ printAriaAttrs(options.aria) }}
       {{ printDataAttrs(options.data, options.unbounded) }}
       {{ printCommonAttrs(options) }}>
@@ -27,7 +29,7 @@
         <i class="material-icons mdc-button__icon" aria-hidden="true">{{ options.icon }}</i>
       {% endif %}
       <div class="mdc-button__touch"></div>
-    </button>
+    </{{ tag }}>
   </div>
 {% endmacro %}
 

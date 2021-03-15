@@ -1,0 +1,52 @@
+@use "@material/card";
+
+@include card.core-styles;
+
+.my-card {
+  width: 350px;
+
+  &__content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  &__content:first-child,
+  .mdc-card__primary-action+&__content {
+    padding-top: 16px;
+  }
+
+  &__content:last-child {
+    padding-bottom: 16px;
+  }
+
+  &__content+&__content {
+    padding-top: 18px;
+  }
+  
+  &__title,
+  &__desc,
+  &__subtitle {
+    -webkit-font-smoothing: antialiased;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: bold;
+    letter-spacing: .0125em;
+  }
+
+  &__subtitle, &__desc {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: normal;
+    letter-spacing: .018em;
+    opacity: .6;
+  }
+
+  &__actions {
+    justify-content: space-between;
+  }
+}

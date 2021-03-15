@@ -1,3 +1,5 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = function (self, env) {
   // DS custom tags
   function DsCommonTags() {
@@ -62,7 +64,7 @@ module.exports = function (self, env) {
       ];
     };
 
-    this.createCode = function createCode(lng, code, toggle) {
+    this.createCode = function createCode(lng, code, hasToggle = true, expanded = false) {
       lng = lng.toLowerCase() === 'njk' ? 'twig' : lng.toLowerCase();
       code = code
         .trimEnd()
@@ -76,13 +78,12 @@ module.exports = function (self, env) {
         code = code.replace(new RegExp(`^[ \r]{${wsmatch[0].length}}`, 'gm'), '');
       }
 
-      const hasToggle = typeof toggle === 'boolean';
-      const icon = toggle ? 'expand_less' : 'expand_more';
+      const icon = expanded ? 'expand_less' : 'expand_more';
       const toggleStart = hasToggle
         ? `
         <div class="ds-toggle">
           <a class="ds-toggle__trigger" href="#" title="Toggle code">Toggle code <span class="ds-toggle__icon material-icons">${icon}</span></a>
-          <div class="ds-toggle__content" style="display: ${toggle ? 'block' : 'none'};">
+          <div class="ds-toggle__content" style="display: ${expanded ? 'block' : 'none'};">
       `
         : '';
       const toggleEnd = hasToggle
@@ -109,7 +110,7 @@ module.exports = function (self, env) {
      */
     this.runCode = function runCode(context, language, options, body) {
       const [ lng, opts, code ] = this.parseArgs([ language, options, body ], [ '', {} ]);
-      const html = this.createCode(lng + '', code + '', opts.toggle);
+      const html = this.createCode(lng + '', code + '', opts.toggle, opts.expanded);
       return self.apos.template.safe(html);
     };
 
@@ -122,7 +123,7 @@ module.exports = function (self, env) {
     this.runCodeCell = function runCodeCell(context, span, language, options, body) {
       const [ s, lng, opts, code ] = this.parseArgs([ span, language, options, body ], [ 6, '', {} ]);
 
-      const tag = this.createCode(lng + '', code, opts.toggle);
+      const tag = this.createCode(lng + '', code, opts.toggle, opts.expanded);
       const html = this.createCell(s, tag, opts);
 
       return self.apos.template.safe(html);
@@ -257,18 +258,47 @@ module.exports = function (self, env) {
     };
   }
 
-  // In v2
-  // const env = self.apos.templates.getEnv(self);
+  // our filters
+  const filters = {
+    debug(data) {
+      if (isProd) {
+        return '';
+      }
+      const formatted = JSON.stringify(data, null, 2);
+      return self.apos.template.safe(`<pre><code>${formatted}</code></pre>`);
+    }
+  };
+
+  // our globals
+  const globals = {
+    // TODO Quick fix till __ns arrives back
+    __ns(...args) {
+      if (args.length > 1) {
+        return args[1];
+      }
+
+      return args[0];
+    }
+  };
 
   // Register module extension
+  // in v2:
+  // const env = self.apos.templates.getEnv(self);
   env.addExtension('DsCommonTags', new DsCommonTags());
 
-  // TODO Quick fix till __ns arrives back
-  env.addGlobal('__ns', (...args) => {
-    if (args.length > 1) {
-      return args[1];
-    }
-
-    return args[0];
+  // Register filters
+  Object.keys(filters).forEach((name) => {
+    env.addFilter(name, filters[name]);
   });
+
+  // Register globals
+  Object.keys(globals).forEach((name) => {
+    env.addGlobal(name, globals[name]);
+  });
+
+  return {
+    DsCommonTags,
+    filters,
+    globals
+  };
 };

@@ -29,8 +29,8 @@ describe('Resolve Stories', function() {
       expect(s1.module).to.equal('general');
       expect(s2.module).to.equal('general');
 
-      expect(s1.path).to.equal('test/mocks/node_modules/general/views/**/*.stories.js');
-      expect(s2.path).to.equal('test/mocks/modules/general/views/**/*.stories.js');
+      expect(s1.path).to.equal('test/app/node_modules/general/views/**/*.stories.js');
+      expect(s2.path).to.equal('test/app/modules/general/views/**/*.stories.js');
     });
 
     it('should initialize modules with docs by default', () => {
@@ -94,7 +94,7 @@ describe('Resolve Stories', function() {
       expect(self.paths.length).to.equal(1, 'wrong paths count');
       const [ configPath ] = self.paths;
       expect(configPath.module).to.equal('general');
-      expect(configPath.path).to.equal('test/mocks/modules/general/views/findme.stories.js');
+      expect(configPath.path).to.equal('test/app/modules/general/views/findme.stories.js');
     });
 
     it('should initialize internal docs config paths last', async () => {
@@ -121,11 +121,11 @@ describe('Resolve Stories', function() {
       expect(self.paths.length).to.equal(3, 'wrong paths count');
       const [ c1, c2, c3 ] = self.paths;
       expect(c1.module).to.equal('module1');
-      expect(c1.path).to.equal('test/mocks/node_modules/module1/views/01.stories.js');
+      expect(c1.path).to.equal('test/app/node_modules/module1/views/01.stories.js');
       expect(c2.module).to.equal('module1');
-      expect(c2.path).to.equal('test/mocks/node_modules/module1/views/02.stories.js');
+      expect(c2.path).to.equal('test/app/node_modules/module1/views/02.stories.js');
       expect(c3.module).to.equal('module1');
-      expect(c3.path).to.equal('test/mocks/modules/module1/views/01.stories.js');
+      expect(c3.path).to.equal('test/app/modules/module1/views/01.stories.js');
     });
 
   });

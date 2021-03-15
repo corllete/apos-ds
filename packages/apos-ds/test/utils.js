@@ -4,11 +4,12 @@ const expect = chai.expect;
 const cssName = (name) => name.toLocaleLowerCase();
 const aposUtil = {
   cssName,
-  warnDevOnce: chai.spy()
+  warnDevOnce: chai.spy(),
+  warn: chai.spy()
 };
 
 const aposMock = {
-  rootDir: './test/mocks',
+  rootDir: './test/app',
   util: aposUtil
 
 };

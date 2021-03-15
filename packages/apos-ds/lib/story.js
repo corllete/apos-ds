@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const util = require('util');
 const glob = util.promisify(require('glob'));
 
@@ -22,6 +23,7 @@ module.exports = function (self, options) {
   const {
     css,
     trim,
+    warn,
     warnDevOnce
   } = require('./utils')(self);
 
@@ -56,14 +58,31 @@ module.exports = function (self, options) {
     return processed;
   }
 
+  function resolveDataPath(fpath, relativeTo) {
+    const p = fpath.replace('{rootDir}', path.resolve(self.apos.rootDir));
+    if (p[0] === '/') {
+      return p;
+    }
+    return path.join(path.resolve(relativeTo), p);
+  }
+
+  // Load json data if data provided is a file path
+  function loadStoryData(fpathOrData, configPath) {
+    if (!fpathOrData || typeof fpathOrData !== 'string') {
+      return fpathOrData || {};
+    }
+    const resolved = resolveDataPath(fpathOrData, configPath);
+    return JSON.parse(fs.readFileSync(resolved));
+  }
+
   // Initialize story from a raw config
-  const initConfigStory = (config, categories, index) => (story) => {
+  const initConfigStory = (config, categories, index, configPath) => (story) => {
     if (!story.name) {
-      warnDevOnce(`Story is missing a name field:\n${JSON.stringify(story, null, 4)}`);
+      warn(`Story is missing a name field:\n${JSON.stringify(story, null, 4)}`);
       return {};
     }
     const category = categories[config.categoryId];
-    const details = !!story.sources;
+    const details = (story.sources || []).length > 0;
     const processed = Object.assign(
       {
         // defaults
@@ -76,6 +95,13 @@ module.exports = function (self, options) {
         categoryId: config.categoryId
       }
     );
+
+    try {
+      processed.data = loadStoryData(story.data, configPath);
+    } catch (e) {
+      processed.data = {};
+      warn(`Failed to load story data ${story.data}: ${e.message}`);
+    }
 
     index[processed._id] = {
       config: config._id,
@@ -93,13 +119,13 @@ module.exports = function (self, options) {
   }
 
   // Process story config
-  function processConfig(module, config) {
+  function processConfig(module, config, configPath) {
     // category string
     const cat = config.category;
 
     // enhance the config
     if (!config.name) {
-      warnDevOnce(`Config is missing a category field:\n${JSON.stringify(config, null, 4)}`);
+      warn(`Config is missing a category field:\n${JSON.stringify(config, null, 4)}`);
       return {};
     }
 
@@ -152,10 +178,16 @@ module.exports = function (self, options) {
         // }
       }
     } else {
-      warnDevOnce(`Config ${cat} is missing a category field.`);
+      warn(`Config ${cat} is missing a category field.`);
     }
 
-    cfg.stories = cfg.stories.map(initConfigStory(cfg, self.categories, self.storyIndex));
+    try {
+      cfg.data = loadStoryData(cfg.data, configPath);
+    } catch (e) {
+      cfg.data = {};
+      warn(`Failed to load config data ${cfg.data}: ${e.message}`);
+    }
+    cfg.stories = cfg.stories.map(initConfigStory(cfg, self.categories, self.storyIndex, configPath));
     self.config[cfg._id] = cfg;
   }
 
@@ -223,8 +255,9 @@ module.exports = function (self, options) {
   // Build config from paths
   function buildConfig() {
     self.paths.forEach((c) => {
-      const config = require(path.resolve(c.path));
-      processConfig(config.module || c.module, config);
+      const fpath = path.resolve(c.path);
+      const config = require(fpath);
+      processConfig(config.module || c.module, config, path.dirname(fpath));
     });
     finishCategories();
   }

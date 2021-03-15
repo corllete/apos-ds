@@ -11,18 +11,16 @@
 // Icon buttons
 @use "@material/icon-button" as ib;
 
-// Text fields
-@use "@material/floating-label/mdc-floating-label";
-@use "@material/line-ripple/mdc-line-ripple";
-@use "@material/notched-outline/mdc-notched-outline";
-@use "@material/textfield" as tf;
-@use "@material/textfield/character-counter" as cc;
-@use "@material/textfield/icon";
-
-
-
 @include fab.core-styles;
 @include ib.core-styles;
-@include tf.core-styles;
-@include cc.character-counter-core-styles;
-@include icon.icon-core-styles;
+
+// FIx link buttons
+.mdc-button {
+  text-decoration: none;
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}

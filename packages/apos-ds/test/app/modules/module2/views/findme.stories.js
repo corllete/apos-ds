@@ -2,6 +2,7 @@ module.exports = {
   name: 'testConfigId',
   label: 'Test Config',
   category: 'Atoms :: Test',
+  data: '{rootDir}/data.json',
   stories: [
     {
       name: 'story1',
@@ -19,13 +20,17 @@ module.exports = {
       name: 'story3',
       label: 'story3',
       template: 'atoms/test/story3.njk',
-      state: 'inprogress'
+      state: 'inprogress',
+      data: {
+        inlineKey: 'inlineValue'
+      }
     },
     {
       name: 'storyFull',
       label: 'Story Full',
       template: 'atoms/test/story.full.njk',
       state: 'inprogress',
+      data: 'data.json',
       sources: [
         {
           type: 'macro',
