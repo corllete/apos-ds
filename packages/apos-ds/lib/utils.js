@@ -19,9 +19,17 @@ module.exports = function (self) {
     );
   };
 
+  const warn = (message) => {
+    self.apos.util.warn(
+      'apos-ds',
+      '\n⚠️  ' + message
+    );
+  };
+
   return {
     trim,
     css,
+    warn,
     warnDevOnce
   };
 };

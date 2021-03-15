@@ -1,0 +1,50 @@
+{
+  "all": {
+    "title": "Title",
+    "label": "Primary",
+    "primary": "#primary-url",
+    "sub": "Secondary text",
+    "url": "#media-url",
+    "img": "https://source.unsplash.com/nPz8akkUmDI/400x300",
+    "desc": "Greyhound divisively hello coldly wonderfully marginally far upon excluding.",
+    "actions": [
+      {
+        "label": "Action 1",
+        "url": "#action1"
+      },
+      {
+        "label": "Action 2",
+        "url": "#action2"
+      }
+    ]
+  },
+  "outlined": {
+    "title": "Title",
+    "sub": "Secondary text",
+    "url": "#media-url",
+    "img": "https://source.unsplash.com/nPz8akkUmDI/400x300",
+    "actions": [
+      {
+        "label": "Action 1",
+        "url": "#action1"
+      },
+      {
+        "label": "Action 2",
+        "url": "#action2"
+      }
+    ]
+  },
+  "actions": {
+    "title": "Title",
+    "sub": "Secondary text",
+    "desc": "Greyhound divisively hello coldly wonderfully marginally far upon excluding.",
+    "actions": [
+      {
+        "label": "Action 1"
+      },
+      {
+        "label": "Action 2"
+      }
+    ]
+  }
+}

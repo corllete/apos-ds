@@ -4,11 +4,11 @@ exports[`Resolve Stories Gather Story metadata from  Config Paths should initial
 Array [
   Object {
     "module": "module2",
-    "path": "test/mocks/node_modules/module2/views/**/*.stories.js",
+    "path": "test/app/node_modules/module2/views/**/*.stories.js",
   },
   Object {
     "module": "module2",
-    "path": "test/mocks/modules/module2/views/**/*.stories.js",
+    "path": "test/app/modules/module2/views/**/*.stories.js",
   },
 ]
 `;
@@ -17,7 +17,7 @@ exports[`Resolve Stories Gather Story metadata from  Config Paths should initial
 Array [
   Object {
     "module": "module2",
-    "path": "test/mocks/modules/module2/views/findme.stories.js",
+    "path": "test/app/modules/module2/views/findme.stories.js",
   },
 ]
 `;
@@ -28,6 +28,10 @@ Object {
     "_id": "testconfigid",
     "category": "Atoms :: Test",
     "categoryId": "atoms-test",
+    "data": Object {
+      "key1": "val1",
+      "key2": "val2",
+    },
     "label": "Test Config",
     "module": "module2",
     "name": "testConfigId",
@@ -35,6 +39,7 @@ Object {
       Object {
         "_id": "testconfigid-story1",
         "categoryId": "atoms-test",
+        "data": Object {},
         "details": false,
         "label": "Story 1",
         "module": "module2",
@@ -45,6 +50,7 @@ Object {
       Object {
         "_id": "testconfigid-story2",
         "categoryId": "atoms-test",
+        "data": Object {},
         "details": false,
         "label": "story2",
         "module": "module2",
@@ -55,6 +61,9 @@ Object {
       Object {
         "_id": "testconfigid-story3",
         "categoryId": "atoms-test",
+        "data": Object {
+          "inlineKey": "inlineValue",
+        },
         "details": false,
         "label": "story3",
         "module": "module2",
@@ -65,6 +74,10 @@ Object {
       Object {
         "_id": "testconfigid-storyfull",
         "categoryId": "atoms-test",
+        "data": Object {
+          "key1": "newVal",
+          "key3": "val3",
+        },
         "details": true,
         "label": "Story Full",
         "module": "module2",
