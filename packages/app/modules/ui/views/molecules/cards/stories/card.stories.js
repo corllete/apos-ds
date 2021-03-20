@@ -9,7 +9,8 @@ module.exports = {
       template: 'molecules/cards/stories/card.njk',
       data: 'mock.json',
       state: 'inreview',
-      details: true
+      details: true,
+      meta: true
     }
   ]
 };

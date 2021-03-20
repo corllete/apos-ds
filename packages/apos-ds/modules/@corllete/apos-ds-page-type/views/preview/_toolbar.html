@@ -33,9 +33,9 @@
 {# Functional in preview (inside the iframe) context only #}
 {% macro actionToggleCode(single) %}
   {% if single %}
-    <a href="#" title="Toggle all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="toggle">code</a>
+    <a href="#" title="Toggle all code" class="material-icons ds-action ds-toggle--all" data-action="toggle">code</a>
   {% else %}
-    <a href="#" title="Show all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="show">unfold_more</a>
-    <a href="#" title="Hide all code" class="mdc-icon-button material-icons ds-action ds-toggle--all" data-action="hide">unfold_less</a>
+    <a href="#" title="Show all code" class="material-icons ds-action ds-toggle--all" data-action="show">unfold_more</a>
+    <a href="#" title="Hide all code" class="material-icons ds-action ds-toggle--all" data-action="hide">unfold_less</a>
   {% endif %}
 {% endmacro %}

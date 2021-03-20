@@ -152,7 +152,7 @@ module.exports = function (self, env) {
 
       html += `\r<div class="ds-grid__inner${innerCls}">\n\r`;
       if (options.heading) {
-        html += this.createCell(12, `<h2>${options.heading}</h2>`);
+        html += this.createCell(12, `<h3>${options.heading}</h3>`);
       }
       html += content;
       html += '\r</div>';

@@ -55,7 +55,7 @@
 {% endmacro %}
 
 {% macro meta(id, category, parentLink) %}
-  <h2 class="ds-category-list__heading" id="{{ id }}">
+  <h3 class="ds-category-list__heading" id="{{ id }}">
     {% if parentLink %}
       <a
         class="ds-category-list__heading-link"
@@ -64,7 +64,7 @@
     {% else %}
       {{ category.label }}
     {% endif %}
-  </h2>
+  </h3>
   {% if cat.desc %}
     <p  class="ds-category-list__desc">{{ cat.desc }}</p>
   {% endif %}

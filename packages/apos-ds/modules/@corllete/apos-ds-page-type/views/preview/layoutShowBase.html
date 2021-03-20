@@ -10,33 +10,35 @@
 {% endif %}
 
 {# Top bar #}
-<div class="ds-story__top-bar ds-layout-sides">
-  <div class="ds-story__meta">
-    
-    <div class="ds-story__tmpl-location ds-typography--outline">
-      {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
+{% if story and story.meta %}
+  <div class="ds-story__top-bar ds-layout-sides">
+    <div class="ds-story__meta">
+      
+      <div class="ds-story__tmpl-location ds-typography--outline">
+        {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
+      </div>
+      {# Tagline #}
+      {% set tagline %}
+        {%- block tagline -%}{%- endblock -%}
+      {% endset %}
+      {% if tagline %}
+        <div class="ds-story__tagline ds-typography--outline">
+          {{ tagline | safe }}
+        </div>
+      {% endif %}
     </div>
-    {# Tagline #}
-    {% set tagline %}
-      {%- block tagline -%}{%- endblock -%}
+
+    {# Action bar #}
+    {% set actionbar %}
+      {%- block actionbar -%}{%- endblock -%}
     {% endset %}
-    {% if tagline %}
-      <div class="ds-story__tagline ds-typography--outline">
-        {{ tagline | safe }}
+    {% if actionbar %}
+      <div class="ds-story__top-actions">
+        {{ actionbar | safe }}
       </div>
     {% endif %}
   </div>
-
-  {# Action bar #}
-  {% set actionbar %}
-    {%- block actionbar -%}{%- endblock -%}
-  {% endset %}
-  {% if actionbar %}
-    <div class="ds-story__top-actions">
-      {{ actionbar | safe }}
-    </div>
-  {% endif %}
-</div>
+{% endif %}
 
 {# Preview #}
 {% set preview %}{% block preview %}{% endblock %}{% endset %}
@@ -79,7 +81,9 @@
       {# Meta #}
       {% set story = data.story %}
 
-      {# TODO code preview tabs? #}
+      <h4 class="ds-story__details-heading">
+        {{ story.label }} {{ apos.dsp.storyState(story.state) }}
+      </h4>
       <div class="ds-story__meta ds-typography--outline">
         {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
       </div>

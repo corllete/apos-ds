@@ -86,7 +86,8 @@ module.exports = function (self, options) {
     const processed = Object.assign(
       {
         // defaults
-        details
+        details,
+        meta: true
       },
       story,
       {

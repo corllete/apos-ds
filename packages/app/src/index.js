@@ -10,7 +10,10 @@ import { MDCTextFieldIcon } from '@material/textfield/icon';
 const buttonEls = Array.from(document.querySelectorAll('.mdc-button'));
 buttonEls.forEach(el => new MDCRipple(el));
 const iconButtons = Array.from(document.querySelectorAll('.mdc-icon-button'));
-iconButtons.forEach(el => new MDCRipple(el));
+iconButtons.forEach(el => {
+  const ripple = new MDCRipple(el);
+  ripple.unbounded = true;
+});
 
 // Text field
 const textFields = Array.from(document.querySelectorAll('.mdc-text-field'));

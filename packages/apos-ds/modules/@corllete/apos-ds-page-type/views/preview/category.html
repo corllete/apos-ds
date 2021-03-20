@@ -11,13 +11,13 @@
     {{ list.render(catCollection, data.categories, data.config, { parentLink: false }) }}
   {% else %}
     {% call list.container() -%}
-      <h2 class="ds-category-list__heading">
+      <h3 class="ds-category-list__heading">
         {% if not cat.list %}
           List preview disabled for this category
         {% else %}
           Category not found
         {% endif %}
-      </h2>
+      </h3>
     {%- endcall %}
   {% endif %}
 {% endblock %}

@@ -249,7 +249,7 @@ body, html {
 
 /* Content global */
 .ds-main-content {
-  margin: 1rem;
+  margin: 0;
   padding: 0;
 }
 
@@ -266,6 +266,10 @@ body, html {
 }
 
 /* Category listing */
+
+.ds-category-list {
+  margin: 1rem;
+}
 
 .ds-category-list__sub,
 .ds-category-list__story {
@@ -364,8 +368,9 @@ body, html {
   max-width: 100%;
 }
 
+.ds-story__details-heading,
 .ds-story__heading {
-  margin: 0.5rem 0;
+  margin: 1rem;
   font-size: 1.5rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -374,8 +379,12 @@ body, html {
   text-transform: uppercase;
 }
 
+.ds-story__details-heading {
+  margin: 0.5rem 0;
+}
+
 .ds-story__top-bar {
-  margin: 0 0 1rem 0;
+  margin: 1rem;
 }
 
 .ds-story__top-actions {
@@ -388,6 +397,10 @@ body, html {
 .ds-category-list__story-preview,
 .ds-story__preview {
   background-color: var(--ds-light-bg-color);
+}
+
+.ds-story__preview-variants {
+  margin: 0 1rem;
 }
 
 .ds-category-list__story-preview-simple,
@@ -1091,6 +1104,23 @@ a.ds-toggle__trigger:hover {
 }
 
 /* Fix uppercase transformed icons */
+a.ds-action,
 .material-icons {
   text-transform: none !important;
+  text-decoration: none;
+  color: var(--ds-main-text-color);
+}
+
+a.ds-action:hover {
+  text-transform: none !important;
+  text-decoration: none;
+  color: var(--ds-main-hover-color)
+}
+a.ds-action:active {
+  text-transform: none !important;
+  text-decoration: none;
+}
+a.ds-action:focus {
+  text-transform: none !important;
+  text-decoration: none;
 }
