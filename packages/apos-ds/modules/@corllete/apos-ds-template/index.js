@@ -1,6 +1,4 @@
-// This configures the @apostrophecms/pages module to add a "home" page type to the
-// pages menu
-// FIXME move to the bundle https://github.com/apostrophecms/apostrophe/discussions/2694#discussioncomment-349719
+// This configures the @apostrophecms/templates module to add our custom nunjucks environment
 module.exports = {
   improve: '@apostrophecms/template',
   extendMethods(self, options) {
