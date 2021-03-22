@@ -7,9 +7,9 @@
   <div class="ds-story">
   {% if story %}
       {% if story.meta %}
-        <h3 class="ds-story__heading" id="{{ story._id }}">
+        <div class="ds-story__heading" id="{{ story._id }}">
           {{ story.label }} {{ apos.dsp.storyState(story.state) }}
-        </h3>
+        </div>
       {% endif %}
       
       {% set tmpl = story.module + ":" + story.template %}
