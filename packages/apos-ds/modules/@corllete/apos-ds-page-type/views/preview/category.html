@@ -6,18 +6,9 @@
 {% block title %}{% if cat %}{{ cat.label }} - {% endif %}{{ super() }}{% endblock %}
 
 {% block content %}
-
   {% if cat and cat.list %}
-    {{ list.render(catCollection, data.categories, data.config, { parentLink: false }) }}
+    {% render list.render(catCollection, data.categories, data.config, { parentLink: false }) %}
   {% else %}
-    {% call list.container() -%}
-      <h3 class="ds-category-list__heading">
-        {% if not cat.list %}
-          List preview disabled for this category
-        {% else %}
-          Category not found
-        {% endif %}
-      </h3>
-    {%- endcall %}
+    {% render list.nf(cat) %}
   {% endif %}
 {% endblock %}
