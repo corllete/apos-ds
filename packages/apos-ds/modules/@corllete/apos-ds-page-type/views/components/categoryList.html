@@ -31,65 +31,93 @@
  #
  # @todo parse-doc for Nunjucks
  #}
-{% macro render(list, categories, configs, options) %}
-  {% call container() -%}
-    {{ categoryList(list, categories, configs, options) }}
-  {%- endcall %}
-{% endmacro %}
+{% fragment render(list, categories, configs, options) %}
 
-{% macro container() %}
   <div class="ds-category-list">
-    {{ caller() }}
+    {% set found = 0 %}
+    {% asyncEach id, category in list %}
+      {% if category.list and category.all.length > 0 %}
+
+        {# Meta #}
+        <h3 class="ds-category-list__heading" id="{{ id }}">
+          {% if options.parentLink %}
+            <a
+              class="ds-category-list__heading-link"
+              href="{{ category._url }}"
+              target="_parent">{{ category.label }}<span class="material-icons ds-category-list__heading-icon">link</span></a>
+          {% else %}
+            {{ category.label }}
+          {% endif %}
+        </h3>
+        {% if category.desc %}
+          <p class="ds-category-list__desc">{{ category.desc }}</p>
+        {% endif %}
+
+        {# Stories #}
+          {% asyncEach configName in category.all %}
+
+            {% set config = configs[configName] %}
+            {% set scat = categories[config.categoryId] %}
+            {% if not scat.list %}
+              {% set categoryId = category.children | first %}
+              {% set scat = categories[categoryId] %}
+            {% endif %}
+            {% if not scat or not scat.list %}
+              {% set scat = cat %}
+            {% endif %}
+
+              
+            {% asyncEach story in config.stories %}
+              {% if story.list %}
+                {% set found = found + 1 %}
+                <div class="ds-category-list__story">
+                  <h4 class="ds-category-list__story-heading" id="{{ story._id }}">
+                    <a
+                      class="ds-category-list__subheading-link"
+                      href="{{ scat._url }}"
+                      target="_parent">{{ scat.label }}</a>
+                    <span class="material-icons ds-category-list__story-category-icon--arrow">double_arrow</span>
+                    <a
+                      class="ds-category-list__story-heading-link"
+                      href="{{ story._url }}"
+                      target="_parent">{{ story.label }}  {{ apos.dsp.storyState(story.state) }}</a>
+                  </h4>
+                  {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutList.html' %}
+                  {% set tmpl = story.module + ":" + story.template %}
+
+                  {% include tmpl %}
+                </div>
+              {% endif %}
+            {% endeach %}
+
+          {% endeach %}
+
+
+      {% endif %}
+    {% endeach %}
+
+    {% if found == 0 %}
+    {% dshint 'neutral' %}
+      No results
+    {% enddshint %}
+    {% endif %}
   </div>
-{% endmacro %}
 
-{% macro categoryList(list, categories, configs, options) %}
-  {% for id, cat in list %}
-    {% if cat.list and cat.all.length > 0 %}
-      {# Meta #}
-      {{ meta(id, cat, options.parentLink) }}
-      {# Stories #}
-      {{ stories(cat, categories, configs) }}
-    {% endif %}
-  {% endfor %}
-{% endmacro %}
 
-{% macro meta(id, category, parentLink) %}
-  <h3 class="ds-category-list__heading" id="{{ id }}">
-    {% if parentLink %}
-      <a
-        class="ds-category-list__heading-link"
-        href="{{ category._url }}"
-        target="_parent">{{ category.label }}<span class="material-icons ds-category-list__heading-icon">link</span></a>
-    {% else %}
-      {{ category.label }}
-    {% endif %}
-  </h3>
-  {% if cat.desc %}
-    <p  class="ds-category-list__desc">{{ cat.desc }}</p>
-  {% endif %}
-{% endmacro %}
+{% endfragment %}
 
-{% macro stories(category, categories, configs) %}
-  {% if category.list and category.all.length > 0 %}
-    {% for configName in category.all %}
 
-      {% set config = configs[configName] %}
-      {% set scat = categories[config.categoryId] %}
-      {% if not scat.list %}
-        {% set categoryId = category.children | first %}
-        {% set scat = categories[categoryId] %}
+{% fragment nf(cat) %}
+  <div class="ds-category-list">
+    {% dshint %}
+      {% if cat and not cat.list %}
+        List preview disabled for this category
+      {% else %}
+        Category not found
       {% endif %}
-      {% if not scat or not scat.list %}
-        {% set scat = category %}
-      {% endif %}
-
-      {% for story in config.stories %}
-        {{ item(story, scat) }}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-{% endmacro %}
+    {% enddshint %}
+  </div>
+{% endfragment %}
 
 {##
  # Render list story item
@@ -105,22 +133,4 @@
  # @key {StorySource[]} sources sources array used to build dependency graph and docs
  # @enddef
  #}
-{% macro item(story, category) %}
-  <div class="ds-category-list__story">
-    <h4 class="ds-category-list__story-heading" id="{{ story._id }}">
-      <a
-        class="ds-category-list__subheading-link"
-        href="{{ scat._url }}"
-        target="_parent">{{ scat.label }}</a>
-      <span class="material-icons ds-category-list__story-category-icon--arrow">double_arrow</span>
-      <a
-        class="ds-category-list__story-heading-link"
-        href="{{ story._url }}"
-        target="_parent">{{ story.label }}  {{ apos.dsp.storyState(story.state) }}</a>
-    </h4>
-    {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutList.html' %}
-    {% set tmpl = story.module + ":" + story.template %}
-    {% include tmpl ignore missing %}
-  </div>
-{% endmacro %}
 

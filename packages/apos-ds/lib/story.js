@@ -87,7 +87,8 @@ module.exports = function (self, options) {
       {
         // defaults
         details,
-        meta: true
+        meta: true,
+        list: true
       },
       story,
       {

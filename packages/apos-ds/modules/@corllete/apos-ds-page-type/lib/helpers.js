@@ -70,7 +70,7 @@ module.exports = function (self, options) {
         return arr;
       }
 
-      return arr.reduce((acc, item) => {
+      return arr.filter(item => !!item).reduce((acc, item) => {
         return {
           ...acc,
           [item[idKey]]: item

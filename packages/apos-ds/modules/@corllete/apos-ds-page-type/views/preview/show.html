@@ -4,8 +4,8 @@
 {% block title %}{% if story %}{{ story.label }} - {% endif %}{{ super() }}{% endblock %}
 
 {% block content %}
+  <div class="ds-story">
   {% if story %}
-    <div class="ds-story">
       {% if story.meta %}
         <h3 class="ds-story__heading" id="{{ story._id }}">
           {{ story.label }} {{ apos.dsp.storyState(story.state) }}
@@ -14,11 +14,15 @@
       
       {% set tmpl = story.module + ":" + story.template %}
       {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutShow.html' %}
+      {# Fix async tags rendering #}
+      {% asyncFix "" %}
+
       {% include tmpl ignore missing %}
-    </div>
+      
   {% else %}
     <h3 class="ds-story__heading">
       Story not found
     </h3>
   {% endif %}
+  </div>
 {% endblock %}

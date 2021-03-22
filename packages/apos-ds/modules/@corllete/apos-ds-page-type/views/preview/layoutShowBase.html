@@ -1,13 +1,5 @@
 {# Extra page style #}
-{% set css %}
-  {%- block css -%}{%- endblock -%}
-{% endset %}
-
-{% if css %}
-  {# <style> #}
-{{ css | safe }}
-  {# </style> #}
-{% endif %}
+{% block css %}{% endblock %}
 
 {# Top bar #}
 {% if story and story.meta %}
@@ -18,47 +10,26 @@
         {{ story.module }}:{{ story.template }} {% if story.state %}({{ apos.dsp.storyStateLabel(story.state) }}){% endif %}
       </div>
       {# Tagline #}
-      {% set tagline %}
-        {%- block tagline -%}{%- endblock -%}
-      {% endset %}
-      {% if tagline %}
-        <div class="ds-story__tagline ds-typography--outline">
-          {{ tagline | safe }}
-        </div>
-      {% endif %}
+      <div class="ds-story__tagline ds-typography--outline">
+        {% block tagline %}{% endblock %}
+      </div>
     </div>
 
     {# Action bar #}
-    {% set actionbar %}
-      {%- block actionbar -%}{%- endblock -%}
-    {% endset %}
-    {% if actionbar %}
-      <div class="ds-story__top-actions">
-        {{ actionbar | safe }}
-      </div>
-    {% endif %}
+    <div class="ds-story__top-actions">
+      {% block actionbar %}{% endblock %}
+    </div>
   </div>
 {% endif %}
 
 {# Preview #}
-{% set preview %}{% block preview %}{% endblock %}{% endset %}
-
-{% set previewSimple %}{% block previewSimple %}{% endblock %}{% endset %}
-
 <div class="ds-story__content">
   {# Before Preview #}
   {% block beforePreview %}{% endblock %}
 
   {# Default and simple (flex centered) preview #}
-  {% if preview %}
-    <div class="ds-story__preview">
-      {{ preview | safe }}
-    </div>
-  {% else %}
-    <div class="ds-story__preview-simple">
-      {{ previewSimple | safe }}
-    </div>
-  {% endif %}
+  <div class="ds-story__preview">{% block preview %}{% endblock %}</div>
+  <div class="ds-story__preview-simple">{% block previewSimple %}{% endblock %}</div>
 
   {# After Preview #}
   {% block afterPreview %}{% endblock %}
@@ -89,12 +60,7 @@
       </div>
 
       {# Description #}
-      {% set desc %}
-        {%- block description -%}{%- endblock -%}
-      {% endset %}
-      {% if desc %}
-        <div class="ds-typography--desc">{{ desc | safe }}</div>
-      {% endif %}
+        <div class="ds-typography--desc">{% block description %}{% endblock %}</div>
 
       {# Sources #}
       {% if story.sources.length %}
@@ -123,12 +89,4 @@
 
 
 {# Extra page JS #}
-{% set js %}
-  {%- block js -%}{%- endblock -%}
-{% endset %}
-
-{% if js %}
-  {# <script type="text/javascript"> #}
-{{ js | safe }}
-  {# </script> #}
-{% endif %}
+{% block js %}{% endblock %}

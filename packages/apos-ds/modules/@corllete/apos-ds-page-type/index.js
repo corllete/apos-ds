@@ -30,6 +30,16 @@ module.exports = {
 
   helpers: require('./lib/helpers'),
 
+  customTags() {
+    return {
+      asyncFix: {
+        async run() {
+          return '';
+        }
+      }
+    };
+  },
+
   methods(self, options) {
     self.previewRoute = '/__preview';
 
