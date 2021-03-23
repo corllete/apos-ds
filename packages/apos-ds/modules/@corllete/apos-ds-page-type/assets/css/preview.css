@@ -1108,6 +1108,10 @@ a.ds-action,
 .material-icons {
   text-transform: none !important;
   text-decoration: none;
+  color: inherit;
+}
+
+a.ds-action {
   color: var(--ds-main-text-color);
 }
 
