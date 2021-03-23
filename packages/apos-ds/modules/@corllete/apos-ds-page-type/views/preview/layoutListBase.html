@@ -1,54 +1,28 @@
 {# Extra page style #}
-{% set css %}
-  {%- block css -%}{%- endblock -%}
-{% endset %}
-
-{% if css %}
-  <style>
-    {{ css | safe }}
-  </style>
-{% endif %}
+{% block css %}{% endblock %}
 
 {# Tagline #}
-{% set tagline %}
+<div class="ds-category-list__tagline ds-typography--outline">
   {% block tagline %}{% endblock %}
-{% endset %}
-
-{% if tagline %}
-  <div class="ds-category-list__tagline ds-typography--outline">
-    {{ tagline | safe }}
-  </div>
-{% endif %}
-
-{% set preview %}{% block preview %}{% endblock %}{% endset %}
+</div>
 
 {% set previewSimple %}
-  {% block previewSimple %}{% endblock %}
+  
 {% endset %}
 
 <div class="ds-category-list__preview-container">
   {% block beforePreview %}{% endblock %}
 
-  {% if preview %}
-    <div class="ds-category-list__story-preview">
-      {{ preview | safe }}
-    </div>
-  {% else %}
-    <div class="ds-category-list__story-preview-simple">
-      {{ previewSimple | safe }}
-    </div>
-  {% endif %}
+  <div class="ds-category-list__story-preview">
+    {% block preview %}{% endblock %}
+  </div>
+
+  <div class="ds-category-list__story-preview-simple">
+    {% block previewSimple %}{% endblock %}
+  </div>
 
   {% block afterPreview %}{% endblock %}
 </div>
 
 {# Extra page JS #}
-{% set js %}
-  {%- block js -%}{%- endblock -%}
-{% endset %}
-
-{% if js %}
-  <script type="text/javascript">
-    {{ js | safe }}
-  </script>
-{% endif %}
+{% block js %}{% endblock %}
