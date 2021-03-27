@@ -16,6 +16,18 @@ module.exports = {
         name: '@corllete/apos-ds-page-type',
         label: 'Design System'
       }
+    ],
+    park: [
+      {
+        slug: '/design-system',
+        parkedId: 'design-system',
+        _defaults: {
+          slug: '/design-system',
+          parkedId: 'design-system',
+          title: 'Design System',
+          type: '@corllete/apos-ds-page-type'
+        }
+      }
     ]
   }
 };

@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const _ = require('@sailshq/lodash');
 
 module.exports = {
@@ -9,7 +11,10 @@ module.exports = {
     projectName: null
   },
 
-  init(self) {},
+  init(self) {
+    self.hasRemoteAssets = !!process.env.APOS_UPLOADFS_ASSETS;
+    self.isProduction = process.env.NODE_ENV === 'production';
+  },
 
   // We need a static reference to apos.ds, so initialization happens
   // after everything is initialized
@@ -50,40 +55,88 @@ module.exports = {
     } = require('./lib/utils');
 
     return {
+      getAssetNamespace() {
+        return 'ds';
+      },
+
+      getBaseAposPublicPath() {
+        return '/apos-frontend/releases';
+      },
+
+      // get full path of modules/@corllete/apos-ds-page-type/ui
+      // as dependency or not; optionally check if /dist should be added
+      getBaseAssetLocalPath(asDep, checkDist) {
+        const dist = '/dist';
+        const uiPath = path.join(
+          self.apos.rootDir,
+          asDep ? '/node_modules/@corllete/apos-ds' : '',
+          '/modules/@corllete/apos-ds-page-type/ui'
+        );
+
+        if (!checkDist) {
+          return uiPath;
+        }
+
+        // when installed as npm module only ui/dist is available
+        // so basic exist test for ui/js folder should be fine without breaking
+        // the module development
+        if (self.isProduction || !fs.existsSync(path.join(uiPath, '/js'))) {
+          return path.join(uiPath, dist);
+        }
+        return uiPath;
+      },
+
+      getBaseAssetReleasePath(pub, forceLocal = false) {
+        // /apos-frontend/releases/XXX/ds
+        if (!forceLocal && self.hasRemoteAssets) {
+          return path.join(
+            self.getBaseAposPublicPath(),
+            self.apos.asset.getReleaseId(),
+            self.getAssetNamespace()
+          );
+        }
+
+        // /rootPath/public/apos-frontend/releases/XXX/ds
+        const base = pub ? '/' : path.join(self.apos.rootDir, 'public');
+        return path.join(
+          base,
+          self.getBaseAposPublicPath(),
+          self.apos.asset.getReleaseId(),
+          self.getAssetNamespace()
+        );
+      },
+
+      getAssetHelperBaseUrl() {
+        let base = '';
+        if (self.hasRemoteAssets && self.isProduction) {
+          base = self.apos.uploadfs.getUrl();
+        }
+        base += self.getBaseAssetReleasePath(true);
+        return base;
+      },
+
       // get css asset path/tag
       stylesheetHelper(name, pathOnly = false) {
-        let base;
-        if (process.env.NODE_ENV === 'production') {
-          const releaseId = self.apos.asset.getReleaseId();
-          const uploadfsFolder = `/assets/${releaseId}`;
-          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/apos-ds/css`;
-        } else {
-          base = '/apos-ds/css';
-        }
+        const base = `${self.getAssetHelperBaseUrl()}/css`;
         const path = `${base}/${name}.css`;
+
         if (pathOnly) {
           return path;
         }
-        const bundle = `<link href="${path}" rel="stylesheet" />`;
-        return self.apos.template.safe(bundle);
+
+        return self.apos.template.safe(`<link href="${path}" rel="stylesheet" />`);
       },
 
       // get js asset path/tag
       scriptHelper(name, pathOnly = false) {
-        let base;
-        if (process.env.NODE_ENV === 'production') {
-          const releaseId = self.apos.asset.getReleaseId();
-          const uploadfsFolder = `/assets/${releaseId}`;
-          base = `${self.apos.attachment.uploadfs.getUrl()}${uploadfsFolder}/apos-ds/js`;
-        } else {
-          base = '/apos-ds/js';
-        }
+        const base = `${self.getAssetHelperBaseUrl()}/js`;
         const path = `${base}/${name}.js`;
+
         if (pathOnly) {
           return path;
         }
-        const bundle = `<script type="text/javascript" src="${base}/${name}.js"></script>`;
-        return self.apos.template.safe(bundle);
+
+        return self.apos.template.safe(`<script type="text/javascript" src="${path}"></script>`);
       },
 
       // register our story url handler
