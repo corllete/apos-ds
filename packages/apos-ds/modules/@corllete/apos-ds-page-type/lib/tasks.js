@@ -1,5 +1,6 @@
-const fs = require('fs-extra');
 const path = require('path');
+const fs = require('fs-extra');
+const util = require('util');
 
 module.exports = function (self, options) {
   return {
@@ -12,71 +13,65 @@ module.exports = function (self, options) {
           self.apos.util.warn('Bundle disabled, nothing to do.');
           return;
         }
-        let uiPath = path.join(self.apos.rootDir, '/node_modules/@corllete/apos-ds/modules/@corllete/apos-ds-page-type/ui');
-        const publishPath = path.join(self.apos.rootDir, '/public/apos-ds');
-        const dist = '/dist';
-        try {
-          fs.unlinkSync(publishPath);
-        } catch (e) {
-          //
-        }
-        require('remove').removeSync(publishPath, { ignoreErrors: true });
-        if (process.env.NODE_ENV === 'production') {
-          uiPath += dist;
-          fs.mkdirSync(publishPath);
-          fs.mkdirSync(path.join(publishPath, '/js'));
-          fs.mkdirSync(path.join(publishPath, '/css'));
-          fs.writeFileSync(
-            path.join(publishPath, '/js/bundle.js'),
-            fs.readFileSync(path.join(uiPath, '/js/bundle.js'))
-          );
-          fs.writeFileSync(
-            path.join(publishPath, '/js/preview.js'),
-            fs.readFileSync(path.join(uiPath, '/js/preview.js'))
-          );
-          fs.writeFileSync(
-            path.join(publishPath, '/js/highlight.common.min.js'),
-            fs.readFileSync(path.join(uiPath, '/js/highlight.common.min.js'))
-          );
-          fs.writeFileSync(
-            path.join(publishPath, '/css/bundle.css'),
-            fs.readFileSync(path.join(uiPath, '/css/bundle.css'))
-          );
-          fs.writeFileSync(
-            path.join(publishPath, '/css/preview.css'),
-            fs.readFileSync(path.join(uiPath + '/css/preview.css'))
-          );
-          await deploy();
-        } else {
-          // when installed as npm module only ui/dist is available
-          // so basic exist test for ui/js folder should be fine without breaking
-          // the module development
-          if (!fs.existsSync(path.join(uiPath, '/js'))) {
-            uiPath = path.join(uiPath, dist);
+
+        await deploy();
+        printResult();
+
+        async function removeSymlink(p) {
+          try {
+            await fs.unlink(p);
+          } catch (e) {
+            //
           }
-          // Just symlink it
-          fs.symlinkSync(uiPath, publishPath);
         }
 
-        // shamelessly stolen from @apostrophe/assets/index.js build task
+        function printResult() {
+          const pre = `[${self.__meta.name}]`;
+          self.apos.util.log(pre, `Published (${self.isProduction ? 'production' : 'dev'}):`);
+          self.apos.util.log(pre, self.stylesheetHelper('bundle', true));
+          self.apos.util.log(pre, self.stylesheetHelper('preview', true));
+          self.apos.util.log(pre, self.scriptHelper('bundle', true));
+          self.apos.util.log(pre, self.scriptHelper('preview', true));
+        }
+
+        // shamelessly stolen (but heavily modified) from @apostrophe/assets/index.js build task
         async function deploy() {
-          if (process.env.NODE_ENV !== 'production') {
+          if (!self.isProduction) {
+            // Just symlink it
+            const uiPath = self.getBaseAssetLocalPath(true, true);
+            const publicFolder = self.getBaseAssetReleasePath(false, true);
+
+            await removeSymlink(publicFolder);
+            await fs.remove(publicFolder);
+
+            await fs.ensureSymlink(uiPath, publicFolder);
             return;
           }
-          const copyIn = require('util').promisify(self.apos.attachment.uploadfs.copyIn);
-          const releaseId = self.apos.asset.getReleaseId();
-          const localFolder = path.join(self.apos.rootDir, '/public/apos-ds');
-          const uploadfsFolder = path.join('/assets', `/${releaseId}`, '/apos-ds');
-          await copyIn(path.join(localFolder, '/js/bundle.js'), path.join(uploadfsFolder, '/js/bundle.js'));
-          await copyIn(path.join(localFolder, '/js/preview.js'), path.join(uploadfsFolder, '/js/preview.js'));
-          await copyIn(path.join(localFolder, '/js/highlight.common.min.js'), path.join(uploadfsFolder, '/js/highlight.common.min.js'));
-          await copyIn(path.join(localFolder, '/css/bundle.css'), path.join(uploadfsFolder, '/css/bundle.css'));
-          await copyIn(path.join(localFolder, '/css/preview.css'), path.join(uploadfsFolder, '/css/preview.css'));
-          self.apos.util.log('Published:');
-          self.apos.util.log(self.stylesheetHelper('bundle', true));
-          self.apos.util.log(self.stylesheetHelper('preview', true));
-          self.apos.util.log(self.scriptHelper('bundle', true));
-          self.apos.util.log(self.scriptHelper('preview', true));
+
+          const localFolder = self.getBaseAssetLocalPath(true, true);
+          let copyIn;
+          const publicFolder = self.getBaseAssetReleasePath(false);
+
+          if (self.hasRemoteAssets) {
+            copyIn = util.promisify(self.apos.uploadfs.copyIn);
+          } else {
+            copyIn = fs.copy;
+            await removeSymlink(publicFolder);
+            await fs.remove(publicFolder);
+            await fs.mkdirp(publicFolder);
+          }
+
+          const files = [
+            '/js/bundle.js',
+            '/js/preview.js',
+            '/js/highlight.common.min.js',
+            '/css/bundle.css',
+            '/css/preview.css'
+          ];
+
+          for (const file of files) {
+            await copyIn(path.join(localFolder, file), path.join(publicFolder, file));
+          }
         }
       }
     }

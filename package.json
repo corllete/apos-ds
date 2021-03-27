@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "prep": "npm run bootstrap && npm run build && npm run assets",
+    "predev": "npm run bootstrap && npm run build && npm run assets",
     "dev": "lerna run dev --stream",
     "build": "lerna run build --stream",
     "assets": "lerna run assets --stream",

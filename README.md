@@ -6,19 +6,16 @@ It's yet another design system but experimental and built for Nunjucks component
 
 ## Development / Demo install
 
-Clone this.
+Clone this and
+```sh
+npm i
+```
 
 Be sure you have mongodb running. If you don't but you have `docker-compose` installed - we got your back! Just do:
 ```sh
 docker-compose up -d
 ```
 It'll take a while but only the first time. Promise.
-
-When your mongodb is up and running:
-```sh
-npm i && npm run prep
-```
-It may take a while...
 
 When you are ready playing stop your mongo:
 ```sh
@@ -35,11 +32,14 @@ Execute `docker volume rm apos-ds_mongodb-data` to remove it.
 
 ## Run it
 
+You should have mongodb running on default port.
+
 The demo app `packages/app` is slightly modified [Apostrophe 3 boilerplate](https://github.com/apostrophecms/a3-boilerplate).
-In order to be able to add page and attach the design system to it, you have to create user:
+In order to be able to manage (add, edit pages, etc) your installation, you have to create user:
 ```sh
-cd packages/app && node app @apostrophecms/user:add admin admin
+cd packages/app && node app @apostrophecms/user:add dev admin
 ```
+This will create user `dev` with administration permissions.
 
 From the project root or inside `packages/app` run:
 ```sh
@@ -47,6 +47,10 @@ npm run dev
 ```
 
 Some instructions are available on the initial home page. Log in and create new page with type `Design System`.
+
+> NOTE: if you see an error in your terminal stating something along lines `slug already in use`, you need to reset
+> your database (the design system is now parked at `/design-system` route). More information is available at the 
+> welcome screen of the app.
 
 ## Where are the docs?
 
