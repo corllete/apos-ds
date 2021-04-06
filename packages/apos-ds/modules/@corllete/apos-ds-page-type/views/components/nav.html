@@ -10,7 +10,7 @@
 
 {% macro parent(category, categories, configs) %}
   {# {% if category.parents.length == 0 and (category.children.length > 0 or (not category.list and category.all.length > 0)) %} #}
-  {% if category.parents.length == 0 and category.children.length > 0 %}
+  {% if category.parents.length == 0 and (category.children.length > 0 or category.all.length > 0)  %}
     {{ row('group-list', category, categories, configs) }}
   {% endif %}
 {% endmacro %}
@@ -52,6 +52,7 @@
 {% endmacro %}
 
 {% macro items(category, configs) %}
+  
   {% for configId in category.all %}
     {% set config = configs[configId] %}
     {% for story in config.stories %}
