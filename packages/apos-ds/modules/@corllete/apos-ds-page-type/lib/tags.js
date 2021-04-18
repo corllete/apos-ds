@@ -61,8 +61,13 @@ class Tags {
 
   }
 
-  _createCode = (lng, code, hasToggle = true, expanded = false) => {
+  _createCode = (lng, code, {
+    label, toggle = true, expanded = false
+  }) => {
     lng = lng.toLowerCase() === 'njk' ? 'twig' : lng.toLowerCase();
+    if (!label) {
+      label = 'Code';
+    }
     code = code
       .trimEnd()
       .replace(/^\s*\n+/, '')
@@ -76,14 +81,14 @@ class Tags {
     }
 
     const icon = expanded ? 'expand_less' : 'expand_more';
-    const toggleStart = hasToggle
+    const toggleStart = toggle
       ? `
         <div class="ds-toggle">
-          <a class="ds-toggle__trigger" href="#" title="Toggle code">Toggle code <span class="ds-toggle__icon material-icons">${icon}</span></a>
+          <a class="ds-toggle__trigger" href="#" title="${label}">${label} <span class="ds-toggle__icon material-icons">${icon}</span></a>
           <div class="ds-toggle__content" style="display: ${expanded ? 'block' : 'none'};">
       `
       : '';
-    const toggleEnd = hasToggle
+    const toggleEnd = toggle
       ? `
           </div>
         </div>
@@ -107,7 +112,7 @@ class Tags {
    */
   runCode = async (context, ...args) => {
     const [ language, options, body ] = await this._parseArgs(args, [ '', {} ]);
-    return this._createCode(language + '', body + '', options.toggle, options.expanded);
+    return this._createCode(language + '', body + '', options);
   }
 
   /**
@@ -119,7 +124,7 @@ class Tags {
   runCodeCell = async (context, ...args) => {
     const [ span, language, options, body ] = await this._parseArgs(args, [ 6, '', {} ]);
 
-    const tag = this._createCode(language + '', body, options.toggle, options.expanded);
+    const tag = this._createCode(language + '', body, options);
     return this._createCell(span, tag, options);
   }
 
