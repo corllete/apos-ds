@@ -1,8 +1,8 @@
 {% macro cell(type, span = 4) -%}
   {% set content = caller() %}
-  {% dscell span %}
+  <div class="ds-grid__cell{%if span%}{{ ' ds-grid__cell--span-' + span }}{%endif%}">
     {{ hint(content, type) }}
-  {% enddscell %}
+  </div>
 {%- endmacro %}
 
 {# type - neutral | warning | ok, empty for default #}

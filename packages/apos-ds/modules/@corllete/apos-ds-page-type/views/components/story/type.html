@@ -23,7 +23,7 @@ Verba tu fingas et ea dicas, quae non sentias?
 {%- endset %}
 
 {% macro cell(obj, options) %}
-  {% dscell options.span %}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
     {% if obj.headings %}
       {{ headings(obj.headings, options) }}
     {% endif %}
@@ -33,7 +33,7 @@ Verba tu fingas et ea dicas, quae non sentias?
     {% if obj.custom %}
       {{ customTypes(obj.custom, options) }}
     {% endif %}
-  {% enddscell %}
+  </div>
 {% endmacro %}
 
 {% macro types(obj, options) %}
@@ -49,9 +49,9 @@ Verba tu fingas et ea dicas, quae non sentias?
 {% endmacro %}
 
 {% macro heading(arr, options) %}
-  {% dscell options.span %}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
     {{ headings(arr, options) }}
-  {% enddscell %}
+  </div>
 {% endmacro %}
 
 {% macro headings(arr, opts) %}
@@ -114,9 +114,9 @@ Verba tu fingas et ea dicas, quae non sentias?
 {% endmacro %}
 
 {% macro paragraph(arr, options) %}
-  {% dscell options.span %}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
     {{ paragraphs(arr, options) }}
-  {% enddscell %}
+  </div>
 {% endmacro %}
 
 {% macro paragraphs(items, opts) %}
@@ -179,9 +179,9 @@ Verba tu fingas et ea dicas, quae non sentias?
 
 
 {% macro custom(arr, options) %}
-  {% dscell options.span %}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
     {{ customTypes(arr, options) }}
-  {% enddscell %}
+  </div>
 {% endmacro %}
 
 {% macro customTypes(items, opts) %}

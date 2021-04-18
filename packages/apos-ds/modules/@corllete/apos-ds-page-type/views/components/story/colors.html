@@ -34,18 +34,16 @@
 {% endmacro %}
 
 {% macro color(name, value, varName, options) %}
-  {% if caller %}
+  {# {% if caller %}
     {% set details = caller() %}
-  {% endif %}
-  {% dscell options.span %}
-    {% call colorItem(name, value, varName, options | merge({ details: details })) %}
-      {{ datails }}
-    {% endcall %}
-  {% enddscell %}
+  {% endif %} #}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
+  {{ colorItem(name, value, varName, options | merge({ details: details })) }}
+  </div>
 {% endmacro %}
 
 {% macro palette(colors, options = {}) %}
-  {% dscell options.span %}
+  <div class="ds-grid__cell{%if options.span%}{{ ' ds-grid__cell--span-' + options.span }}{%endif%}">
     <div class="ds-color-palette{%if options.horizontal%} ds-color-palette--horizontal{%endif%}">
     {% for cols in colors %}
       <div class="ds-color-palette__col">
@@ -72,5 +70,5 @@
       </div>
     {% endfor %}
     </div>
-  {% enddscell %}
+  </div>
 {% endmacro %}

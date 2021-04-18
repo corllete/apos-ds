@@ -39,6 +39,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.7.7",
+		"@babel/eslint-parser": "^7.13.14",
 		"@babel/preset-env": "^7.7.7",
 		"autoprefixer": "^9.7.3",
 		"babel-loader": "^8.0.6",
@@ -47,7 +48,7 @@
 		"copy-webpack-plugin": "^6.4.1",
 		"css-loader": "^1.0.1",
 		"dart-sass": "^1.25.0",
-		"eslint": "^7.9.0",
+		"eslint": "^7.24.0",
 		"eslint-config-apostrophe": "^3.4.0",
 		"extract-loader": "^3.1.0",
 		"file-loader": "^5.0.2",

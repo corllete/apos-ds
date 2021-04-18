@@ -35,8 +35,9 @@ module.exports = {
 
   helpers: require('./lib/helpers'),
 
-  customTags() {
+  customTags(self) {
     return {
+      ...require('./lib/tags')(self),
       asyncFix: {
         async run() {
           return '';
