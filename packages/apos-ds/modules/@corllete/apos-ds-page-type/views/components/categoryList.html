@@ -35,7 +35,7 @@
 
   <div class="ds-category-list">
     {% set found = 0 %}
-    {% asyncEach id, category in list %}
+    {% for id, category in list %}
       {% if category.list and category.all.length > 0 %}
 
         {# Meta #}
@@ -54,7 +54,7 @@
         {% endif %}
 
         {# Stories #}
-          {% asyncEach configName in category.all %}
+          {% for configName in category.all %}
 
             {% set config = configs[configName] %}
             {% set scat = categories[config.categoryId] %}
@@ -67,7 +67,7 @@
             {% endif %}
 
               
-            {% asyncEach story in config.stories %}
+            {% for story in config.stories %}
               {% if story.list %}
                 {% set found = found + 1 %}
                 <div class="ds-category-list__story">
@@ -84,17 +84,16 @@
                   </h4>
                   {% set dsPreview = '@corllete/apos-ds-page-type:preview/layoutList.html' %}
                   {% set tmpl = story.module + ":" + story.template %}
-
+                  {% asyncFix '' %}
                   {% include tmpl %}
                 </div>
               {% endif %}
-            {% endeach %}
+            {% endfor %}
 
-          {% endeach %}
-
+          {% endfor %}
 
       {% endif %}
-    {% endeach %}
+    {% endfor %}
 
     {% if found == 0 %}
     {% dshint 'neutral' %}
