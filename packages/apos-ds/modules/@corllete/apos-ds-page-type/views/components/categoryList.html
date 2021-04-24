@@ -29,13 +29,13 @@
  # @key {String:Boolean} list if it should render its stories in list
  # @enddef
  #
- # @todo parse-doc for Nunjucks
+ # FIXME break it down again to helper fragments now when fragments are working again
  #}
 {% fragment render(list, categories, configs, options) %}
 
   <div class="ds-category-list">
     {% set found = 0 %}
-    {% for id, category in list %}
+    {% asyncEach id, category in list %}
       {% if category.list and category.all.length > 0 %}
 
         {# Meta #}
@@ -54,7 +54,7 @@
         {% endif %}
 
         {# Stories #}
-          {% for configName in category.all %}
+          {% asyncEach configName in category.all %}
 
             {% set config = configs[configName] %}
             {% set scat = categories[config.categoryId] %}
@@ -67,7 +67,7 @@
             {% endif %}
 
               
-            {% for story in config.stories %}
+            {% asyncEach story in config.stories %}
               {% if story.list %}
                 {% set found = found + 1 %}
                 <div class="ds-category-list__story">
@@ -88,12 +88,12 @@
                   {% include tmpl %}
                 </div>
               {% endif %}
-            {% endfor %}
+            {% endeach %}
 
-          {% endfor %}
+          {% endeach %}
 
       {% endif %}
-    {% endfor %}
+    {% endeach %}
 
     {% if found == 0 %}
     {% dshint 'neutral' %}
