@@ -1,5 +1,5 @@
 // nunjucks helpers
-module.exports = function (self, options) {
+module.exports = function (self) {
   if (!self.apos.ds.options.enabled) {
     return {};
   }
@@ -7,14 +7,47 @@ module.exports = function (self, options) {
   const { normalizeTypeHelper, normalizeTypeOptionsHelper } = require('./utils.js');
 
   return {
-    stylesheet: function (name, urlOnly = false) {
+    /**
+     * Id is the last portion of the URL of story preview
+     *
+     * Usage:
+     * `apos.dsp.story('atoms-buttons-fab', data.config)`
+     *
+     * @param {String} id
+     * @param {Object} config the entire story data
+     * @returns {Object} story
+     */
+    story(id, config) {
+      if (!config) {
+        return self.apos.ds.getStory(id);
+      }
+
+      return self.getStory(id, config);
+    },
+
+    /**
+     * Id is the last portion of the URL of story preview
+     *
+     * Usage:
+     * `apos.dsp.storyData('atoms-buttons-fab')`
+     *
+     * @param {String} id
+     * @returns {Object} story data
+     */
+    storyData(id) {
+      return (self.apos.ds.getStory(id) || {}).data;
+    },
+
+    stylesheet(name, urlOnly = false) {
       return self.stylesheetHelper(name, urlOnly);
     },
 
-    script: function (name, urlOnly = false) {
+    script(name, urlOnly = false) {
       return self.scriptHelper(name, urlOnly);
     },
 
+    // Internals, used in macros/fragments
+    // Use it at your own risk, they may change
     storyState(state, small) {
       const cls = small ? ' ds-state--small' : '';
       switch (state) {

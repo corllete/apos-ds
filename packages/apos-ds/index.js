@@ -119,14 +119,31 @@ module.exports = {
       },
 
       // Apply all required story filters
-      async applyStoryFilters(req, stories) {
-        await self.addStoryUrls(req, stories);
+      async applyStoryFilters(req, config) {
+        await self.addStoryUrls(req, config);
       },
 
       // Set the request context for stories, used in pages module
       async setStoryContext(req) {
         req.data.config = JSON.parse(JSON.stringify(self.config));
         await self.applyStoryFilters(req, req.data.config);
+      },
+
+      getStory(id) {
+        const config = self.getStoryConfigFor(id);
+        if (!config) {
+          return;
+        }
+        return config.stories.find(s => s._id === id);
+      },
+
+      getStoryConfigFor(storyId) {
+        const index = self.storyIndex[storyId];
+        if (!index) {
+          return;
+        }
+
+        return self.config[index.config];
       },
 
       checkForWarnings() {

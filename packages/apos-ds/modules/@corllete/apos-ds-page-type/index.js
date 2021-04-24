@@ -176,6 +176,14 @@ module.exports = {
         });
       },
 
+      getStory(id, config) {
+        const storyConfig = self.apos.ds.getStoryConfigFor(id);
+        if (!storyConfig || !config) {
+          return;
+        }
+        return (config[storyConfig._id] || [ { stories: [] } ]).stories.find(s => s._id === id);
+      },
+
       // the common context for all owned routes
       async setCommonContext(req) {
         await Promise.all([
@@ -204,9 +212,10 @@ module.exports = {
       },
 
       // this will go soon
-      async themePage(req) {
-        self.setTemplate(req, 'theme');
-      },
+      // this is gone
+      // async themePage(req) {
+      //   self.setTemplate(req, 'theme');
+      // },
 
       // module index - list all stories
       async indexPage(req) {
