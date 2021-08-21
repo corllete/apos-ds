@@ -1,6 +1,8 @@
 // The design system layout
 
-html, body, .apos-refreshable {
+html,
+body,
+.apos-refreshable {
   height: 100%;
 }
 
@@ -10,7 +12,8 @@ body {
   background-color: white;
 }
 
-.apos-ui, .apos-admin-bar-wrapper {
+.apos-ui,
+.apos-admin-bar-wrapper {
   display: none;
 }
 
@@ -61,7 +64,8 @@ body {
     * TODO - refactor, convert to flex and JS, add icon link to category list
     * https://www.cssscript.com/multilevel-accordion-menu-with-plain-html-css/
     */
-  .nav .nav__item-link, .nav .nav__category-link {
+  .nav .nav__item-link,
+  .nav .nav__category-link {
     display: block;
   }
 
@@ -90,7 +94,8 @@ body {
     color: rgba(0, 0, 0, .87);
     text-decoration: none;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: none;
       outline: none;
     }
@@ -103,17 +108,20 @@ body {
     background: #ffffff;
   }
 
-  .nav .nav__item-link:focus, 
-  .nav .nav__item-link:hover, 
-  .nav label:focus, 
+  .nav .nav__item-link:focus,
+  .nav .nav__item-link:hover,
+  .nav label:focus,
   .nav label:hover {
     background: #f5f5f5;
   }
 
-  .nav label { cursor: pointer; }
+  .nav label {
+    cursor: pointer;
+  }
 
   // Styling first level lists items
-  .group-list .nav__item-link, .group-list label {
+  .group-list .nav__item-link,
+  .group-list label {
     padding-left: 2rem;
   }
 
@@ -125,7 +133,8 @@ body {
   }
 
   // Styling second level list items
-  .sub-group-list .nav__item-link, .sub-group-list label {
+  .sub-group-list .nav__item-link,
+  .sub-group-list label {
     padding-left: 4rem;
   }
 
@@ -137,7 +146,8 @@ body {
   }
 
   // Styling third level list items
-  .sub-sub-group-list .nav__item-link, .sub-sub-group-list label {
+  .sub-sub-group-list .nav__item-link,
+  .sub-sub-group-list label {
     padding-left: 6rem;
   }
 
@@ -149,7 +159,9 @@ body {
   }
 
   // Hide nested lists
-  .group-list, .sub-group-list, .sub-sub-group-list {
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
     height: 100%;
     max-height: 0;
     overflow: hidden;
@@ -161,18 +173,19 @@ body {
     text-transform: uppercase;
   }
 
-  .nav__list input[type=checkbox]:checked + label + ul { /* reset the height when checkbox is checked */
-    max-height: 1000px;
+  .nav__list input[type=checkbox]:checked+label+ul {
+    /* reset the height when checkbox is checked */
+    max-height: 10000px;
   }
 
   // Rotating chevron icon on toggle.
-  .nav label > .nav__toggle-icon {
+  .nav label>.nav__toggle-icon {
     margin-left: auto;
     padding: 1rem;
     transition: transform .15s ease;
   }
 
-  .nav__list input[type=checkbox]:checked + label > .nav__toggle-icon {
+  .nav__list input[type=checkbox]:checked+label>.nav__toggle-icon {
     transform: rotate(90deg);
   }
 
@@ -180,12 +193,14 @@ body {
   .nav__list--active {
     font-weight: 600;
   }
+
   // End Side Navigation
 
   h6 {
     color: rgba(0, 0, 0, .6);
     margin: 0;
   }
+
   p {
     margin-block-start: 0.5em;
     margin-block-end: 1.25em;
@@ -211,7 +226,8 @@ body {
     text-decoration: none;
     font-family: Roboto, sans-serif;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: underline;
       outline: none;
     }
@@ -235,7 +251,8 @@ body {
   .section-header a {
     color: rgba(0, 0, 0, 0.54);
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: rgba(0, 0, 0, 0.87);
     }
   }
@@ -278,7 +295,8 @@ body {
     color: $material-color-grey-600;
   }
 
-  svg, img {
+  svg,
+  img {
     vertical-align: -3px;
     margin-right: 4px;
   }
@@ -337,26 +355,31 @@ body {
       @include mdc-typography-baseline-top($line-height);
       @include mdc-typography-baseline-bottom($line-height);
     }
+
     &.mdc-typography--headline2 {
       $line-height: 3.75rem;
       @include mdc-typography-baseline-top($line-height);
       @include mdc-typography-baseline-bottom($line-height);
     }
+
     &.mdc-typography--headline3 {
       $line-height: 3.125rem;
       @include mdc-typography-baseline-top($line-height);
       @include mdc-typography-baseline-bottom($line-height);
     }
+
     &.mdc-typography--headline4 {
       $line-height: 2.5rem;
       @include mdc-typography-baseline-top($line-height);
       @include mdc-typography-baseline-bottom($line-height);
     }
+
     &.mdc-typography--headline5 {
       $line-height: 2rem;
       @include mdc-typography-baseline-top($line-height);
       @include mdc-typography-baseline-bottom($line-height);
     }
+
     &.mdc-typography--headline6,
     &.mdc-typography--subtitle1,
     &.mdc-typography--subtitle2,
@@ -375,27 +398,35 @@ body {
   .ds-summary-color--primary {
     background: $mdc-theme-primary;
   }
+
   .ds-summary-color--on-primary {
     background: $mdc-theme-on-primary;
   }
+
   .ds-summary-color--secondary {
     background: $mdc-theme-secondary;
   }
+
   .ds-summary-color--on-secondary {
     background: $mdc-theme-on-secondary;
   }
+
   .ds-summary-color--error {
     background: $mdc-theme-error;
   }
+
   .ds-summary-color--on-error {
     background: $mdc-theme-on-error;
   }
+
   .ds-summary-color--surface {
     background: $mdc-theme-surface;
   }
+
   .ds-summary-color--on-surface {
     background: $mdc-theme-on-surface;
   }
+
   .ds-summary-color--background {
     background: $mdc-theme-background;
   }
@@ -422,6 +453,7 @@ body {
     text-align: center;
     padding: 0;
   }
+
   .mdc-top-app-bar__navigation-icon {
     cursor: pointer;
   }
@@ -432,7 +464,8 @@ body {
   height: 100vh;
 }
 
-.ds-config-bar, .ds-config-bar--large {
+.ds-config-bar,
+.ds-config-bar--large {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -443,6 +476,7 @@ body {
 
 .ds-config-bar {
   display: none; // hide on >1310px screens
+
   & .ds-action--toggle-side {
     display: none;
   }
@@ -498,10 +532,12 @@ body {
     padding: 0;
     margin: 0;
   }
+
   .ds-content-preview {
     overflow: hidden;
     background: mdc-theme-prop-value(background);
   }
+
   .ds-content-preview__body {
     overflow: auto;
   }
@@ -534,7 +570,8 @@ body {
     min-width: calc(100% - 56px);
   }
 
-  .column, .full {
+  .column,
+  .full {
     width: auto;
     max-width: 420px;
     padding-right: 8px;
@@ -543,7 +580,9 @@ body {
 }
 
 @media only screen and (max-width: 485px) {
-  .column, .full {
+
+  .column,
+  .full {
     overflow: hidden;
   }
 }
@@ -556,14 +595,15 @@ body {
   a {
     display: flex;
     align-items: center;
-    color: if(mdc-theme-contrast-tone($mdc-theme-background) == "dark",
-      rgba(0, 0, 0, 0.54),
-      rgba(255, 255, 255, 0.54));
+    color: if(mdc-theme-contrast-tone($mdc-theme-background)=="dark",
+        rgba(0, 0, 0, 0.54),
+        rgba(255, 255, 255, 0.54));
 
-    &:hover, &:focus {
-    color: if(mdc-theme-contrast-tone($mdc-theme-background) == "dark",
-      rgba(0, 0, 0, 0.87),
-      rgba(255, 255, 255, 0.87));
+    &:hover,
+    &:focus {
+      color: if(mdc-theme-contrast-tone($mdc-theme-background)=="dark",
+          rgba(0, 0, 0, 0.87),
+          rgba(255, 255, 255, 0.87));
       text-decoration: none;
     }
   }
