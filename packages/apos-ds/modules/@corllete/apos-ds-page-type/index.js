@@ -220,10 +220,41 @@ module.exports = {
       // module index - list all stories
       async indexPage(req) {
         const page = req.data.page;
-        req.data.previewUrl = `${page._url}${self.previewRoute}`;
-
         await self.setCommonContext(req);
+
+        async function renderStory(story) {
+          self.setTemplate(req, 'show');
+          req.params.category = story.categoryId;
+          req.params.story = story._id;
+          await self.setCommonContext(req);
+
+          req.data.previewUrl = `${page._url}${self.previewRoute}/${req.params.category}/${req.params.story}`;
+
+        }
+
+        // by default render the story
+        if (typeof self.options.home === 'string') {
+          const story = self.getStory(self.options.home, req.data.config);
+          if (story) {
+            return renderStory(story);
+          }
+        } else if (self.options.home && self.options.home.story) {
+          const story = self.getStory(self.options.home.story, req.data.config);
+
+          // redirect
+          if (story && self.options.home.redirect) {
+            req.redirect = story._url;
+            return;
+          }
+
+          // OR render the story without redirect
+          if (story) {
+            return renderStory(story);
+          }
+        }
+
         self.setTemplate(req, 'index');
+        req.data.previewUrl = `${page._url}${self.previewRoute}`;
       },
 
       // list the stories that belong to a given category
