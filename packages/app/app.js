@@ -19,7 +19,7 @@ require('apostrophe')({
     '@corllete/apos-ds': {
       options: {
         enabled: true,
-        modules: [ 'ui' ]
+        modules: [ 'myui' ]
       },
       // override the docs top category so doc stories are not shown in category lists
       // all subcategory lists will be autmatically disabled as well
@@ -82,7 +82,7 @@ require('apostrophe')({
     'default-page': {},
 
     // Our UI components, documented by the design system
-    ui: {}
+    myui: {}
 
   }
 });

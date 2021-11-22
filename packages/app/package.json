@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "predev": "npm run build && npm run assets",
+    "predev": "npm run assets",
     "dev": "webpack serve & nodemon",
     "build": "node app @apostrophecms/asset:build",
     "assets": "node app @corllete/apos-ds-page-type:publish-assets"
@@ -27,7 +27,7 @@
     "@material/icon-button": "^10.0.0",
     "@material/ripple": "^10.0.0",
     "@material/textfield": "^10.0.0",
-    "apostrophe": "alpha",
+    "apostrophe": "^3.7.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.3.4",

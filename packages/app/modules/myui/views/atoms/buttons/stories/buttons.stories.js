@@ -11,7 +11,7 @@ module.exports = {
   // It also will be used to build components relationships some day (a graph representing
   // how a component is being referenced and what other components it is referencing) - a
   // great way to know how a change to a component reflects on the overall design.
-  module: 'ui',
+  module: 'myui',
   // We can have as many stories as we want in a single story config.
   // However, the idea is to combine the variations of one and the same
   // component in a single story config.

@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const scssInclude = [
   './src/scss',
   // 1. @include atoms/buttons/style -> aposRoot/modules/ui/views/atoms/buttons/style.scss
-  './modules/ui/views',
+  './modules/myui/views',
   // 2. @use "@material/button/styles" -> aposRoot/node_modules/@material/button/styles.scss
   './node_modules'
 ];

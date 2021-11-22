@@ -2,7 +2,7 @@
 
 html,
 body,
-.apos-refreshable {
+[data-apos-refreshable] {
   height: 100%;
 }
 
@@ -17,7 +17,7 @@ body {
   display: none;
 }
 
-.apos-refreshable {
+[data-apos-refreshable] {
   display: flex;
   margin: 0;
   width: 100%;
