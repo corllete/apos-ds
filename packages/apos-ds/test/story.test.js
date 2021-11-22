@@ -33,6 +33,38 @@ describe('Resolve Stories', function() {
       expect(s2.path).to.equal('test/app/modules/general/views/**/*.stories.js');
     });
 
+    it('should initialize with sources option', () => {
+      opts.docs = false;
+      opts.modules = [ 'general' ];
+      opts.sources = [ {
+        module: 'module3',
+        paths: [
+          'component1',
+          'component2'
+        ]
+      } ];
+      const { initModules } = handler(self, opts);
+      initModules();
+
+      expect(self.sources.length).to.equal(6, 'wrong sources count');
+
+      const [ s1, s2, s3, s4, s5, s6 ] = self.sources;
+      expect(s1.module).to.equal('module3');
+      expect(s2.module).to.equal('module3');
+      expect(s3.module).to.equal('module3');
+      expect(s4.module).to.equal('module3');
+      expect(s5.module).to.equal('general');
+      expect(s6.module).to.equal('general');
+
+      expect(s1.path).to.equal('test/app/node_modules/module3/views/component1/**/*.stories.js');
+      expect(s2.path).to.equal('test/app/modules/module3/views/component1/**/*.stories.js');
+      expect(s3.path).to.equal('test/app/node_modules/module3/views/component2/**/*.stories.js');
+      expect(s4.path).to.equal('test/app/modules/module3/views/component2/**/*.stories.js');
+
+      expect(s5.path).to.equal('test/app/node_modules/general/views/**/*.stories.js');
+      expect(s6.path).to.equal('test/app/modules/general/views/**/*.stories.js');
+    });
+
     it('should initialize modules with docs by default', () => {
       opts.modules = [ 'general' ];
       const { initModules } = handler(self, opts);

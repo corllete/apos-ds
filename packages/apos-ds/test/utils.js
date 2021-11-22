@@ -16,7 +16,9 @@ const aposMock = {
 
 const { options, categories } = require('../index');
 
-const moduleSelf = {
+exports.expect = expect;
+exports.chai = chai;
+exports.self = {
   sources: [],
   paths: [],
   config: {},
@@ -24,11 +26,14 @@ const moduleSelf = {
   categories: {},
   apos: aposMock
 };
-
-exports.expect = expect;
-exports.chai = chai;
-exports.self = moduleSelf;
-exports.getSelf = () => ({ ...moduleSelf });
+exports.getSelf = () => ({
+  sources: [],
+  paths: [],
+  config: {},
+  storyIndex: {},
+  categories: {},
+  apos: aposMock
+});
 exports.options = options;
 exports.getOptions = () => ({ ...options });
 exports.getCategories = () => ({ ...categories.add });

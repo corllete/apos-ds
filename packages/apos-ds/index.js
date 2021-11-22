@@ -11,7 +11,12 @@ module.exports = {
     label: 'Design System',
 
     enabled: true,
+    // array of strings module names
     modules: [],
+    // format of source item object:
+    // module: moduleName,
+    // paths: array of paths relative to moduleName/views/
+    sources: [],
     docs: true,
     configFileGlob: '*.stories.js',
     categorySeparator: '::'
@@ -40,6 +45,12 @@ module.exports = {
   },
 
   async init(self, options) {
+    // Initialize memory
+    self.sources = [];
+    self.paths = [];
+    self.config = {};
+    self.storyIndex = {};
+
     if (!options.enabled) {
       return;
     }
@@ -57,13 +68,6 @@ module.exports = {
     if (!options.enabled) {
       return {};
     }
-
-    // Initialize memory
-    self.sources = [];
-    self.paths = [];
-    self.config = {};
-    self.storyIndex = {};
-    // self.categories = options.categories || {};
 
     const {
       initCategories,
