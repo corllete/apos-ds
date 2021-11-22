@@ -193,8 +193,35 @@ module.exports = function (self, options) {
     self.config[cfg._id] = cfg;
   }
 
+  // Init sources passed by options
+  // format { module: xxx, paths: [xxx] }
+  function initCustomSources(sources) {
+    if (sources.length === 0) {
+      return;
+    }
+
+    for (const source of sources) {
+      for (const p of source.paths) {
+        self.sources.push(
+          {
+            module: source.module,
+            path: path.join(self.apos.rootDir, 'node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
+          }
+        );
+        self.sources.push(
+          {
+            module: source.module,
+            path: path.join(self.apos.rootDir, 'modules', source.module, 'views', p, '/**/', options.configFileGlob)
+          }
+        );
+      }
+    }
+  }
+
   // Initialize registered modules
   function initModules() {
+    initCustomSources(options.sources || []);
+
     if (options.modules.length > 0) {
       options.modules.forEach((source) => {
         // As per A3 standard - search first in node_modules, then override with local module
