@@ -14,7 +14,7 @@ const removeItem = (key) => {
   return window.localStorage.removeItem(`dsconf.${key}`);
 };
 
-export default {
+module.exports = {
   getItem,
   setItem,
   removeItem
