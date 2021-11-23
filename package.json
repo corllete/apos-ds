@@ -20,8 +20,7 @@
     "publish:local": "lerna publish prerelease --dist-tag alpha --registry http://localhost:4873"
   },
   "devDependencies": {
-    "lerna": "^3.22.1",
-    "lerna-update-wizard": "^0.17.8",
-    "lerna-wizard": "^1.1.1"
+    "lerna": "^4.0.0",
+    "lerna-update-wizard": "^1.1.0"
   }
 }

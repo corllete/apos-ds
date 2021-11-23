@@ -74,12 +74,14 @@ module.exports = {
     ? {
       devServer: {
         hot: true,
-        inline: true,
+        // inline: true,
         host: '0.0.0.0',
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
-        publicPath: '/wp/',
+        static: {
+          publicPath: '/wp/'
+        },
         port: 9002,
         allowedHosts: [
           '.localhost'

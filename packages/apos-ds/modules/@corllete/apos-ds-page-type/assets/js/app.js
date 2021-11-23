@@ -1,4 +1,4 @@
-import {
+const {
   MDCDrawer,
   MDCFormField,
   MDCIconButtonToggle,
@@ -6,9 +6,9 @@ import {
   MDCSwitch,
   MDCTabBar,
   MDCTopAppBar
-} from './components';
+} = require('./components');
 // Config
-import storage from './storage';
+const storage = require('./storage');
 
 // Init global namespace
 

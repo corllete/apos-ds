@@ -16,6 +16,8 @@ const paths = {
 
 module.exports = [ {
   mode,
+  stats: 'minimal',
+  target: (mode === 'development') ? 'web' : 'es5',
   context: path.join(__dirname, modulePath),
   entry: [
     paths.jsIn,
@@ -50,19 +52,27 @@ module.exports = [ {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('dart-sass'),
-              webpackImporter: false,
-              includePaths: paths.scssInclude
+              implementation: require('sass'),
+              // webpackImporter: false,
+              sassOptions: {
+                includePaths: paths.scssInclude
+              }
             }
           }
         ]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: [ '@babel/preset-env' ]
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              sourceType: 'module',
+              babelrc: false,
+              presets: [ '@babel/preset-env' ]
+            }
+          }
+        ]
       }
     ]
   },
