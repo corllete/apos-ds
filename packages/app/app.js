@@ -2,6 +2,7 @@ const path = require('path');
 
 require('apostrophe')({
   shortName: 'app',
+  baseUrl: process.env.APP_BASE_URL || null,
 
   modules: {
 
