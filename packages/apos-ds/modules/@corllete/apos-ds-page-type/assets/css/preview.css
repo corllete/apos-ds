@@ -631,6 +631,11 @@ a.ds-toggle__trigger:hover {
   font-weight: 400;
 }
 
+.ds-heading__crating--details {
+  line-height: 1.1em;
+  padding-top: 1em;
+}
+
 .ds-type-fix-top-border {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
