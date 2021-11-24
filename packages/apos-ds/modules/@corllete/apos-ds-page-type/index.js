@@ -98,7 +98,16 @@ module.exports = {
         }
 
         // /rootPath/public/apos-frontend/releases/XXX/ds
-        const base = pub ? '/' : path.join(self.apos.rootDir, 'public');
+        let base;
+        if (pub) {
+          base = '/';
+          if (self.apos.baseUrl) {
+            base = (new URL(self.apos.baseUrl)).pathname;
+          }
+        } else {
+          base = path.join(self.apos.rootDir, 'public');
+        }
+
         return path.join(
           base,
           self.getBaseAposPublicPath(),
