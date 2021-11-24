@@ -17,7 +17,7 @@ const paths = {
 module.exports = [ {
   mode,
   stats: 'minimal',
-  target: (mode === 'development') ? 'web' : 'es5',
+  target: 'web',
   context: path.join(__dirname, modulePath),
   entry: [
     paths.jsIn,
