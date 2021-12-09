@@ -977,6 +977,20 @@ a.ds-toggle__trigger:hover {
   text-indent: 0px;
 }
 
+/* Markdown */
+.ds-markdown li,
+.ds-markdown p {
+  line-height: 1.4rem;
+}
+
+.ds-markdown ul:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.ds-markdown li:not(:last-child) {
+  padding-bottom: 1rem;
+}
+
 /* Misc */
 
 /* Toggle */
@@ -1103,6 +1117,22 @@ a.ds-toggle__trigger:hover {
 
 .ds-p {
   margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ds-vspacer {
+  margin-bottom: 3rem;
+}
+
+.ds-vspacer--large {
+  margin-bottom: 4rem;
+}
+
+.ds-vspacer--medium {
+  margin-bottom: 2rem;
+}
+
+.ds-vspacer--small {
   margin-bottom: 1rem;
 }
 

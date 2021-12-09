@@ -1,30 +1,33 @@
-h1,
-h2,
-h3 {
-  text-align: center;
-}
+.bp-welcome {
 
-h1 {
-  font-size: 4em;
-  font-weight: 200;
-}
-
-a {
-  color: $color-purple;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
+  h1,
+  h2,
+  h3 {
+    text-align: center;
   }
 
-  &:visited {
-    color: $color-purple-light;
+  h1 {
+    font-size: 4em;
+    font-weight: 200;
   }
-}
 
-::selection {
-  background-color: $color-gold;
+  a {
+    color: $color-purple;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $color-purple-light;
+    }
+  }
+
+  ::selection {
+    background-color: $color-gold;
+  }
 }
 
 // code {
@@ -64,7 +67,10 @@ a {
   font-weight: 500;
   background: $color-purple;
   color: white;
-  &:visited, &:hover, &:active {
+
+  &:visited,
+  &:hover,
+  &:active {
     color: white;
   }
 }

@@ -11,16 +11,17 @@
   </p>
 {% endblock %}
 
+
 {% block previewSimple %}
   {# new feature - debug filter in development #}
   {# {{ story | debug }} #}
-  <div class="ds-story__preview-even">
+  <div class="ds-story__preview-even ds-vspacer">
     {{ cards.card(story.data.all)  }}
   </div>
 {% endblock %}
 
 {% block variants %}
-  {% dssection 'Variants' %}
+  {% dssection %}
 
     {% dscell 6, { cls: 'ds-flex ds-flex--jend' } %}
         <div>
@@ -153,6 +154,115 @@
         {% endraw %}
         {% enddscode %}
     {% enddscell %}
-
   {% enddssection %}
+
+
+  {% dssection %}
+    {% dscell 3 %}{% enddscell %}
+    {% dscell 6 %}
+      {% dshint %}
+        Using `dscode` custom tag inside of markdown tag is bugy and needs investigation.
+        The best way to add expandable code blocks for now is to close markdown block, call `dscode` or 
+        `dscodecell` and re-open the markdown. However, the markdown code syntax works as expected (and it's highlighted). 
+        <br><br>
+        Additionally, the `dscode` tag is now smarted and
+        there is no need to add `raw` to your nunjucks source. For compatibility reasons this feature is 
+        disabled by default, you may opt-in via the `legacyCodeBlocks: false` (`true` by default)
+        option of DS Page package. When using this new feature and need to evaluate source inside the `dscode`
+        body (e.g. to show JSON {%raw%}{{ someObject | jsonFormat }}{%endraw%}) you need to pass `parse` tag
+        argument like this: {%raw%}{% dscode 'json', label = 'Data', parse = true %}{{ someVar | jsonFormat }}{% enddscode %}{%endraw%}
+      {% enddshint %}
+      {% dsmd %}
+        ### EXAMPLES of retrieving stories, config and mock data 
+        Additional info:
+        - The `id` parameter of a config is the config `name` property.        
+        Example: `config.name = 'molecules-cards'`, `configId = 'molecules-cards'`
+        - The `id` parameter of a story is the config `name` property plus dash plus the story name property.
+        Example: `config.name = 'molecules-cards'`, `config.stories[0].name = 'card'` The result is
+        `storyId = 'molecules-cards-card'`
+
+        1. Current story (the whole object) is the global for this template `story` variable
+        ```njk
+          {% raw %}
+          {% set theStory = story %}
+          {% endraw %}
+        ```
+        2. Get current story data, registered via `data` property of the currently rendered story
+        ```njk
+          {% raw %}
+          {% set theStoryData = story.data %}
+          {% endraw %}
+        ```
+      {% enddsmd %}
+      {% dscode 'json', label = 'Data', parse = true %}{{ story.data | jsonFormat }}{% enddscode%}
+
+      {% dsmd %}
+        3. Retrieve another story (the whole object). In this case we retrieve a story with 
+        name `card` living in config with name `molecules-cards`
+        ```njk
+          {% raw %}
+          {% set aStory = apos.dsp.story('molecules-cards-card') %}
+          {% endraw %}
+        ```
+
+        4. Retrieve story data from another story, registered via `data` property of a 
+        story belonging to the current or any other config. 
+        ```njk
+          {% raw %}
+          {% set aStoryData = apos.dsp.storyData('molecules-cards-card') %}
+          {% endraw %}
+        ```
+      {% enddsmd %}
+      {% dscode 'json', label = 'Data', parse = true %}{{ apos.dsp.storyData('molecules-cards-card') | jsonFormat }}{% enddscode%}
+
+      {% dsmd %}
+        5. Retrieve current config (the whole object, containing meta data and all stories)
+        It is the global for this template `storyConfig` variable
+        ```njk
+          {% raw %}
+          {% set aStoryConfig = storyConfig %}
+          {% endraw %}
+        ```
+
+        7. Retrieve another config.
+        In this case we retrieve a config with name 'molecules-cards'
+        ```njk
+          {% raw %}
+          {% set aStoryConfig = apos.dsp.config('molecules-cards') %}
+          {% endraw %}
+        ```
+
+        8. Retrieve another config data
+        In this case we retrieve a config with name 'molecules-cards'
+        ```njk
+          {% raw %}
+          {% set aStoryConfig = apos.dsp.configData('molecules-cards') %}
+          {% endraw %}
+        ```
+      {% enddsmd %}
+      {% dscode 'json', label = 'Data', parse = true %}{{ apos.dsp.configData('molecules-cards') | jsonFormat }}{% enddscode%}
+
+      {% dsmd %}
+        9. Retrieve config of particular story
+        In this case we retrieve the config of a story with name 'molecules-cards-card'
+        ```njk
+          {% raw %}
+          {% set aStoryConfig = apos.dsp.configFor('molecules-cards-card') %}
+          {% endraw %}
+        ```
+
+        10. Retrieve config data by a given story ID
+        In this case we retrieve a config data of a story with name 'molecules-cards-card'
+        ```njk
+          {% raw %}
+          {% set aStoryConfig = apos.dsp.configDataFor('molecules-cards-card') %}
+          {% endraw %}
+        ```
+      {% enddsmd %}
+      {% dscode 'json', label = 'Data', parse = true %}{{ apos.dsp.configDataFor('molecules-cards-card') | jsonFormat }}{% enddscode%}
+    {% enddscell %}
+
+    {% dscell 3 %}{% enddscell %}
+  {% enddssection %}
+
 {% endblock %}

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app",
     "predev": "npm run assets",
-    "dev": "webpack serve & nodemon",
+    "dev": "nodemon & sh -c \"sleep 2 && echo '...' && webpack serve\"",
     "build": "node app @apostrophecms/asset:build",
     "assets": "node app @corllete/apos-ds-page-type:publish-assets"
   },

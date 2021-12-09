@@ -15,7 +15,7 @@ module.exports = function (self) {
      *
      * @param {String} id
      * @param {Object} config the entire story data
-     * @returns {Object} story
+     * @returns {Object} story object
      */
     story(id, config) {
       if (!config) {
@@ -36,6 +36,62 @@ module.exports = function (self) {
      */
     storyData(id) {
       return (self.apos.ds.getStory(id) || {}).data;
+    },
+
+    /**
+     * Get stories configuration object
+     * Id is the `name` property in your *.stories.js configuration file
+     *
+     * Usage - get story config for configuration named `atoms-buttons`:
+     * `apos.dsp.config('atoms-buttons')`
+     *
+     * @param {String} id
+     * @returns {Object} config object
+     */
+    config(id) {
+      return (self.getStoryConfig(id) || {});
+    },
+
+    /**
+     * Get data, added to a config of stories (`data` property on the root config object)
+     * Id is the `name` property in your *.stories.js configuration file
+     *
+     * Usage:
+     * `apos.dsp.configData('atoms-buttons')`
+     *
+     * @param {String} id
+     * @returns {Object} story data
+     */
+    configData(id) {
+      return (self.getStoryConfig(id) || {}).data;
+    },
+
+    /**
+     * Get stories configuration object by a story ID
+     * Id is the `name` property in your *.stories.js configuration file
+     *
+     * Usage - get story config for configuration named `atoms-buttons`:
+     * `apos.dsp.config('atoms-buttons')`
+     *
+     * @param {String} storyId
+     * @returns {Object} config object
+     */
+    configFor(storyId) {
+      return (self.getStoryConfigFor(storyId) || {});
+    },
+
+    /**
+     * Get data, added to a config of stories (`data` property on the root config object)
+     * by a story id
+     *
+     * Usage:
+     * `apos.dsp.configData('atoms-buttons')`
+     *
+     * @param {String} storyId
+     * @returns {Object} story data
+     */
+    configDataFor(storyId) {
+      return (self.getStoryConfigFor(storyId) || {}).data;
     },
 
     stylesheet(name, urlOnly = false) {
