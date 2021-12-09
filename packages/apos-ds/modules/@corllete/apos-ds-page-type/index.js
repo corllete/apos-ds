@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('@sailshq/lodash');
+const markdown = require('markdown-it');
 
 module.exports = {
   extend: '@apostrophecms/page-type',
@@ -8,14 +9,19 @@ module.exports = {
     alias: 'dsp',
     // Set project name shown in UI/page meta data
     // If empty the page.title will be used
-    projectName: null
+    projectName: null,
+    // Code blocks now don't need {% raw %} in order to not parse
+    // nunjucks code. The legacy option keeps it the old way. Default true till v2.
+    legacyCodeBlocks: true
   },
 
   init(self) {
     self.hasRemoteAssets = !!process.env.APOS_UPLOADFS_ASSETS;
     self.isProduction = process.env.NODE_ENV === 'production';
+    self.initMarkdown();
   },
 
+  // FIXME - this is a hack, switch to module ready event
   // We need a static reference to apos.ds, so initialization happens
   // after everything is initialized
   async afterAllSections(self, options) {
@@ -56,6 +62,34 @@ module.exports = {
     } = require('./lib/utils');
 
     return {
+      initMarkdown() {
+        self.md = markdown({
+          html: true, // Enable HTML tags in source
+          xhtmlOut: false, // Use '/' to close single tags (<br />).
+          // This is only for full CommonMark compatibility.
+          breaks: false, // Convert '\n' in paragraphs into <br>
+          langPrefix: 'language-', // CSS language prefix for fenced blocks. Can be
+          // useful for external highlighters.
+          linkify: false, // Autoconvert URL-like text to links
+
+          // Enable some language-neutral replacement + quotes beautification
+          // For the full list of replacements, see https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/replacements.js
+          typographer: false,
+
+          // Double + single quotes replacement pairs, when typographer enabled,
+          // and smartquotes on. Could be either a String or an Array.
+          //
+          // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+          // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+          quotes: '“”‘’',
+
+          // Highlighter function. Should return escaped HTML,
+          // or '' if the source string is not changed and should be escaped externally.
+          // If result starts with <pre... internal wrapper is skipped.
+          highlight: null
+        });
+      },
+
       getAssetNamespace() {
         return 'ds';
       },
@@ -185,8 +219,16 @@ module.exports = {
         });
       },
 
+      getStoryConfig(id) {
+        return self.apos.ds.getStoryConfig(id);
+      },
+
+      getStoryConfigFor(storyId) {
+        return self.apos.ds.getStoryConfigFor(storyId);
+      },
+
       getStory(id, config) {
-        const storyConfig = self.apos.ds.getStoryConfigFor(id);
+        const storyConfig = self.getStoryConfig(id);
         if (!storyConfig || !config) {
           return;
         }

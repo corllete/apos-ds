@@ -36,6 +36,10 @@ require('apostrophe')({
     '@corllete/apos-ds-page-type': {
       options: {
         docs: true
+        // We don't have a plan how to render e.g. JSON from nunjucks
+        // because the new code parser is not allowing evaluation of nunjucks.
+        // We stick with legacy for now, and we might need to introduce another custom tag.
+        // legacyCodeBlocks: false
       }
     },
 

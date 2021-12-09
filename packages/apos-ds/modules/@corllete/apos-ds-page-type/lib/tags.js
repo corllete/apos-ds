@@ -1,6 +1,11 @@
 const util = require('util');
 
 class Tags {
+
+  constructor(self) {
+    this.self = self;
+  }
+
   /**
    * The default parser.
    * It parses arguments and single body, has closing tag
@@ -14,10 +19,65 @@ class Tags {
 
     // Parse the body
     const body = parser.parseUntilBlocks('end' + token.value);
+
+    // A hack to detect the column start
+    // https://github.com/zephraph/nunjucks-markdown/blob/master/lib/markdown_tag.js#L22
+    // const tabStart = new nodes.NodeList(0, 0, [ new nodes.Output(0, 0, [ new nodes.TemplateData(0, 0, (token.colno - 1)) ]) ]);
     parser.advanceAfterBlockEnd();
 
     return {
       args,
+      blocks: [ body ]
+    };
+  }
+
+  /**
+   * A parser that keeps the body raw (no parsing) and parses arguments - useful for e.g. code blocks
+   */
+  parseArgsRawBody = (parser, nodes, lexer) => {
+    const start = parser.tokens.index;
+
+    const token = parser.nextToken(); // Get the tag token
+    const args = parser.parseSignature(null, true); // parse the arguments, allow KWArguments
+
+    // REWIND and cheat rawBody so that parser.advanceAfterBlockEnd() doesn't crash
+    const current = parser.tokens.index;
+    parser.tokens.backN(current - start);
+    while (parser.tokens.current() !== '{') {
+      parser.tokens.back();
+    }
+    parser.peeked = null;
+    let peek;
+    while ((peek = parser.peekToken())) {
+      if (peek.type === lexer.TOKEN_BLOCK_END) {
+        break;
+      }
+      parser.nextToken();
+    }
+    parser.tokens.backN(2);
+    parser.peeked = token;
+    parser.tokens.in_code = true;
+    // END REWIND
+
+    const body = parser.parseRaw(token.value);
+
+    return {
+      args,
+      blocks: [ body ]
+    };
+  }
+
+  /**
+   * A parser that keeps the body raw (no parsing) and doesn't parse arguments - useful for e.g. code blocks
+   */
+  parseRawBody = (parser, nodes, lexer) => {
+    // This is the easy way, in case we don't have arguments...
+    const token = parser.peekToken();
+    const body = parser.parseRaw(token.value);
+    // Done!
+
+    return {
+      args: null,
       blocks: [ body ]
     };
   }
@@ -61,13 +121,16 @@ class Tags {
 
   }
 
-  _createCode = (lng, code, {
-    label, toggle = true, expanded = false
+  _createCode = async (context, lng, code, {
+    label, parse = false, toggle = true, expanded = false
   }) => {
     lng = lng.toLowerCase() === 'njk' ? 'twig' : lng.toLowerCase();
     if (!label) {
       label = 'Code';
     }
+    // An idea about handling empty spaces
+    // https://github.com/zephraph/nunjucks-markdown/blob/master/lib/markdown_tag.js#L46
+
     code = code
       .trimEnd()
       .replace(/^\s*\n+/, '')
@@ -78,6 +141,12 @@ class Tags {
     const wsmatch = code.replace(/^\s*$/gm, '').match(/^\s+/);
     if (wsmatch) {
       code = code.replace(new RegExp(`^[ \r]{${wsmatch[0].length}}`, 'gm'), '');
+    }
+
+    // NEW eval feature - only if not in legacy mode
+    if (!this.self.options.legacyCodeBlocks && parse) {
+      const req = context.ctx.__req;
+      code = await this.self.apos.template.renderString(req, code, context.ctx, this.self);
     }
 
     const icon = expanded ? 'expand_less' : 'expand_more';
@@ -112,7 +181,7 @@ class Tags {
    */
   runCode = async (context, ...args) => {
     const [ language, options, body ] = await this._parseArgs(args, [ '', {} ]);
-    return this._createCode(language + '', body + '', options);
+    return this._createCode(context, language + '', body + '', options);
   }
 
   /**
@@ -124,8 +193,38 @@ class Tags {
   runCodeCell = async (context, ...args) => {
     const [ span, language, options, body ] = await this._parseArgs(args, [ 6, '', {} ]);
 
-    const tag = this._createCode(language + '', body, options);
+    const tag = await this._createCode(context, language + '', body, options);
     return this._createCell(span, tag, options);
+  }
+
+  _createMarkdown = (src) => {
+    let source = src
+      .trimEnd()
+      .replace(/^\s*\n+/, '');
+
+    // try to cut out column whitespace indentation of the code block
+    const wsmatch = source.replace(/^\s*$/gm, '').match(/^\s+/);
+    if (wsmatch) {
+      source = source.replace(new RegExp(`^[ \r]{${wsmatch[0].length}}`, 'gm'), '');
+    }
+
+    return `
+      <div class="ds-markdown">
+        ${this.self.md.render(source)}
+      </div>
+    `;
+  }
+
+  /**
+   * Usage:
+   * {% dsmd 'njk' %}
+   *   ...code
+   * {% enddsmd %}
+   */
+  runMarkdown = async (context, ...args) => {
+    const [ body ] = await this._parseArgs(args, []);
+    const res = this._createMarkdown((body + '').replace(/```njk/gm, '```twig'));
+    return this.self.apos.template.safe(res);
   }
 
   _createCell = (span, content, options = {}) => {
@@ -252,15 +351,19 @@ class Tags {
 }
 
 module.exports = function (self) {
-  const handler = new Tags();
+  const handler = new Tags(self);
   return {
     dscode: {
-      parse: handler.parse,
+      parse: self.options.legacyCodeBlocks ? handler.parse : handler.parseArgsRawBody,
       run: handler.runCode
     },
     dscodecell: {
-      parse: handler.parse,
+      parse: self.options.legacyCodeBlocks ? handler.parse : handler.parseArgsRawBody,
       run: handler.runCodeCell
+    },
+    dsmd: {
+      parse: handler.parse,
+      run: handler.runMarkdown
     },
     dsgrid: {
       parse: handler.parse,

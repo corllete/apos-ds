@@ -1,4 +1,5 @@
 const isProd = process.env.NODE_ENV === 'production';
+const jsonFormat = require('json-format');
 
 // `self` here should be the apos.template context
 module.exports = function (self, env) {
@@ -10,6 +11,16 @@ module.exports = function (self, env) {
       }
       const formatted = JSON.stringify(data, null, 2);
       return self.apos.template.safe(`<pre><code>${formatted}</code></pre>`);
+    },
+
+    jsonFormat(data) {
+      if (!data) {
+        return '';
+      }
+      return self.apos.template.safe(jsonFormat(data, {
+        type: 'space',
+        size: 2
+      }));
     }
   };
 

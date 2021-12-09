@@ -150,6 +150,10 @@ module.exports = {
         return self.config[index.config];
       },
 
+      getStoryConfig(configId) {
+        return self.config[configId];
+      },
+
       checkForWarnings() {
         if (self.paths.length === 0) {
           warnDevOnce(
