@@ -21,7 +21,7 @@
 		"watch": "run-p -n watch:*",
 		"watch:js": "webpack --watch",
 		"watch:spec": "npm run test:spec -- -w",
-		"preversion": "npm run test && npm run build:prod",
+		"preversion": "npm run test",
 		"version": "npm run build:prod && git add .",
 		"postversion": "git push origin main && git push --tags"
 	},
