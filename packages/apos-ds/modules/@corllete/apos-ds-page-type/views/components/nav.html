@@ -32,28 +32,27 @@
     </label>
     
     <ul class="{{ type }}">
-      {# not category.list or  #}
+      {# 1. If there are no children - show all items  #}
       {% if not category.children.length %}
         {# render items #}
         {{ items(category, configs) }}
       {% else %}
+        {# 1. If there are children - show all sub categories  #}
         {# render sub categories #}
         {% for id in category.children %}
           {{ row(next, categories[id], categories, configs) }}
         {% endfor %}
+        {# 3. Show items that are mixed with sub folders on the same level #}
+        {% if category.items | length %}
+          {{ items(category, configs, 'items') }}
+        {% endif %}
       {% endif %}
-
-      {# {% if category.list %}
-        {% set label = __ns('ds', 'View all') %}
-        {{ item(category._url, label, false) }}
-      {% endif %} #}
     </ul>
   </li>
 {% endmacro %}
 
-{% macro items(category, configs) %}
-  
-  {% for configId in category.all %}
+{% macro items(category, configs, source = 'all') %}
+  {% for configId in category[source] %}
     {% set config = configs[configId] %}
     {% for story in config.stories %}
       {{ item(story._url, story.label, story.active, story.state) }}
