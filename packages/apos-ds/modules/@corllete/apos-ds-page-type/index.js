@@ -227,12 +227,12 @@ module.exports = {
         return self.apos.ds.getStoryConfigFor(storyId);
       },
 
-      getStory(id, config) {
-        const storyConfig = self.getStoryConfig(id);
+      getStory(storyId, config) {
+        const storyConfig = self.getStoryConfigFor(storyId);
         if (!storyConfig || !config) {
           return;
         }
-        return (config[storyConfig._id] || [ { stories: [] } ]).stories.find(s => s._id === id);
+        return (config[storyConfig._id] || [ { stories: [] } ]).stories.find(s => s._id === storyId);
       },
 
       // the common context for all owned routes
