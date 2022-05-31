@@ -7,7 +7,11 @@ if [[ ! -z "$1" ]]; then
 fi
 
 if [[ ! -z "$2" ]]; then
-  dry="$2"
+  otp="$2"
+fi
+
+if [[ ! -z "$3" ]]; then
+  dry="$3"
 fi
 
 echo
@@ -20,14 +24,14 @@ fi
 if [[ ! -z "$error" ]]; then
   echo
   echo "Usage: "
-  echo "./publish patch|minor|major [dry]"
+  echo "./publish patch|minor|major [otp] [dry]"
 else
   if [[ ! -z "$dry" ]]; then
     echo "DRY RUN"
   fi
 
-  # tag="latest"
-  tag="alpha"
+  tag="latest"
+  # tag="alpha"
 
   if [[ ! -z "$dry" ]]; then
     set +e
@@ -45,9 +49,9 @@ else
 
   if [[ ! -z "$dry" ]]; then
     echo "2. [dry] npm publish --dry-run --tag=$tag"
-    npm publish --dry-run --tag=$tag
+    npm publish --dry-run --tag=$tag --otp=$otp
   else 
-    publish=$(npm publish --tag=$tag)
+    publish=$(npm publish --tag=$tag --otp=$otp)
     echo "2. [publish] npm publish -> ${publish}"
   fi
 fi
