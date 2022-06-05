@@ -218,6 +218,7 @@ module.exports = function (self, options) {
 
   // Initialize registered modules
   function initModules() {
+    // FIXME - parse error
     initCustomSources(options.sources || []);
 
     if (options.modules.length > 0) {

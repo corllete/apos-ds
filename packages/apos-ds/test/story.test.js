@@ -23,15 +23,14 @@ describe('Resolve Stories', function() {
       const { initModules } = handler(self, opts);
       initModules();
 
-      expect(self.sources.length).to.equal(3, 'wrong sources count');
+      expect(self.sources.length).to.equal(2, 'wrong sources count');
 
-      const [ s1, s2, s3 ] = self.sources;
+      const [ s1, s2 ] = self.sources;
       expect(s1.module).to.equal('general');
       expect(s2.module).to.equal('general');
 
       expect(s1.path).to.equal('test/app/node_modules/general/views/**/*.stories.js');
-      expect(s2.path).to.equal('test/node_modules/general/views/**/*.stories.js');
-      expect(s3.path).to.equal('test/app/modules/general/views/**/*.stories.js');
+      expect(s2.path).to.equal('test/app/modules/general/views/**/*.stories.js');
     });
 
     it('should initialize with sources option', () => {
@@ -47,29 +46,23 @@ describe('Resolve Stories', function() {
       const { initModules } = handler(self, opts);
       initModules();
 
-      expect(self.sources.length).to.equal(9, 'wrong sources count');
+      expect(self.sources.length).to.equal(6, 'wrong sources count');
 
-      const [ s1, s2, s3, s4, s5, s6, s7, s8, s9 ] = self.sources;
+      const [ s1, s2, s3, s4, s5, s6 ] = self.sources;
       expect(s1.module).to.equal('module3');
       expect(s2.module).to.equal('module3');
       expect(s3.module).to.equal('module3');
       expect(s4.module).to.equal('module3');
-      expect(s5.module).to.equal('module3');
-      expect(s6.module).to.equal('module3');
-      expect(s7.module).to.equal('general');
-      expect(s8.module).to.equal('general');
-      expect(s9.module).to.equal('general');
+      expect(s5.module).to.equal('general');
+      expect(s6.module).to.equal('general');
 
       expect(s1.path).to.equal('test/app/node_modules/module3/views/component1/**/*.stories.js');
-      expect(s2.path).to.equal('test/node_modules/module3/views/component1/**/*.stories.js');
-      expect(s3.path).to.equal('test/app/modules/module3/views/component1/**/*.stories.js');
-      expect(s4.path).to.equal('test/app/node_modules/module3/views/component2/**/*.stories.js');
-      expect(s5.path).to.equal('test/node_modules/module3/views/component2/**/*.stories.js');
-      expect(s6.path).to.equal('test/app/modules/module3/views/component2/**/*.stories.js');
+      expect(s2.path).to.equal('test/app/modules/module3/views/component1/**/*.stories.js');
+      expect(s3.path).to.equal('test/app/node_modules/module3/views/component2/**/*.stories.js');
+      expect(s4.path).to.equal('test/app/modules/module3/views/component2/**/*.stories.js');
 
-      expect(s7.path).to.equal('test/app/node_modules/general/views/**/*.stories.js');
-      expect(s8.path).to.equal('test/node_modules/general/views/**/*.stories.js');
-      expect(s9.path).to.equal('test/app/modules/general/views/**/*.stories.js');
+      expect(s5.path).to.equal('test/app/node_modules/general/views/**/*.stories.js');
+      expect(s6.path).to.equal('test/app/modules/general/views/**/*.stories.js');
     });
 
     it('should initialize modules with docs by default', () => {
@@ -77,9 +70,9 @@ describe('Resolve Stories', function() {
       const { initModules } = handler(self, opts);
       initModules();
 
-      expect(self.sources.length).to.equal(5, 'wrong sources count');
+      expect(self.sources.length).to.equal(4, 'wrong sources count');
 
-      const [ , , , d1, d2 ] = self.sources;
+      const [ , , d1, d2 ] = self.sources;
       expect(d1.module).to.equal('@corllete/apos-ds-page-type');
       expect(d2.module).to.equal('@corllete/apos-ds-page-type');
 
@@ -170,7 +163,7 @@ describe('Resolve Stories', function() {
   });
 
   describe('Gather Story metadata from  Config Paths', function () {
-    it.only('should initialize stories from their configuration', async () => {
+    it('should initialize stories from their configuration', async () => {
       opts.docs = false;
       opts.modules = [ 'module2' ];
       self.categories = getCategories();

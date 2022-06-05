@@ -10,6 +10,7 @@ const aposUtil = {
 
 const aposMock = {
   rootDir: './test/app',
+  npmRootDir: './test/app',
   util: aposUtil
 
 };
