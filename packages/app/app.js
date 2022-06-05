@@ -42,7 +42,9 @@ require('apostrophe')({
         // We don't have a plan how to render e.g. JSON from nunjucks
         // because the new code parser is not allowing evaluation of nunjucks.
         // We stick with legacy for now, and we might need to introduce another custom tag.
-        legacyCodeBlocks: false
+        legacyCodeBlocks: false,
+        // Disable the release ID (see apos docs)
+        useReleaseId: false
       }
     },
 

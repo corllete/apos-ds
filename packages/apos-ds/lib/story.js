@@ -205,11 +205,7 @@ module.exports = function (self, options) {
         self.sources.push(
           {
             module: source.module,
-            path: path.join(self.apos.rootDir, 'node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
-          },
-          {
-            module: source.module,
-            path: path.join(self.apos.rootDir, '../node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
+            path: path.join(self.apos.npmRootDir, 'node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
           },
           {
             module: source.module,
@@ -231,11 +227,7 @@ module.exports = function (self, options) {
         self.sources = self.sources.concat([
           {
             module: source,
-            path: path.join(self.apos.rootDir, 'node_modules/', source, 'views', '/**/', options.configFileGlob)
-          },
-          {
-            module: source,
-            path: path.join(self.apos.rootDir, '../node_modules/', source, 'views', '/**/', options.configFileGlob)
+            path: path.join(self.apos.npmRootDir, 'node_modules/', source, 'views', '/**/', options.configFileGlob)
           },
           {
             module: source,
@@ -250,7 +242,7 @@ module.exports = function (self, options) {
       self.sources.push(
         {
           module: source,
-          path: path.resolve(`node_modules/@corllete/apos-ds/modules/${source}/views`) + glob
+          path: path.resolve(`${self.apos.npmRootDir}/node_modules/@corllete/apos-ds/modules/${source}/views`) + glob
         },
         {
           module: source,
