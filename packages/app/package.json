@@ -20,14 +20,14 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@corllete/apos-ds": "^1.1.3",
+    "@corllete/apos-ds": "^1.2.0",
     "@material/button": "^12.0.0",
     "@material/card": "^12.0.0",
     "@material/fab": "^12.0.0",
     "@material/icon-button": "^12.0.0",
     "@material/ripple": "^12.0.0",
     "@material/textfield": "^12.0.0",
-    "apostrophe": "^3.7.0",
+    "apostrophe": "^3.21.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.3.4",
@@ -43,14 +43,13 @@
     "eslint-plugin-node": "^11.1.0",
     "nodemon": "^2.0.4",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.5.0"
+    "webpack-dev-server": "^4.9.0"
   },
   "nodemonConfig": {
     "verbose": false,
     "watch": [
       "./app.js",
       "./modules/**/*",
-      "./public/**/*",
       "./node_modules/@corllete/apos-ds/index.js",
       "./node_modules/@corllete/apos-ds/lib/*.js",
       "./node_modules/@corllete/apos-ds/modules/**/*"
@@ -59,6 +58,9 @@
       ".git"
     ],
     "ignore": [
+      "**/ui/apos/",
+      "**/ui/src/",
+      "**/ui/public/",
       "./src",
       "locales/*.json",
       "public/apos-frontend",

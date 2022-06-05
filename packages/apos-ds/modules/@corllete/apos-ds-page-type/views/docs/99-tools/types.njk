@@ -28,7 +28,6 @@
 {% block preview %}
   {% dssection 'Headings' %}
     {% dscodecell 6, 'njk', { toggle: false } %}
-      {% raw %}
         {# Usage #}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -36,7 +35,6 @@
         {{ types.heading(headings, options) }}
         {# No grid #}
         {{ types.headings(headings, options) }}
-      {% endraw %}
     {% enddscodecell %}
     {% dscell 4 %}
       <div class="ds-typography--code">
@@ -56,11 +54,9 @@
     {% enddsrow %}
     {{ types.heading([98,28,21,16,14,12], { span: 12 }) }}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
         {{ types.heading([98,28,21,16,14,12], { span: 12 }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -72,11 +68,9 @@
     {% enddsrow %}
     {{ types.heading([98], { span: 12, truncate: false }) }}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
         {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
         {{ types.heading([98], { span: 12, truncate: false }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -93,11 +87,9 @@
     {% enddsrow %}
     {{ types.heading(3, { span: 12, detect: true }) }}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading(3, { span: 12, detect: true }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -117,7 +109,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading(1, { 
@@ -128,7 +119,6 @@
         single: true, 
         detect: true 
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -169,7 +159,6 @@
     }) }}
 
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading([38], { 
@@ -194,7 +183,6 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -220,7 +208,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading(['ds-demo-type-color'], { 
@@ -231,7 +218,6 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -262,7 +248,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading(
@@ -285,7 +270,6 @@
           detect: true
         }
       ) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -353,7 +337,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.heading(
@@ -387,13 +370,11 @@
           details: true
         }
       ) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
   {% dssection 'Paragraphs' %}
     {% dscodecell 6, 'njk', { toggle: false } %}
-      {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -401,7 +382,6 @@
       {{ types.paragraph(items, options) }}
       {# No grid #}
       {{ types.paragraphs(items, options) }}
-      {% endraw %}
     {% enddscodecell %}
     {% dscell 4 %}
       <div class="ds-typography--code">
@@ -421,11 +401,9 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph(['20/30', '15/22.5'], { span: 6, background: '#f8f8f8' }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -450,7 +428,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph(['20/30', '15/22.5'], { 
@@ -464,7 +441,6 @@
         small: true,
         details: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -505,7 +481,6 @@
     }) }}
     
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph(['20/30'], { 
@@ -530,7 +505,6 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -551,7 +525,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph(['20/30', '15/22.5'], { 
@@ -564,7 +537,6 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -583,7 +555,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph(['ds-demo-type-color'], { 
@@ -594,7 +565,6 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -625,7 +595,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.paragraph([{
@@ -646,14 +615,12 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
 
   {% dssection 'Custom types' %}
     {% dscodecell 6, 'njk', { toggle: false } %}
-      {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -661,7 +628,6 @@
       {{ types.custom(items, options) }}
       {# No grid #}
       {{ types.customTypes(items, options) }}
-      {% endraw %}
     {% enddscodecell %}
     {% dscell 4 %}
       <div class="ds-typography--code">
@@ -683,11 +649,9 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.custom(['strong', 'em'], { span: 6, background: '#f8f8f8', content: 'Custom content from options' }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -721,7 +685,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.custom([
@@ -745,7 +708,6 @@
         small: true,
         details: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -791,7 +753,6 @@
     }) }}
     
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
         {{ types.custom(['em'], { 
@@ -830,7 +791,6 @@
           small: true
         }) }}
 
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
@@ -850,7 +810,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.custom(['code', 'blockquote'], { 
@@ -862,13 +821,11 @@
         details: true,
         detect: true
       }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 
   {% dssection 'Types Collection' %}
     {% dscodecell 6, 'njk', { toggle: false } %}
-      {% raw %}
       {# Usage #}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
@@ -876,7 +833,6 @@
       {{ types.cell(items, options) }}
       {# No grid #}
       {{ types.types(items, options) }}
-      {% endraw %}
     {% enddscodecell %}
     {% dscell 4 %}
       <div class="ds-typography--code">
@@ -908,7 +864,6 @@
       </div>
     {% enddscell %}
     {% dscodecell 12, 'njk' %}
-      {% raw %}
       {% import "@corllete/apos-ds-page-type:components/story/type.html" as types %}
 
       {{ types.cell({
@@ -925,7 +880,6 @@
           }
         ]
       }, { span: 6, background: '#f8f8f8' }) }}
-      {% endraw %}
     {% enddscodecell %}
   {% enddssection %}
 {% endblock %}

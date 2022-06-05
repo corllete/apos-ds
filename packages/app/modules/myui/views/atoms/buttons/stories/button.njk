@@ -1,14 +1,5 @@
 {% extends dsPreview %}
 {% import "atoms/buttons/macro.html" as buttons %}
-  
-{% block previewSimple %}
-  <div class="ds-story__preview-even">
-    {{ buttons.button('Default')  }}
-    {{ buttons.btnOutlined('Outlined')  }}
-    {{ buttons.btnRaised('Rasied')  }}
-    {{ buttons.btnUnelevated('Unelevated')  }}
-  </div>
-{% endblock %}
 
 {% block tagline %}
   The generic button variants - outlined, raised and with no elevation.
@@ -20,4 +11,30 @@
     Quae cum essent dicta, discessimus. Disserendi artem nullam habuit. 
     Quae contraria sunt his, malane? Dici enim nihil potest verius.
   </p>
+{% endblock %}
+  
+{% block previewSimple %}
+  <div class="ds-story__preview-even">
+    {{ buttons.button('Default')  }}
+    {{ buttons.btnOutlined('Outlined')  }}
+    {{ buttons.btnRaised('Rasied')  }}
+    {{ buttons.btnUnelevated('Unelevated')  }}
+  </div>
+{% endblock %}
+
+{% block variants %}
+  {# A basic grid helper #}
+  {% dsgrid %}
+    {% dscell 6 %}
+      {# A code view helper, see the other stories for the `dscodecell` variant #}
+      {% dscode 'njk' %}
+        {% import "atoms/buttons/macro.html" as buttons %}
+
+        {{ buttons.button('Default')  }}
+        {{ buttons.btnOutlined('Outlined')  }}
+        {{ buttons.btnRaised('Rasied')  }}
+        {{ buttons.btnUnelevated('Unelevated')  }}
+      {% enddscode%}
+    {% enddscell %}
+  {% enddsgrid %}
 {% endblock %}

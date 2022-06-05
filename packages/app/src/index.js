@@ -1,4 +1,5 @@
 //
+// This is a naive implementation, for demonstration purposes only!
 // Initialize material design components
 //
 import { MDCRipple } from '@material/ripple';

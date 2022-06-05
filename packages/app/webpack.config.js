@@ -73,14 +73,16 @@ module.exports = {
   ...((mode === 'development')
     ? {
       devServer: {
-        hot: true,
-        // inline: true,
+        hot: process.env.WP_HOT !== '0',
+        liveReload: process.env.WP_HOT !== '0',
         host: '0.0.0.0',
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
         static: {
-          publicPath: '/wp/'
+          publicPath: '/wp/',
+          // disable watching the `public` folder by default
+          watch: false
         },
         port: 9002,
         allowedHosts: [
@@ -88,6 +90,10 @@ module.exports = {
         ],
         proxy: {
           '/': 'http://localhost:3000'
+        },
+        client: {
+          logging: 'info',
+          reconnect: true
         }
       }
     }

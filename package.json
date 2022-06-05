@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "npm run bootstrap && npm run build && npm run assets",
     "dev": "lerna run dev --stream",
-    "build": "lerna run build --stream",
+    "build": "lerna run build --stream --scope=@corllete/apos-ds",
     "assets": "lerna run assets --stream",
     "test": "lerna run test --stream",
     "bootstrap": "lerna bootstrap",
