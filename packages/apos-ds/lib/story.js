@@ -206,9 +206,11 @@ module.exports = function (self, options) {
           {
             module: source.module,
             path: path.join(self.apos.rootDir, 'node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
-          }
-        );
-        self.sources.push(
+          },
+          {
+            module: source.module,
+            path: path.join(self.apos.rootDir, '../node_modules/', source.module, 'views', p, '/**/', options.configFileGlob)
+          },
           {
             module: source.module,
             path: path.join(self.apos.rootDir, 'modules', source.module, 'views', p, '/**/', options.configFileGlob)
@@ -230,6 +232,10 @@ module.exports = function (self, options) {
           {
             module: source,
             path: path.join(self.apos.rootDir, 'node_modules/', source, 'views', '/**/', options.configFileGlob)
+          },
+          {
+            module: source,
+            path: path.join(self.apos.rootDir, '../node_modules/', source, 'views', '/**/', options.configFileGlob)
           },
           {
             module: source,

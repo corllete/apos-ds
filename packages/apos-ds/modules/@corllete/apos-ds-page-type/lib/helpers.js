@@ -73,11 +73,14 @@ module.exports = function (self) {
      * Usage - get story config for configuration named `atoms-buttons`:
      * `apos.dsp.config('atoms-buttons')`
      *
-     * @param {String} storyId
+     * @param {String} storyIdOrStory
      * @returns {Object} config object
      */
-    configFor(storyId) {
-      return (self.getStoryConfigFor(storyId) || {});
+    configFor(storyIdOrStory) {
+      if (storyIdOrStory && typeof storyIdOrStory === 'object') {
+        return (self.getStoryConfigFor(storyIdOrStory._id) || {});
+      }
+      return (self.getStoryConfigFor(storyIdOrStory) || {});
     },
 
     /**
@@ -87,11 +90,14 @@ module.exports = function (self) {
      * Usage:
      * `apos.dsp.configData('atoms-buttons')`
      *
-     * @param {String} storyId
+     * @param {String|Object} storyIdOrStory
      * @returns {Object} story data
      */
-    configDataFor(storyId) {
-      return (self.getStoryConfigFor(storyId) || {}).data;
+    configDataFor(storyIdOrStory) {
+      if (storyIdOrStory && typeof storyIdOrStory === 'object') {
+        return (self.getStoryConfigFor(storyIdOrStory._id) || {}).data;
+      }
+      return (self.getStoryConfigFor(storyIdOrStory) || {}).data;
     },
 
     stylesheet(name, urlOnly = false) {
