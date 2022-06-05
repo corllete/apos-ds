@@ -63,7 +63,7 @@ Some instructions are available on the initial home page. Log in and create new 
 
 Take a look at the [`packages/app` for example integration](packages/app), stories and "Material Design Components" implementation.
 
-Run `npm run dev` and open `http://localhost:3000/design-system`. Read the contents of the `Docs` section and inspect the code in `packages/app`.
+Run `npm run dev` and open `http://localhost:3000/design-system`. Read the stories (they are documented) and the special `Docs` stories category and inspect the code in `packages/app`.
 
 ## Where is the npm package?
 

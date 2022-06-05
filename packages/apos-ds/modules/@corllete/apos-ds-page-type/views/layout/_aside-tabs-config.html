@@ -2,7 +2,33 @@
   <div class="drawer-content--options">
     <h6 class="mdc-typography--overline">Options</h6>
     <div class="mdc-form-field apos-admin-form-field">
-      <div class="mdc-switch apos-admin-switch{% if not data.user %} mdc-switch--disabled{% endif %}">
+
+      <button 
+        id="apos-admin-switch" 
+        class="mdc-switch apos-admin-switch{% if not data.user %} mdc-switch--disabled{% endif %}" 
+        type="button" 
+        role="switch"
+        {% if not data.user %} disabled{% endif %}>
+        <div class="mdc-switch__track"></div>
+        <div class="mdc-switch__handle-track">
+          <div class="mdc-switch__handle">
+            <div class="mdc-switch__shadow">
+              <div class="mdc-elevation-overlay"></div>
+            </div>
+            <div class="mdc-switch__ripple"></div>
+            <div class="mdc-switch__icons">
+              <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+                <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+              </svg>
+              <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                <path d="M20 13H4v-2h16v2z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </button>
+{# 
+      <button class="mdc-switch apos-admin-switch{% if not data.user %} mdc-switch--disabled{% endif %}">
         <div class="mdc-switch__track"></div>
         <div class="mdc-switch__thumb-underlay">
           <div class="mdc-switch__thumb">
@@ -14,8 +40,10 @@
               {% if not data.user %}disabled{% endif %}>
           </div>
         </div>
-      </div>
-      <label for="apos-admin-input">Toggle Apostrophe admin</label>
+      </button> #}
+
+
+      <label for="apos-admin-switch">Toggle Apostrophe admin</label>
     </div>
   </div>
 </div>

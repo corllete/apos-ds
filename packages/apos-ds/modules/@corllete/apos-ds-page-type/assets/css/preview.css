@@ -385,6 +385,12 @@ html {
   margin: 0.5rem 0;
 }
 
+.ds-story__details-desc {
+  max-width: 690px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .ds-story__top-bar {
   margin: 1rem;
 }
@@ -898,11 +904,13 @@ a.ds-toggle__trigger:hover {
 /* Modal */
 .ds-modal {
   position: fixed;
+  max-width: 960px;
   left: 0;
+  right: 0;
   bottom: 0;
   height: 0;
   padding: 0 5px;
-  margin: 0;
+  margin: 0 auto;
   -moz-opacity: 0;
   opacity: 0;
   transition-property: opacity, height;
