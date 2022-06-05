@@ -23,14 +23,18 @@
 
     {# Default code #}
     {% dscodecell 6, 'njk' %}
-      {% raw %}
 
       {% dshintcell 6 %}
         Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
         <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
       {% enddshintcell %}
 
-      {% endraw %}
+      {# OR not wrapped in a grid cell #}
+      {% dshint %}
+        Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
+        <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
+      {% enddshint %}
+
     {% enddscodecell %}
 
     {# Type ok #}
@@ -41,14 +45,12 @@
 
     {# Type ok code #}
     {% dscodecell 6, 'njk' %}
-      {% raw %}
 
       {% dshintcell 6, 'ok' %}
         Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
         <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
       {% enddshintcell %}
 
-      {% endraw %}
     {% enddscodecell %}
 
 
@@ -60,14 +62,12 @@
 
     {# Type warning code #}
     {% dscodecell 6, 'njk' %}
-      {% raw %}
 
       {% dshintcell 6, 'warning' %}
         Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
         <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
       {% enddshintcell %}
 
-      {% endraw %}
     {% enddscodecell %}
 
     {# Type neutral #}
@@ -78,14 +78,12 @@
 
     {# Type neutral code #}
     {% dscodecell 6, 'njk' %}
-      {% raw %}
 
       {% dshintcell 6, 'neutral' %}
         Make sure to use <code>text-rendering: optimizeLegibility;</code> on fonts over 36px, as well as 
         <code>-webkit-font-smoothing: antialiased;</code> and <code>-moz-osx-font-smoothing: grayscale;</code> on dark backgrounds.
       {% enddshintcell %}
 
-      {% endraw %}
     {% enddscodecell %}
 
   {% enddssection %}

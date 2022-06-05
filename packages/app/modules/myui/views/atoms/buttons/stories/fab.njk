@@ -11,3 +11,18 @@
   {{ buttons.fabExtended('favorite', 'Extended Fab')  }}
   {{ buttons.fabExtended('favorite', 'Extended Trailing Fab', { trailing: true })  }}
 {% endblock %}
+
+{% block variants %}
+  {# A basic grid helper #}
+  {% dsgrid %}
+    {# A code view grid helper, see the other stories for the `dscode` variant #}
+    {% dscodecell 6, 'njk' %}
+      {% import "atoms/buttons/macro.html" as buttons %}
+
+      {{ buttons.fab('favorite')  }}
+      {{ buttons.fabMini('favorite')  }}
+      {{ buttons.fabExtended('favorite', 'Extended Fab')  }}
+      {{ buttons.fabExtended('favorite', 'Extended Trailing Fab', { trailing: true })  }}
+    {% enddscodecell %}
+  {% enddsgrid %}
+{% endblock %}

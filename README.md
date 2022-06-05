@@ -46,6 +46,11 @@ From the project root or inside `packages/app` run:
 npm run dev
 ```
 
+To disable Webpack Live and Hot Reload (for some reason):
+```sh
+WP_HOT=0 run dev
+```
+
 Some instructions are available on the initial home page. Log in and create new page with type `Design System`.
 
 > NOTE: if you see an error in your terminal stating something along lines `slug already in use`, you need to reset
@@ -54,7 +59,11 @@ Some instructions are available on the initial home page. Log in and create new 
 
 ## Where are the docs?
 
-On the way!
+[The integration guide](packages/apos-ds)
+
+Take a look at the [`packages/app` for example integration](packages/app), stories and "Material Design Components" implementation.
+
+Run `npm run dev` and open `http://localhost:3000/design-system`. Read the stories (they are documented) and the special `Docs` stories category and inspect the code in `packages/app`.
 
 ## Where is the npm package?
 

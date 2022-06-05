@@ -1,6 +1,6 @@
 const {
   MDCDrawer,
-  MDCFormField,
+  // MDCFormField,
   MDCIconButtonToggle,
   MDCRipple,
   MDCSwitch,
@@ -92,18 +92,18 @@ const storyNs = storyIframe ? storyIframe.contentWindow : null;
 // const aposUi = Array.from(document.querySelectorAll('.apos-admin-bar-wrapper'));
 
 if (formFieldAaEl && aaSwitchEl) {
-  const formField = new MDCFormField(formFieldAaEl);
+  // const formField = new MDCFormField(formFieldAaEl);
   const switchHandler = new MDCSwitch(aaSwitchEl);
-  formField.input = switchHandler;
-  const input = formFieldAaEl.querySelector('#apos-admin-input');
-  switchHandler.checked = storage.getItem('apos.admin');
+  // formField.input = switchHandler;
+  // const switchEl = formFieldAaEl.querySelector('#apos-admin-switch');
+  switchHandler.selected = storage.getItem('apos.admin');
 
-  input.addEventListener('change', function () {
-    storage.setItem('apos.admin', switchHandler.checked);
+  aaSwitchEl.addEventListener('click', function () {
+    storage.setItem('apos.admin', switchHandler.selected);
     if (!storyNs) {
       return;
     }
-    storyNs.aposds.toggleAdmin.set(switchHandler.checked);
+    storyNs.aposds.toggleAdmin.set(switchHandler.selected);
   });
 }
 

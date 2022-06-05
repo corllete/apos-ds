@@ -683,6 +683,8 @@
   })();
 
   const modal = (function () {
+    let globalHandlers = [];
+
     /**
      *
      * @param {String|HTMLElement} selectorOrEl
@@ -703,6 +705,7 @@
       }
       el.style.height = height || '50vh';
       el.style.opacity = 1;
+      addGlobalListeners();
     }
 
     function close(selectorOrEl) {
@@ -712,6 +715,7 @@
       }
       el.style.height = 0;
       el.style.opacity = 0;
+      removeGlobalListeners();
     }
 
     function toggle(selectorOrEl, height) {
@@ -720,8 +724,11 @@
         return;
       }
       const isVisible = +getComputedStyle(el).opacity;
-      el.style.height = isVisible ? 0 : height || '50vh';
-      el.style.opacity = isVisible ? 0 : 1;
+      if (isVisible) {
+        close(selectorOrEl);
+      } else {
+        open(selectorOrEl, height);
+      }
     }
 
     function modalCloseHandlerFactory(modal) {
@@ -731,9 +738,59 @@
       };
     }
 
+    function addGlobalListeners() {
+      window.document.body.addEventListener('click', onClickCloseFactory());
+      window.top && window.top.document.body.addEventListener('keyup', onEscCloseFactory(true));
+      window.document.body.addEventListener('keyup', onEscCloseFactory());
+    }
+
+    function removeGlobalListeners() {
+      Array.prototype.forEach.call(globalHandlers, function (handler) {
+        handler.el.removeEventListener(handler.event || 'click', handler.fn);
+      });
+      globalHandlers = [];
+    }
+
+    function onClickCloseFactory(top) {
+      const handler = function (ev) {
+        const _modal = ev
+          .composedPath()
+          .find(el => el.classList && el.classList.contains('ds-modal'));
+        if (!_modal) {
+          const allModals = document.querySelectorAll('.ds-modal');
+          Array.prototype.forEach.call(allModals, function(modal) {
+            close(modal);
+          });
+        }
+      };
+      globalHandlers.push({
+        el: top ? window.top.document.body : window.document.body,
+        fn: handler
+      });
+      return handler;
+    }
+
+    function onEscCloseFactory(top) {
+      const handler = function (ev) {
+        if (ev.key === 'Escape' || ev.key === 'Esc') {
+          const allModals = document.querySelectorAll('.ds-modal');
+          Array.prototype.forEach.call(allModals, function(modal) {
+            close(modal);
+          });
+        }
+      };
+      globalHandlers.push({
+        el: top ? window.top.document.body : window.document.body,
+        fn: handler,
+        event: 'keyup'
+      });
+      return handler;
+    }
+
     const handlers = [];
     function init() {
-      Array.prototype.forEach.call(document.querySelectorAll('.ds-modal'), function(modal) {
+      const allModals = document.querySelectorAll('.ds-modal');
+      Array.prototype.forEach.call(allModals, function(modal) {
         const buttons = modal.querySelectorAll('.ds-modal__close-button');
         Array.prototype.forEach.call(buttons, function (button) {
           const handler = modalCloseHandlerFactory(modal);
@@ -748,7 +805,7 @@
 
     function destroy() {
       Array.prototype.forEach.call(handlers, function (handler) {
-        handler.el.removeEventListener('click', handler.fn);
+        handler.el.removeEventListener(handler.event || 'click', handler.fn);
       });
     }
 

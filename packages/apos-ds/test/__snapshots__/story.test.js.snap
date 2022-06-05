@@ -8,10 +8,6 @@ Array [
   },
   Object {
     "module": "module2",
-    "path": "test/node_modules/module2/views/**/*.stories.js",
-  },
-  Object {
-    "module": "module2",
     "path": "test/app/modules/module2/views/**/*.stories.js",
   },
 ]
@@ -225,6 +221,79 @@ Object {
     "label": "Templates",
     "list": false,
     "parents": Array [],
+  },
+}
+`;
+
+exports[`Resolve Stories Initialize Categories should initialize from minimal category definitions from options 1`] = `
+Object {
+  "test": Object {
+    "_id": "test",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Test",
+    "list": true,
+    "parents": Set {},
+  },
+}
+`;
+
+exports[`Resolve Stories Initialize Categories should initialize the default category definition 1`] = `
+Object {
+  "atoms": Object {
+    "_id": "atoms",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Atoms",
+    "list": true,
+    "parents": Set {},
+  },
+  "ds-docs": Object {
+    "_id": "ds-docs",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Docs",
+    "list": true,
+    "parents": Set {},
+  },
+  "molecules": Object {
+    "_id": "molecules",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Molecules",
+    "list": true,
+    "parents": Set {},
+  },
+  "organisms": Object {
+    "_id": "organisms",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Organisms",
+    "list": true,
+    "parents": Set {},
+  },
+  "pages": Object {
+    "_id": "pages",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Pages",
+    "list": false,
+    "parents": Set {},
+  },
+  "templates": Object {
+    "_id": "templates",
+    "all": Array [],
+    "children": Set {},
+    "items": Array [],
+    "label": "Templates",
+    "list": false,
+    "parents": Set {},
   },
 }
 `;

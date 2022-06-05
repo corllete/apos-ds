@@ -12,7 +12,10 @@ module.exports = {
     projectName: null,
     // Code blocks now don't need {% raw %} in order to not parse
     // nunjucks code. The legacy option keeps it the old way. Default true till v2.
-    legacyCodeBlocks: true
+    legacyCodeBlocks: true,
+    // If set to false, the apos release ID won't be used when
+    // publishing the DS assets
+    useReleaseId: true
   },
 
   init(self) {
@@ -103,7 +106,7 @@ module.exports = {
       getBaseAssetLocalPath(asDep, checkDist) {
         const dist = '/dist';
         const uiPath = path.join(
-          self.apos.rootDir,
+          asDep ? self.apos.npmRootDir : self.apos.rootDir,
           asDep ? '/node_modules/@corllete/apos-ds' : '',
           '/modules/@corllete/apos-ds-page-type/ui'
         );
@@ -122,16 +125,16 @@ module.exports = {
       },
 
       getBaseAssetReleasePath(pub, forceLocal = false) {
-        // /apos-frontend/releases/XXX/ds
+        // /apos-frontend/releases/XXX/ds (XXX - releaseId usage depends on module option)
         if (!forceLocal && self.hasRemoteAssets) {
           return path.join(
             self.getBaseAposPublicPath(),
-            self.apos.asset.getReleaseId(),
+            self.options.useReleaseId !== false ? self.apos.asset.getReleaseId() : '',
             self.getAssetNamespace()
           );
         }
 
-        // /rootPath/public/apos-frontend/releases/XXX/ds
+        // /rootPath/public/apos-frontend/releases/XXX/ds (XXX - releaseId usage depends on module option)
         let base;
         if (pub) {
           base = '/';
@@ -145,7 +148,7 @@ module.exports = {
         return path.join(
           base,
           self.getBaseAposPublicPath(),
-          self.apos.asset.getReleaseId(),
+          self.options.useReleaseId !== false ? self.apos.asset.getReleaseId() : '',
           self.getAssetNamespace()
         );
       },

@@ -161,6 +161,7 @@
     {% dscell 3 %}{% enddscell %}
     {% dscell 6 %}
       {% dshint %}
+        {% dsmd %}
         Using `dscode` custom tag inside of markdown tag is bugy and needs investigation.
         The best way to add expandable code blocks for now is to close markdown block, call `dscode` or 
         `dscodecell` and re-open the markdown. However, the markdown code syntax works as expected (and it's highlighted). 
@@ -171,6 +172,7 @@
         option of DS Page package. When using this new feature and need to evaluate source inside the `dscode`
         body (e.g. to show JSON {%raw%}{{ someObject | jsonFormat }}{%endraw%}) you need to pass `parse` tag
         argument like this: {%raw%}{% dscode 'json', label = 'Data', parse = true %}{{ someVar | jsonFormat }}{% enddscode %}{%endraw%}
+        {% enddsmd %}
       {% enddshint %}
       {% dsmd %}
         ### EXAMPLES of retrieving stories, config and mock data 

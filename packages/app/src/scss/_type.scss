@@ -1,3 +1,10 @@
+html,
+body {
+  font-family: Roboto;
+  font-size: 16px;
+}
+
+// The Apostrophe Boilerplate Home Page CSS
 .bp-welcome {
 
   h1,
@@ -66,7 +73,7 @@
   line-height: 1;
   font-weight: 500;
   background: $color-purple;
-  color: white;
+  color: white !important;
 
   &:visited,
   &:hover,

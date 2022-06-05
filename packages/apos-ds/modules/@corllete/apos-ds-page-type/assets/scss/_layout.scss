@@ -1,3 +1,13 @@
+@use "@material/elevation";
+@use "@material/switch";
+@use "@material/drawer";
+@use "@material/tab";
+@use "@material/tab-indicator";
+@use "@material/top-app-bar";
+@use "@material/theme/color-palette" as c;
+@use "@material/theme/theme-color" as tc;
+@use "@material/theme" as theme;
+@use "@material/typography/mixins" as t;
 // The design system layout
 
 html,
@@ -26,8 +36,8 @@ body {
 // The left navigation drawer content
 
 .ds-drawer {
-  @include mdc-drawer-surface-fill-color(white);
-  @include mdc-drawer-shape-radius(0);
+  @include drawer.surface-fill-color(white);
+  @include drawer.shape-radius(0);
   width: 350px;
   height: 100%;
   z-index: 440;
@@ -104,7 +114,7 @@ body {
   .nav__category-link:active,
   .nav__category-link:focus,
   .nav__category-link:hover {
-    color: $mdc-theme-primary;
+    color: theme.$primary;
     background: #ffffff;
   }
 
@@ -208,16 +218,16 @@ body {
 
   .mdc-tab {
     font-family: Roboto, sans-serif;
-    @include mdc-tab-active-text-label-color(#6200ee);
-    @include mdc-tab-states-color(#6200ee);
-    @include mdc-tab-text-label-color(black);
+    @include tab.active-text-label-color(#6200ee);
+    @include tab.states-color(#6200ee);
+    @include tab.text-label-color(black);
 
     .mdc-tab-indicator--active {
-      @include mdc-tab-ink-color(#6200ee);
+      @include tab.ink-color(#6200ee);
     }
 
     .mdc-tab-indicator {
-      @include mdc-tab-indicator-underline-color(#6200ee);
+      @include tab-indicator.underline-color(#6200ee);
     }
   }
 
@@ -235,15 +245,19 @@ body {
 
   code {
     font-family: 'Roboto mono';
-    background: $material-color-grey-200;
+    background: -color-grey-200;
   }
 
   .mdc-form-field {
     margin: 12px 0;
 
     .rtl-switch {
-      @include mdc-switch-toggled-off-color(white);
-      @include mdc-switch-toggled-off-track-color(black);
+      @include switch.theme((
+        unselected-handle-color: white,
+        unselected-track-color: black,
+      ));
+      // @include mdc-switch-toggled-off-color(white);
+      // @include mdc-switch-toggled-off-track-color(black);
       margin-right: 16px;
     }
   }
@@ -283,7 +297,7 @@ body {
 
 .ds-title {
   a {
-    color: $material-color-grey-800;
+    color: -color-grey-800;
     font-family: 'Roboto', sans-serif;
     font-style: italic;
     font-weight: 800;
@@ -292,7 +306,7 @@ body {
 
   a:hover {
     text-decoration: none;
-    color: $material-color-grey-600;
+    color: -color-grey-600;
   }
 
   svg,
@@ -320,7 +334,7 @@ body {
 }
 
 .ds-summary-line {
-  @include mdc-typography(caption);
+  @include t.typography(caption);
 
   display: flex;
   align-items: center;
@@ -338,7 +352,7 @@ body {
   .ds-summary-color {
     width: 20px;
     height: 20px;
-    border: 1px solid $material-color-grey-400;
+    border: 1px solid -color-grey-400;
     border-radius: 50%;
   }
 
@@ -352,32 +366,32 @@ body {
     // Draw typography baselines
     &.mdc-typography--headline1 {
       $line-height: 6rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
 
     &.mdc-typography--headline2 {
       $line-height: 3.75rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
 
     &.mdc-typography--headline3 {
       $line-height: 3.125rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
 
     &.mdc-typography--headline4 {
       $line-height: 2.5rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
 
     &.mdc-typography--headline5 {
       $line-height: 2rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
 
     &.mdc-typography--headline6,
@@ -389,53 +403,53 @@ body {
     &.mdc-typography--button,
     &.mdc-typography--overline {
       $line-height: 2rem;
-      @include mdc-typography-baseline-top($line-height);
-      @include mdc-typography-baseline-bottom($line-height);
+      @include t.baseline-top($line-height);
+      @include t.baseline-bottom($line-height);
     }
   }
 
   // Application of color
   .ds-summary-color--primary {
-    background: $mdc-theme-primary;
+    background: theme.$primary;
   }
 
   .ds-summary-color--on-primary {
-    background: $mdc-theme-on-primary;
+    background: theme.$on-primary;
   }
 
   .ds-summary-color--secondary {
-    background: $mdc-theme-secondary;
+    background: theme.$secondary;
   }
 
   .ds-summary-color--on-secondary {
-    background: $mdc-theme-on-secondary;
+    background: theme.$on-secondary;
   }
 
   .ds-summary-color--error {
-    background: $mdc-theme-error;
+    background: theme.$error;
   }
 
   .ds-summary-color--on-error {
-    background: $mdc-theme-on-error;
+    background: theme.$on-error;
   }
 
   .ds-summary-color--surface {
-    background: $mdc-theme-surface;
+    background: theme.$surface;
   }
 
   .ds-summary-color--on-surface {
-    background: $mdc-theme-on-surface;
+    background: theme.$on-surface;
   }
 
   .ds-summary-color--background {
-    background: $mdc-theme-background;
+    background: theme.$background;
   }
 }
 
 .mdc-list-divider.typography-baseline-divider {
   margin-top: 0;
   margin-bottom: 12px;
-  border-bottom-color: $material-color-grey-200;
+  border-bottom-color: c.$grey-200;
 }
 
 // The app bar
@@ -444,9 +458,9 @@ body {
   display: none; // hide on >1310px screens
   position: fixed;
 
-  @include mdc-top-app-bar-fill-color(white);
-  @include mdc-top-app-bar-icon-ink-color($material-color-grey-800);
-  @include mdc-elevation(1);
+  @include top-app-bar.fill-color(white);
+  @include top-app-bar.icon-ink-color(c.$grey-800);
+  @include elevation.elevation(1);
 
   .mdc-top-app-bar__title {
     width: 100%;
@@ -470,7 +484,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  background: $material-color-grey-100;
+  background: c.$grey-100;
   padding: 5px;
 }
 
@@ -508,7 +522,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background: mdc-theme-prop-value(background);
+  background: tc.prop-value(background);
   background-color: #ffffff;
 
   &:not(.mdc-top-app-bar--fixed-adjust) {
@@ -535,7 +549,7 @@ body {
 
   .ds-content-preview {
     overflow: hidden;
-    background: mdc-theme-prop-value(background);
+    background: tc.prop-value(background);
   }
 
   .ds-content-preview__body {
@@ -595,13 +609,13 @@ body {
   a {
     display: flex;
     align-items: center;
-    color: if(mdc-theme-contrast-tone($mdc-theme-background)=="dark",
+    color: if(theme.contrast-tone(theme.$background)=="dark",
         rgba(0, 0, 0, 0.54),
         rgba(255, 255, 255, 0.54));
 
     &:hover,
     &:focus {
-      color: if(mdc-theme-contrast-tone($mdc-theme-background)=="dark",
+      color: if(theme.contrast-tone(theme.$background)=="dark",
           rgba(0, 0, 0, 0.87),
           rgba(255, 255, 255, 0.87));
       text-decoration: none;
@@ -626,8 +640,8 @@ body {
 .typography-callout {
   font-size: 12px;
   padding: 16px;
-  border: 1px solid $material-color-grey-300;
-  background-color: $material-color-grey-200;
+  border: 1px solid c.$grey-300;
+  background-color: c.$grey-200;
 }
 
 .font-link {
