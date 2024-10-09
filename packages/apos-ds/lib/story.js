@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const util = require('util');
-const glob = util.promisify(require('glob'));
+// const util = require('util');
+// const glob = util.promisify(require('glob'));
+const { glob } = require('glob');
 
 /**
  * Methods to initialize module options and based on them to discover

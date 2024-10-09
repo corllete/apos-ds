@@ -153,9 +153,9 @@ describe('Resolve Stories', function() {
       expect(self.paths.length).to.equal(3, 'wrong paths count');
       const [ c1, c2, c3 ] = self.paths;
       expect(c1.module).to.equal('module1');
-      expect(c1.path).to.equal('test/app/node_modules/module1/views/01.stories.js');
+      expect(c1.path).to.equal('test/app/node_modules/module1/views/02.stories.js');
       expect(c2.module).to.equal('module1');
-      expect(c2.path).to.equal('test/app/node_modules/module1/views/02.stories.js');
+      expect(c2.path).to.equal('test/app/node_modules/module1/views/01.stories.js');
       expect(c3.module).to.equal('module1');
       expect(c3.path).to.equal('test/app/modules/module1/views/01.stories.js');
     });
